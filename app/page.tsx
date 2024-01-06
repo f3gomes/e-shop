@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container";
 import { HomeBanner } from "@/components/HomeBanner";
+import { ProductList } from "@/components/ProductList";
 
 export default function Home() {
   return (
@@ -8,6 +9,8 @@ export default function Home() {
         <div>
           <HomeBanner />
         </div>
+
+        <ProductList />
       </Container>
     </div>
   );

@@ -21,7 +21,48 @@ export const products = [
           "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1694245647731-iphone14-gray.png?alt=media&token=ba0019e0-a6cb-4da7-b214-6252bf57f7e3",
       },
     ],
-    reviews: [],
+    reviews: [
+      {
+        id: "64a65a6158b470c6e06959ee",
+        userId: "6475af156bad4917456e6e1e",
+        productId: "64a4ebe300900d44bb50628a",
+        rating: 4,
+        comment: "good",
+        createdDate: "2023-07-06T06:08:33.067Z",
+        user: {
+          id: "6475af156bad4917456e6e1e",
+          name: "Charles",
+          email: "example@gmail.com",
+          emailVerified: null,
+          image:
+            "https://lh3.googleusercontent.com/a/AAcHTteOiCtILLBWiAoolIW9PJH-r5825pBDl824_8LD=s96-c",
+          hashedPassword: null,
+          createdAt: "2023-05-30T08:08:53.979Z",
+          updatedAt: "2023-05-30T08:08:53.979Z",
+          role: "ADMIN",
+        },
+      },
+      {
+        id: "64a65a6158b470c6e06959ee",
+        userId: "6475af156bad4917456e6e1e",
+        productId: "64a4ebe300900d44bb50628a",
+        rating: 4.5,
+        comment: "excellent",
+        createdDate: "2023-07-06T06:08:33.067Z",
+        user: {
+          id: "6475af156bad4917456e6e1e",
+          name: "Charles",
+          email: "example@gmail.com",
+          emailVerified: null,
+          image:
+            "https://lh3.googleusercontent.com/a/AAcHTteOiCtILLBWiAoolIW9PJH-r5825pBDl824_8LD=s96-c",
+          hashedPassword: null,
+          createdAt: "2023-05-30T08:08:53.979Z",
+          updatedAt: "2023-05-30T08:08:53.979Z",
+          role: "ADMIN",
+        },
+      },
+    ],
   },
   {
     id: "64a4ebe300900d44bb50628a",
@@ -37,7 +78,7 @@ export const products = [
         color: "Black",
         colorCode: "#000000",
         image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192448311-watch-silver.jpg?alt=media&token=a76bec63-f616-4647-9dd3-b3d23407ba4f",
       },
     ],
     reviews: [
@@ -150,7 +191,7 @@ export const products = [
         color: "Graphite",
         colorCode: " #383838",
         image:
-          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+          "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192448311-watch-silver.jpg?alt=media&token=a76bec63-f616-4647-9dd3-b3d23407ba4f",
       },
     ],
     reviews: [],
