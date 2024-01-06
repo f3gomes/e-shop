@@ -5,6 +5,7 @@ import { Rating } from "@mui/material";
 import { products } from "@/utils/data";
 import { formatPrice } from "@/utils/formatPrice";
 import { truncateText } from "@/utils/truncateText";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   product: (typeof products)[0];
@@ -13,12 +14,17 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const { name, images, reviews, price } = product;
 
+  const router = useRouter();
+
   const productRating =
     product.reviews.reduce((acc, item) => item.rating + acc, 0) /
     product.reviews.length;
 
   return (
-    <div className="col-span-1 cursor-pointer border-[1.2px] border-slate-200 bg-slate-50 rounded-sm p-2 transition duration-300 hover:scale-105 text-center text-sm">
+    <div
+      onClick={() => router.push(`/product/${product.id}`)}
+      className="col-span-1 cursor-pointer border-[1.2px] border-slate-200 bg-slate-50 rounded-sm p-2 transition duration-300 hover:scale-105 text-center text-sm"
+    >
       <div className="flex flex-col items-center w-full gap-1">
         <div className="aspect-square overflow-hidden relative w-full">
           <Image
