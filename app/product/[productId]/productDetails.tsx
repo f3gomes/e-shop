@@ -1,9 +1,11 @@
 "use client";
 
+import { SetColor } from "@/components/SetColor";
+import { CartProductType, SelectedImgType } from "@/types/cart";
 import { products } from "@/utils/data";
 import { cn } from "@/utils/merge";
 import { Rating } from "@mui/material";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 interface ProductDetailsProps {
   product: (typeof products)[0];
@@ -14,9 +16,29 @@ const Horizontal = () => {
 };
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
+  const [cartProduct, setCartProduct] = useState<CartProductType>({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    brand: product.brand,
+    selectedImg: { ...product.images[0] },
+    quantity: 1,
+    price: product.price,
+  });
+
   const productRating =
     product.reviews.reduce((acc, item) => item.rating + acc, 0) /
     product.reviews.length;
+
+  const handleColorSelect = useCallback(
+    (value: SelectedImgType) => {
+      setCartProduct((prev) => {
+        return { ...prev, selectedImg: value };
+      });
+    },
+    []
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -41,7 +63,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           {product.inStock ? "In stock" : "Out of stock"}
         </div>
         <Horizontal />
-        <div>color</div>
+        <SetColor
+          cartProduct={cartProduct}
+          images={product.images}
+          handleColorSelect={handleColorSelect}
+        />
         <Horizontal />
         <div>quantity</div>
         <Horizontal />
