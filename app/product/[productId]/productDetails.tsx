@@ -1,6 +1,7 @@
 "use client";
 
 import { SetColor } from "@/components/SetColor";
+import { SetQuantity } from "@/components/SetQuantity";
 import { CartProductType, SelectedImgType } from "@/types/cart";
 import { products } from "@/utils/data";
 import { cn } from "@/utils/merge";
@@ -31,14 +32,27 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     product.reviews.reduce((acc, item) => item.rating + acc, 0) /
     product.reviews.length;
 
-  const handleColorSelect = useCallback(
-    (value: SelectedImgType) => {
+  const handleColorSelect = useCallback((value: SelectedImgType) => {
+    setCartProduct((prev) => {
+      return { ...prev, selectedImg: value };
+    });
+  }, []);
+
+  const handleQtyIncrease = useCallback(() => {
+    if (cartProduct.quantity < 99) {
       setCartProduct((prev) => {
-        return { ...prev, selectedImg: value };
+        return { ...prev, quantity: prev.quantity++ };
       });
-    },
-    []
-  );
+    }
+  }, [cartProduct]);
+
+  const handleQtyDecrease = useCallback(() => {
+    if (cartProduct.quantity > 1) {
+      setCartProduct((prev) => {
+        return { ...prev, quantity: prev.quantity-- };
+      });
+    }
+  }, [cartProduct]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -69,7 +83,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           handleColorSelect={handleColorSelect}
         />
         <Horizontal />
-        <div>quantity</div>
+        <SetQuantity
+          cartProduct={cartProduct}
+          handleQtyDecrease={handleQtyDecrease}
+          handleQtyIncrease={handleQtyIncrease}
+        />
         <Horizontal />
         <div>add to cart</div>
       </div>
