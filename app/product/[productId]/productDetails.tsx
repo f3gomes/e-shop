@@ -8,13 +8,15 @@ import { products } from "@/utils/data";
 import { SetColor } from "@/components/SetColor";
 import { SetQuantity } from "@/components/SetQuantity";
 import { CartProductType, SelectedImgType } from "@/types/cart";
+import { ProductAddButton } from "@/components/ProductAddButton";
+import { ProductImage } from "@/components/ProductImage";
 
 interface ProductDetailsProps {
   product: (typeof products)[0];
 }
 
 const Horizontal = () => {
-  return <hr className="w-[30%] my-2" />;
+  return <hr className="w-full my-3" />;
 };
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
@@ -63,7 +65,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div>Images</div>
+      <ProductImage
+        product={product}
+        cartProduct={cartProduct}
+        handleColorSelect={handleColorSelect}
+      />
+
       <div className="flex flex-col gap-1 text-slate-500 text-sm">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
         <div className="flex items-center gap-2">
@@ -96,7 +103,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           handleQtyIncrease={handleQtyIncrease}
         />
         <Horizontal />
-        <div>add to cart</div>
+
+        <div className="max-w-[300px]">
+          <ProductAddButton label="Add to Cart" onClick={() => {}} />
+        </div>
       </div>
     </div>
   );
