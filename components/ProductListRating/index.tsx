@@ -3,6 +3,7 @@
 import moment from "moment";
 import { Heading } from "../Heading";
 import { Rating } from "@mui/material";
+import { Avatar } from "../Avatar";
 
 interface ProductListRatingProps {
   product: any;
@@ -19,7 +20,7 @@ export function ProductListRating({ product }: ProductListRatingProps) {
             return (
               <div key={item.id} className="max-w-[300px]">
                 <div className="flex items-center gap-2">
-                  <div>Avatar</div>
+                  <Avatar src={item?.user.image} />
                   <div className="font-semibold">{item?.user.name}</div>
                   <div className="font-light">
                     {moment(item.createDate).fromNow()}
