@@ -10,6 +10,7 @@ import { SetQuantity } from "@/components/SetQuantity";
 import { CartProductType, SelectedImgType } from "@/types/cart";
 import { ProductAddButton } from "@/components/ProductAddButton";
 import { ProductImage } from "@/components/ProductImage";
+import { useCart } from "@/hooks/useCart";
 
 interface ProductDetailsProps {
   product: (typeof products)[0];
@@ -20,6 +21,10 @@ const Horizontal = () => {
 };
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
+  const { cartTotalQty } = useCart();
+
+  console.log(cartTotalQty);
+
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
