@@ -1,12 +1,13 @@
 "use client";
 
+import React, { useCallback, useEffect, useState } from "react";
+
+import { cn } from "@/utils/merge";
+import { Rating } from "@mui/material";
+import { products } from "@/utils/data";
 import { SetColor } from "@/components/SetColor";
 import { SetQuantity } from "@/components/SetQuantity";
 import { CartProductType, SelectedImgType } from "@/types/cart";
-import { products } from "@/utils/data";
-import { cn } from "@/utils/merge";
-import { Rating } from "@mui/material";
-import React, { useCallback, useState } from "react";
 
 interface ProductDetailsProps {
   product: (typeof products)[0];
@@ -53,6 +54,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       });
     }
   }, [cartProduct]);
+
+  useEffect(() => {
+    setCartProduct((prev) => {
+      return { ...prev, quantity: 1 };
+    });
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

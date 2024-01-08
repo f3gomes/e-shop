@@ -24,7 +24,7 @@ export function SetQuantity({
         <button onClick={handleQtyDecrease} className={btnStyles}>
           -
         </button>
-        <div>{cartProduct.quantity}</div>
+        <div className="w-6 flex justify-center">{cartProduct.quantity}</div>
         <button onClick={handleQtyIncrease} className={btnStyles}>
           +
         </button>
