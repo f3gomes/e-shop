@@ -1,5 +1,6 @@
 "use client";
 
+import { CartItem } from "@/components/CartItem";
 import { Heading } from "@/components/Heading";
 import { CustomButton } from "@/components/ProductAddButton";
 import { useCart } from "@/hooks/useCart";
@@ -41,7 +42,7 @@ export default function CartClient() {
       <div>
         {cartProducts &&
           cartProducts.map((item) => {
-            return <div key={item.id}>{item.name}</div>;
+            return <CartItem key={item.id} item={item} />;
           })}
       </div>
 
