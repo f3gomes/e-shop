@@ -3,7 +3,7 @@
 import { cn } from "@/utils/merge";
 import { IconType } from "react-icons";
 
-interface ProductAddButtonProps {
+interface CustomButtonProps {
   label: string;
   disabled?: boolean;
   outline?: boolean;
@@ -13,7 +13,7 @@ interface ProductAddButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function ProductAddButton({
+export function CustomButton({
   label,
   disabled,
   outline,
@@ -21,7 +21,7 @@ export function ProductAddButton({
   custom,
   icon: Icon,
   onClick,
-}: ProductAddButtonProps) {
+}: CustomButtonProps) {
   return (
     <button
       className={cn(
