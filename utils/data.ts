@@ -1,4 +1,6 @@
-export const products = [
+import { IProduct } from "@/types/product";
+
+export const products: IProduct[] = [
   {
     id: "64a654593e91b8e73a351e9b",
     name: "iphone 14",

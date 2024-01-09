@@ -4,12 +4,13 @@ import { CartItem } from "@/components/CartItem";
 import { Heading } from "@/components/Heading";
 import { CustomButton } from "@/components/ProductAddButton";
 import { useCart } from "@/hooks/useCart";
+import { formatPrice } from "@/utils/formatPrice";
 import Link from "next/link";
 import React from "react";
 import { MdArrowBack } from "react-icons/md";
 
 export default function CartClient() {
-  const { cartProducts, handleClearCart } = useCart();
+  const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -60,7 +61,7 @@ export default function CartClient() {
           <div>
             <div className="flex justify-between w-64 text-base font-semibold">
               <span>Subtotal</span>
-              <span>R$ 1,000</span>
+              <span>{formatPrice(cartTotalAmout)}</span>
             </div>
             <p>Frete e Taxas</p>
 

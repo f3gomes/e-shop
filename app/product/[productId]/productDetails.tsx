@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { cn } from "@/utils/merge";
 import { Rating } from "@mui/material";
-import { products } from "@/utils/data";
 import { useCart } from "@/hooks/useCart";
 import { SetColor } from "@/components/SetColor";
 import { SetQuantity } from "@/components/SetQuantity";
@@ -13,9 +12,10 @@ import { CartProductType, SelectedImgType } from "@/types/cart";
 import { CustomButton } from "@/components/ProductAddButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { IProduct } from "@/types/product";
 
 interface ProductDetailsProps {
-  product: (typeof products)[0];
+  product: IProduct;
 }
 
 const Horizontal = () => {

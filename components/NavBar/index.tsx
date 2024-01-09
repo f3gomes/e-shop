@@ -5,6 +5,7 @@ import { cn } from "@/utils/merge";
 import { Redressed } from "next/font/google";
 
 import { Container } from "../Container";
+import { CartCount } from "../CartCount";
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 interface NavBarProps {
@@ -24,11 +25,11 @@ export function NavBar({ children }: NavBarProps) {
               E-Shop
             </Link>
 
-            <div className="hidden md:block">Search</div>
+            <div className="hidden md:block">Buscar</div>
 
             <div className="flex items-center gap-8 md:gap-12">
-              <div>CartCount</div>
-              <div>UserMenu</div>
+              <CartCount />
+              <div>Avatar</div>
             </div>
           </div>
         </Container>
