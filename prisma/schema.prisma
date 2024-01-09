@@ -32,7 +32,7 @@ model User {
   email              String?   @unique
   emailVerified      DateTime?
   image              String?
-  hashedPassowrd     String?
+  hashedPassword     String?
   createdAt          DateTime @default(now())
   updateAt           DateTime @updatedAt
 

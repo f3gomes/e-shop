@@ -27,8 +27,8 @@ export default NextAuth({
           type: "password",
         },
       },
-      async authorize(credentials: any) {
-        if (!credentials.email || !credentials.password) {
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
           throw new Error("Invalid email or password");
         }
 
@@ -44,7 +44,7 @@ export default NextAuth({
 
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.hashedPassword
         );
 
         if (!isCorrectPassword) {

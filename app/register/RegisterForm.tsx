@@ -1,15 +1,22 @@
 "use client";
 
-import { Heading } from "@/components/Heading";
-import { Input } from "@/components/Input";
-import { CustomButton } from "@/components/ProductAddButton";
-import Link from "next/link";
 import React, { useState } from "react";
+
+import axios from "axios";
+import toast from "react-hot-toast";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
+import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { Input } from "@/components/Input";
+import { useRouter } from "next/navigation";
+import { Heading } from "@/components/Heading";
 import { AiOutlineGoogle } from "react-icons/ai";
+import { CustomButton } from "@/components/ProductAddButton";
 
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -25,7 +32,29 @@ export default function RegisterForm() {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log(data);
+    axios
+      .post("/api/register", data)
+      .then(() => {
+        toast.success("Conta criada!");
+
+        signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        }).then((callback) => {
+          if (callback?.ok) {
+            router.push("/cart");
+            router.refresh();
+            toast.success("Bem vindo!");
+          }
+
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
+        });
+      })
+      .catch(() => toast.error("Algo deu errado!"))
+      .finally(() => setIsLoading(false));
   };
 
   return (
