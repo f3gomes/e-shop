@@ -12,7 +12,7 @@ interface ProductListRatingProps {
 export function ProductListRating({ product }: ProductListRatingProps) {
   return (
     <div>
-      <Heading title="Product Reviews" />
+      <Heading title="Avaliações de clientes" />
 
       <div className="text-sm mt-2">
         {product.reviews &&

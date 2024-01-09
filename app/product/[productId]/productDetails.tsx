@@ -105,7 +105,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <Horizontal />
 
         <div>
-          <span className="font-semibold">Category: {product.brand}</span>
+          <span className="font-semibold">Categoria: {product.brand}</span>
         </div>
         <div
           className={cn(product.inStock ? "text-teal-400" : "text-rose-400")}

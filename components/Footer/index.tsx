@@ -1,72 +1,79 @@
-import { ReactNode } from "react";
-import { FooterList } from "../FooterList";
-import { Container } from "../Container";
 import Link from "next/link";
 import { shopInfo } from "@/shop-info/data";
 import { MdFacebook } from "react-icons/md";
-import {
-  AiFillTwitterCircle,
-  AiFillInstagram,
-  AiFillYoutube,
-} from "react-icons/ai";
+import { AiFillInstagram, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 
-interface FooterProps {
-  children?: ReactNode;
-}
+import { Container } from "../Container";
+import { FooterList } from "../FooterList";
 
-export function Footer({ children }: FooterProps) {
+export function Footer() {
+  const iconStyle = "hover:scale-110 transition duration-300";
+
   return (
     <footer className="bg-slate-700 text-slate-200 text-sm mt-16">
       <Container>
         <div className="flex flex-col md:flex-row justify-between pt-16 pb-8">
           <FooterList>
-            <h3 className="text-base font-bold mb-2">Shop Categories</h3>
+            <h3 className="text-base font-bold mb-2">
+              {shopInfo.footer.categories.title}
+            </h3>
 
-            <Link href={"#"}>Phones</Link>
-            <Link href={"#"}>Laptops</Link>
-            <Link href={"#"}>Desktops</Link>
+            <Link href={"/"}>{shopInfo.footer.categories.category1}</Link>
+            <Link href={"/"}>{shopInfo.footer.categories.category2}</Link>
+            <Link href={"/"}>{shopInfo.footer.categories.category3}</Link>
           </FooterList>
 
           <FooterList>
-            <h3 className="text-base font-bold mb-2">Customer Service</h3>
+            <h3 className="text-base font-bold mb-2">
+              {shopInfo.footer.services.title}
+            </h3>
 
-            <Link href={"#"}>Contact Us</Link>
-            <Link href={"#"}>Shipping Policy</Link>
-            <Link href={"#"}>Return & Exchanges</Link>
+            <Link href={"/"}>{shopInfo.footer.services.service1}</Link>
+            <Link href={"/"}>{shopInfo.footer.services.service2}</Link>
+            <Link href={"/"}>{shopInfo.footer.services.service3}</Link>
           </FooterList>
 
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-base font-bold mb-2">About Us</h3>
+            <h3 className="text-base font-bold mb-2">
+              {shopInfo.footer.about.title}
+            </h3>
 
-            <p className="mb-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem odit
-              earum aut pariatur, veritatis modi perspiciatis labore quam
-              soluta, corrupti, et corporis enim! Ab in dicta vero tempore
-              dignissimos nemo!
-            </p>
+            <p className="mb-2">{shopInfo.footer.about.text}</p>
 
             <p>
-              &copy; {new Date().getFullYear()} {shopInfo.name} All rights
-              reserved
+              &copy; {new Date().getFullYear()} {shopInfo.name} Todos os
+              direitos reservados
             </p>
           </div>
 
           <FooterList>
-            <h3 className="text-balance font-bold">Follow Us</h3>
+            <h3 className="text-balance font-bold">Redes sociais</h3>
             <div className="flex gap-2">
-              <Link href={"/"}>
+              <Link
+                className={iconStyle}
+                href={shopInfo.footer.socials.facebook}
+              >
                 <MdFacebook size={24} />{" "}
               </Link>
 
-              <Link href={"/"}>
+              <Link
+                className={iconStyle}
+                href={shopInfo.footer.socials.instagram}
+              >
                 <AiFillInstagram size={24} />{" "}
               </Link>
 
-              <Link href={"/"}>
+              <Link
+                className={iconStyle}
+                href={shopInfo.footer.socials.twitter}
+              >
                 <AiFillTwitterCircle size={24} />{" "}
               </Link>
 
-              <Link href={"/"}>
+              <Link
+                className={iconStyle}
+                href={shopInfo.footer.socials.youtube}
+              >
                 <AiFillYoutube size={24} />{" "}
               </Link>
             </div>
