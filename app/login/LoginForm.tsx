@@ -3,13 +3,18 @@
 import { Heading } from "@/components/Heading";
 import { Input } from "@/components/Input";
 import { CustomButton } from "@/components/ProductAddButton";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AiOutlineGoogle } from "react-icons/ai";
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const {
     register,
@@ -24,7 +29,22 @@ export default function LoginForm() {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log(data);
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+
+      if (callback?.ok) {
+        router.push("/cart");
+        router.refresh();
+        toast.success("Bem vindo!");
+      }
+
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
   };
 
   return (

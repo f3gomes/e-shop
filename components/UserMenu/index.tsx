@@ -9,8 +9,13 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { Avatar } from "../Avatar";
 import { BackDrop } from "../BackDrop";
 import { UserMenuItem } from "../UserMenuItem";
+import { SafeUser } from "@/types";
 
-export function UserMenu() {
+interface UserMenuProps {
+  currentUser: SafeUser | null | any;
+}
+
+export function UserMenu({ currentUser }: UserMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -30,30 +35,33 @@ export function UserMenu() {
 
         {isOpen && (
           <div className="absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
-            <div>
-              <Link href={"/orders"}>
-                <UserMenuItem onClick={toggleOpen}>Meus Pedidos</UserMenuItem>
-              </Link>
+            {currentUser ? (
+              <div>
+                <Link href={"/orders"}>
+                  <UserMenuItem onClick={toggleOpen}>Meus Pedidos</UserMenuItem>
+                </Link>
 
-              <Link href={"/admin"}>
-                <UserMenuItem onClick={toggleOpen}>Painel</UserMenuItem>
-              </Link>
-
-              <UserMenuItem
-                onClick={() => {
-                  toggleOpen();
-                  signOut();
-                }}
-              >
-                Sair
-              </UserMenuItem>
-            </div>
-
-            <div>
-              <Link href={"/login"}>
-                <UserMenuItem onClick={toggleOpen}>Entrar</UserMenuItem>
-              </Link>
-            </div>
+                <Link href={"/admin"}>
+                  <UserMenuItem onClick={toggleOpen}>Painel</UserMenuItem>
+                </Link>
+                
+                <hr />
+                <UserMenuItem
+                  onClick={() => {
+                    toggleOpen();
+                    signOut();
+                  }}
+                >
+                  Sair
+                </UserMenuItem>
+              </div>
+            ) : (
+              <div>
+                <Link href={"/login"}>
+                  <UserMenuItem onClick={toggleOpen}>Entrar</UserMenuItem>
+                </Link>
+              </div>
+            )}
           </div>
         )}
       </div>

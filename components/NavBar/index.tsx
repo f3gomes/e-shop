@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 import Link from "next/link";
 import { cn } from "@/utils/merge";
 import { Redressed } from "next/font/google";
@@ -7,13 +5,13 @@ import { Redressed } from "next/font/google";
 import { Container } from "../Container";
 import { CartCount } from "../CartCount";
 import { UserMenu } from "../UserMenu";
+import { getCurrentUser } from "@/actions/getCurrentUser";
+
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
-interface NavBarProps {
-  children?: ReactNode;
-}
+export async function NavBar() {
+  const currentUser = await getCurrentUser();
 
-export function NavBar({ children }: NavBarProps) {
   return (
     <div className="sticky top-0 w-full bg-slate-200 z-30 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -30,7 +28,7 @@ export function NavBar({ children }: NavBarProps) {
 
             <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
-              <UserMenu />
+              <UserMenu currentUser={currentUser} />
             </div>
           </div>
         </Container>
