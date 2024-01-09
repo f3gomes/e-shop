@@ -38,7 +38,7 @@ export function Footer() {
               {shopInfo.footer.about.title}
             </h3>
 
-            <p className="mb-2">{shopInfo.footer.about.text}</p>
+            <p className="mb-2 text-justify">{shopInfo.footer.about.text}</p>
 
             <p>
               &copy; {new Date().getFullYear()} {shopInfo.name} Todos os
