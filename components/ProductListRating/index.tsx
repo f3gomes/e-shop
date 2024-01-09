@@ -4,9 +4,10 @@ import moment from "moment";
 import { Heading } from "../Heading";
 import { Rating } from "@mui/material";
 import { Avatar } from "../Avatar";
+import { IProduct } from "@/types/product";
 
 interface ProductListRatingProps {
-  product: any;
+  product: IProduct;
 }
 
 export function ProductListRating({ product }: ProductListRatingProps) {

@@ -20,7 +20,7 @@ export default function Produc({ params }: { params: IParams }) {
 
         <div className="flex flex-col mt-20 gap-4">
           <div>Avaliar</div>
-          <ProductListRating product={product} />
+          {product && <ProductListRating product={product} />}
         </div>
       </Container>
     </div>

@@ -25,7 +25,7 @@ export const products: IProduct[] = [
     ],
     reviews: [
       {
-        id: "64a65a6158b470c6e06959ee",
+        id: "64a65a6158b470c6e06959e1",
         userId: "6475af156bad4917456e6e1e",
         productId: "64a4ebe300900d44bb50628a",
         rating: 4,
@@ -45,7 +45,7 @@ export const products: IProduct[] = [
         },
       },
       {
-        id: "64a65a6158b470c6e06959ee",
+        id: "64a65a6158b470c6e06959e2",
         userId: "6475af156bad4917456e6e1e",
         productId: "64a4ebe300900d44bb50628a",
         rating: 4.5,
