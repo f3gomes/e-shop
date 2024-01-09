@@ -110,7 +110,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <div
           className={cn(product.inStock ? "text-teal-400" : "text-rose-400")}
         >
-          {product.inStock ? "In stock" : "Out of stock"}
+          {product.inStock ? "Em estoque" : "Sem estoque"}
         </div>
         <Horizontal />
         {isProductInCart ? (
