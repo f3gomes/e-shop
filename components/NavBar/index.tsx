@@ -6,6 +6,7 @@ import { Redressed } from "next/font/google";
 
 import { Container } from "../Container";
 import { CartCount } from "../CartCount";
+import { UserMenu } from "../UserMenu";
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
 interface NavBarProps {
@@ -29,7 +30,7 @@ export function NavBar({ children }: NavBarProps) {
 
             <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
-              <div>Avatar</div>
+              <UserMenu />
             </div>
           </div>
         </Container>
