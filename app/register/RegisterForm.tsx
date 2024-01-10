@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -13,8 +13,13 @@ import { useRouter } from "next/navigation";
 import { Heading } from "@/components/Heading";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { CustomButton } from "@/components/ProductAddButton";
+import { SafeUser } from "@/types";
 
-export default function RegisterForm() {
+interface RegisterFormProps {
+  currentUser: SafeUser | any;
+}
+
+export default function RegisterForm({ currentUser }: RegisterFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -56,6 +61,18 @@ export default function RegisterForm() {
       .catch(() => toast.error("Algo deu errado!"))
       .finally(() => setIsLoading(false));
   };
+
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/cart");
+      router.refresh();
+    }
+  }, []); // eslint-disable-line
+
+  if (currentUser) {
+    return <p className="text-center">Login Efetuado. Redirecionando...</p>;
+  }
 
   return (
     <>

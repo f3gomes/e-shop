@@ -1,13 +1,18 @@
-import { Container } from "@/components/Container";
-import { FormWrap } from "@/components/FormWrap";
 import React from "react";
+
+import { FormWrap } from "@/components/FormWrap";
+import { Container } from "@/components/Container";
+import { getCurrentUser } from "@/actions/getCurrentUser";
+
 import LoginForm from "./LoginForm";
 
-export default function Login() {
+export default async function Login() {
+  const currentUser = await getCurrentUser();
+
   return (
     <Container>
       <FormWrap>
-        <LoginForm />
+        <LoginForm currentUser={currentUser} />
       </FormWrap>
     </Container>
   );

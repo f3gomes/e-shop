@@ -1,17 +1,24 @@
 "use client";
 
-import { Heading } from "@/components/Heading";
-import { Input } from "@/components/Input";
-import { CustomButton } from "@/components/ProductAddButton";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { AiOutlineGoogle } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
 
-export default function LoginForm() {
+import toast from "react-hot-toast";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
+import Link from "next/link";
+import { SafeUser } from "@/types";
+import { signIn } from "next-auth/react";
+import { Input } from "@/components/Input";
+import { useRouter } from "next/navigation";
+import { Heading } from "@/components/Heading";
+import { AiOutlineGoogle } from "react-icons/ai";
+import { CustomButton } from "@/components/ProductAddButton";
+
+interface LoginFormProps {
+  currentUser: SafeUser | any;
+}
+
+export default function LoginForm({ currentUser }: LoginFormProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -26,6 +33,13 @@ export default function LoginForm() {
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/cart");
+      router.refresh();
+    }
+  }, []); // eslint-disable-line
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -46,6 +60,10 @@ export default function LoginForm() {
       }
     });
   };
+
+  if (currentUser) {
+    return <p className="text-center">Login Efetuado. Redirecionando...</p>;
+  }
 
   return (
     <>

@@ -12,7 +12,7 @@ import { UserMenuItem } from "../UserMenuItem";
 import { SafeUser } from "@/types";
 
 interface UserMenuProps {
-  currentUser: SafeUser | null | any;
+  currentUser: SafeUser | any;
 }
 
 export function UserMenu({ currentUser }: UserMenuProps) {
