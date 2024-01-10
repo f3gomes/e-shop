@@ -71,6 +71,7 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
 
       <CustomButton
         outline
+        disabled
         onClick={() => {}}
         icon={AiOutlineGoogle}
         label="Continuar com Google"

@@ -9,7 +9,7 @@ generator client {
 
 model Account {
   id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String @db.ObjectId
+  userId             String  @db.ObjectId
   type               String
   provider           String
   providerAccountId  String
@@ -38,7 +38,48 @@ model User {
 
   role Role @default(USER)
 
-  accounts Account[]
+  accounts           Account[]
+  orders             Order[]
+}
+
+model Order {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String @db.ObjectId
+  amount             Float
+  currency           String
+  status             String
+  deliveryStatus     String?
+  createDate         DateTime @default(now())
+  paymentIntentId    String @unique
+  products           CartProductType[]
+  address            Address?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+type CartProductType {
+  id String
+  name String
+  description String
+  category String
+  brand String
+  selectedImg Image
+  quantity Int
+  price Float
+}
+
+type Image {
+  color String
+  colorCode String
+  image String
+}
+
+type Address {
+  city String
+  country String
+  street String?
+  postal_code String
+  state String
 }
 
 enum Role {
