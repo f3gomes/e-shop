@@ -1,4 +1,3 @@
-import { CartProductType } from "@/types/cart";
 import {
   createContext,
   useCallback,
@@ -6,18 +5,22 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useLocalStorage } from "./useLocal";
 import toast from "react-hot-toast";
+
+import { CartProductType } from "@/types/cart";
+import { useLocalStorage } from "./useLocal";
 
 type CartContextType = {
   cartTotalQty: number;
   cartTotalAmout: number;
+  paymentIntent: string | null;
   cartProducts: CartProductType[] | null;
-  handleAddProductToCart: (product: CartProductType) => void;
-  handleRemoveProductFromCart: (product: CartProductType) => void;
+  handleClearCart: () => void;
+  handleSetPaymentIntent: (value: string | null) => void;
   handleCartQtyIncrease: (product: CartProductType) => void;
   handleCartQtyDecrease: (product: CartProductType) => void;
-  handleClearCart: () => void;
+  handleAddProductToCart: (product: CartProductType) => void;
+  handleRemoveProductFromCart: (product: CartProductType) => void;
 };
 
 interface Props {
@@ -27,19 +30,23 @@ interface Props {
 export const CartContext = createContext<CartContextType | null>(null);
 
 export const CartContextProvider = (props: Props) => {
-  const { getItem, setItem } = useLocalStorage("eShopCartItems");
+  const { getItem, setItem } = useLocalStorage();
 
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartTotalAmout, setCartTotalAmout] = useState(0);
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   );
+  const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
   useEffect(() => {
-    const cartItems: any = getItem();
+    const cartItems: any = getItem("eShopCartItems");
     const cProducts: CartProductType[] | null = cartItems;
+    const eShopPaymentIntent: any = getItem("eShopPaymentIntent");
+    const paymentIntent: string | null = eShopPaymentIntent;
 
     setCartProducts(cProducts);
+    setPaymentIntent(paymentIntent);
   }, []);
 
   useEffect(() => {
@@ -79,7 +86,7 @@ export const CartContextProvider = (props: Props) => {
       }
 
       toast.success("Produto adicionado ao carrinho!");
-      setItem(updatedCart);
+      setItem("eShopCartItems", updatedCart);
       return updatedCart;
     });
   }, []);
@@ -93,7 +100,7 @@ export const CartContextProvider = (props: Props) => {
 
         setCartProducts(filteredProducts);
         toast.success("Produto removido!");
-        setItem(filteredProducts);
+        setItem("eShopCartItems", filteredProducts);
       }
     },
     [cartProducts]
@@ -120,7 +127,7 @@ export const CartContextProvider = (props: Props) => {
         }
 
         setCartProducts(updatedCart);
-        setItem(updatedCart);
+        setItem("eShopCartItems", updatedCart);
       }
     },
     [cartProducts]
@@ -144,7 +151,7 @@ export const CartContextProvider = (props: Props) => {
           }
 
           setCartProducts(updatedCart);
-          setItem(updatedCart);
+          setItem("eShopCartItems", updatedCart);
         }
       }
     },
@@ -154,18 +161,28 @@ export const CartContextProvider = (props: Props) => {
   const handleClearCart = useCallback(() => {
     setCartProducts(null);
     setCartTotalQty(0);
-    setItem(null);
+    setItem("eShopCartItems", null);
   }, [cartProducts]);
+
+  const handleSetPaymentIntent = useCallback(
+    (value: string | null) => {
+      setPaymentIntent(value);
+      setItem("eShopPaymentIntent", value);
+    },
+    [paymentIntent]
+  );
 
   const value = {
     cartTotalQty,
     cartProducts,
+    paymentIntent,
     cartTotalAmout,
-    handleAddProductToCart,
-    handleRemoveProductFromCart,
+    handleClearCart,
     handleCartQtyIncrease,
     handleCartQtyDecrease,
-    handleClearCart,
+    handleSetPaymentIntent,
+    handleAddProductToCart,
+    handleRemoveProductFromCart,
   };
 
   return <CartContext.Provider value={value} {...props}></CartContext.Provider>;

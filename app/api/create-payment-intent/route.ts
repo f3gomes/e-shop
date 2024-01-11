@@ -1,8 +1,9 @@
-import { getCurrentUser } from "@/actions/getCurrentUser";
-import prisma from "@/libs/prismadb";
-import { CartProductType } from "@/types/cart";
-import { NextResponse } from "next/server";
 import Stripe from "stripe";
+
+import prisma from "@/libs/prismadb";
+import { NextResponse } from "next/server";
+import { CartProductType } from "@/types/cart";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 const stripe = new Stripe(process.env.STRIPE_SCRET_KEY as string, {
   apiVersion: "2023-10-16",
@@ -12,16 +13,18 @@ const calculateOrderAmount = (items: CartProductType[]) => {
   const totalPrice = items.reduce((acc, item) => {
     const totalItem = item.price * item.quantity;
 
-    return acc * totalItem;
+    return acc + totalItem;
   }, 0);
 
-  return totalPrice;
+  const formatedPrice: any = Math.floor(totalPrice);
+
+  return formatedPrice;
 };
 
 export async function POST(request: Request) {
-  const currentUSer = await getCurrentUser();
+  const currentUser = await getCurrentUser();
 
-  if (!currentUSer) {
+  if (!currentUser) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -29,8 +32,9 @@ export async function POST(request: Request) {
 
   const { items, payment_intent_id } = body;
   const total = calculateOrderAmount(items) * 100;
+
   const orderData = {
-    user: { connect: { id: currentUSer.id } },
+    user: { connect: { id: currentUser.id } },
     amount: total,
     currency: "brl",
     status: "pending",

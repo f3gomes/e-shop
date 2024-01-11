@@ -4,7 +4,8 @@ export type CartProductType = {
   description: string;
   category: string;
   brand: string;
-  selectedImg: SelectedImgType;
+  selectedImg?: SelectedImgType;
+  color?: string;
   quantity: number;
   price: number;
 };

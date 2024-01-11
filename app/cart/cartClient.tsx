@@ -6,11 +6,13 @@ import { CustomButton } from "@/components/ProductAddButton";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/formatPrice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { MdArrowBack } from "react-icons/md";
 
 export default function CartClient() {
   const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
+  const router = useRouter();
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -65,7 +67,10 @@ export default function CartClient() {
             </div>
             <p>Frete e Taxas</p>
 
-            <CustomButton label="Confirmar" onClick={() => {}} />
+            <CustomButton
+              label="Confirmar"
+              onClick={() => router.push("/checkout")}
+            />
 
             <Link
               href={"/"}
