@@ -1,17 +1,24 @@
 "use client";
 
-import { CartItem } from "@/components/CartItem";
-import { Heading } from "@/components/Heading";
-import { CustomButton } from "@/components/ProductAddButton";
-import { useCart } from "@/hooks/useCart";
-import { formatPrice } from "@/utils/formatPrice";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { MdArrowBack } from "react-icons/md";
 
-export default function CartClient() {
+import Link from "next/link";
+import { SafeUser } from "@/types";
+import { useCart } from "@/hooks/useCart";
+import { useRouter } from "next/navigation";
+import { MdArrowBack } from "react-icons/md";
+import { Heading } from "@/components/Heading";
+import { CartItem } from "@/components/CartItem";
+import { formatPrice } from "@/utils/formatPrice";
+import { CustomButton } from "@/components/ProductAddButton";
+
+interface CartClientProps {
+  currentUser: SafeUser | any;
+}
+
+export default function CartClient({ currentUser }: CartClientProps) {
   const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
+
   const router = useRouter();
 
   if (!cartProducts || cartProducts.length === 0) {
@@ -67,10 +74,19 @@ export default function CartClient() {
             </div>
             <p>Frete e Taxas</p>
 
-            <CustomButton
-              label="Confirmar"
-              onClick={() => router.push("/checkout")}
-            />
+            {currentUser ? (
+              <CustomButton
+                outline
+                label="Confirmar"
+                onClick={() => router.push("/checkout")}
+              />
+            ) : (
+              <CustomButton
+                outline={false}
+                label="Login para confirmar"
+                onClick={() => router.push("/login")}
+              />
+            )}
 
             <Link
               href={"/"}
