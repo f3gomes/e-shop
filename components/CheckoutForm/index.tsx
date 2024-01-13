@@ -83,8 +83,9 @@ export function CheckoutForm({
         Total: {formattedPrice}
       </div>
       <CustomButton
-        label={isLoading ? "Processando..." : "Pagar"}
+        type="submit"
         disabled={isLoading || !stripe || !elements}
+        label={isLoading ? "Processando..." : "Pagar"}
         onClick={() => {}}
       />
     </form>

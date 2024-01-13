@@ -4,21 +4,23 @@ import { cn } from "@/utils/merge";
 import { IconType } from "react-icons";
 
 interface CustomButtonProps {
+  type?: "button" | "submit" | "reset" | undefined;
   label: string;
-  disabled?: boolean;
-  outline?: boolean;
   small?: boolean;
   custom?: string;
+  outline?: boolean;
+  disabled?: boolean;
   icon?: IconType;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export function CustomButton({
   label,
-  disabled,
-  outline,
   small,
+  type = "button",
   custom,
+  outline,
+  disabled,
   icon: Icon,
   onClick,
 }: CustomButtonProps) {
@@ -34,6 +36,7 @@ export function CustomButton({
       )}
       disabled={disabled}
       onClick={onClick}
+      type={type}
     >
       {Icon && <Icon size={24} />}
       {label}

@@ -54,7 +54,7 @@ export default function CheckoutClient() {
           toast.error("Algo deu errado!");
         });
     }
-  }, [cartProducts, paymentIntent]); // eslint-disable-line
+  }, []); // eslint-disable-line
 
   const options: StripeElementsOptions = {
     clientSecret,

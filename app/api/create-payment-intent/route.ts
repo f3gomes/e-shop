@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 
-const stripe = new Stripe(process.env.STRIPE_SCRET_KEY as string, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2023-10-16",
 });
 
