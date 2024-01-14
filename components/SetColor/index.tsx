@@ -25,7 +25,7 @@ export function SetColor({
               onClick={() => handleColorSelect(image)}
               className={cn(
                 "h-7 w-7 rounded-full border-teal-300 flex items-center justify-center",
-                cartProduct.selectedImg.color === image.color
+                cartProduct.selectedImg?.color === image.color
                   ? "border-[1.5px]"
                   : "border-none"
               )}

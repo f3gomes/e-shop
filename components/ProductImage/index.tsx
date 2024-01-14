@@ -46,7 +46,7 @@ export function ProductImage({
           fill
           priority
           alt={cartProduct.name}
-          src={cartProduct.selectedImg.image}
+          src={cartProduct.selectedImg!.image}
           className="w-full h-full object-contain max-h-[500px] min-h-[300px] sm:min-h-[400px]"
         />
       </div>

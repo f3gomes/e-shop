@@ -1,3 +1,5 @@
+import { Sizes } from "./product";
+
 export type CartProductType = {
   id: string;
   name: string;
@@ -14,4 +16,6 @@ export type SelectedImgType = {
   color: string;
   colorCode: string;
   image: string;
+  size?: Sizes;
+  stock?: number;
 };

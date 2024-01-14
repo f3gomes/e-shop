@@ -14,6 +14,8 @@ export interface Image {
   color: string;
   colorCode: string;
   image: string;
+  size?: Sizes;
+  stock?: number;
 }
 
 export interface Review {
@@ -36,4 +38,13 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: string;
+}
+
+export enum Sizes {
+  P,
+  PP,
+  M,
+  MM,
+  G,
+  GG,
 }

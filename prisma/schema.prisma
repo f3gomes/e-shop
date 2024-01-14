@@ -1,10 +1,10 @@
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider  = "prisma-client-js"
 }
 
 model Account {
@@ -21,40 +21,64 @@ model Account {
   id_token           String?  @db.String
   session_state      String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model User {
-  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
   name               String?
   email              String?   @unique
   emailVerified      DateTime?
   image              String?
   hashedPassword     String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 
   role Role @default(USER)
 
   accounts           Account[]
   orders             Order[]
+  review             Review[]
+}
+
+model Product {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  description        String
+  price              Float
+  brand              String
+  category           String
+  image              Grid[]
+  reviews            Review[]
+}
+
+model Review {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @db.ObjectId
+  productId          String   @db.ObjectId
+  rating             Int
+  comment            String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  product            Product  @relation(fields: [productId], references: [id])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Order {
-  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String @db.ObjectId
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @db.ObjectId
   amount             Float
   currency           String
   status             String
   deliveryStatus     String?
   createDate         DateTime @default(now())
-  paymentIntentId    String @unique
+  paymentIntentId    String   @unique
   products           CartProductType[]
   address            Address?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 type CartProductType {
@@ -63,15 +87,17 @@ type CartProductType {
   description String
   category String
   brand String
-  selectedImg Image
+  selectedImg Grid
   quantity Int
   price Float
 }
 
-type Image {
+type Grid {
   color String
   colorCode String
   image String
+  size Size?
+  stock Int?
 }
 
 type Address {
@@ -85,4 +111,13 @@ type Address {
 enum Role {
   USER
   ADMIN
+}
+
+enum Size {
+  P
+  PP
+  M
+  MM
+  G
+  GG
 }
