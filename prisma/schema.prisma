@@ -50,7 +50,7 @@ model Product {
   price              Float
   brand              String
   category           String
-  image              Grid[]
+  grid               Grid[]
   reviews            Review[]
 }
 
