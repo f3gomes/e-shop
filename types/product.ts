@@ -6,11 +6,11 @@ export interface IProduct {
   brand: string;
   category: string;
   inStock: boolean;
-  images: Image[];
+  grid: Grid[];
   reviews: Review[];
 }
 
-export interface Image {
+export interface Grid {
   color: string;
   colorCode: string;
   image: string;

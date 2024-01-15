@@ -12,7 +12,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { name, images, reviews, price } = product;
+  const { name, grid, reviews, price } = product;
 
   const router = useRouter();
 
@@ -30,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Image
             fill
             alt={name}
-            src={images[0].image}
+            src={grid[0].image}
             className="w-full h-full object-contain"
           />
         </div>

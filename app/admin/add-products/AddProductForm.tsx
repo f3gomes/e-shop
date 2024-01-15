@@ -2,9 +2,8 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-import { grid } from "@/utils/grid";
 import { Input } from "@/components/Input";
 import { GridType } from "@/types/product";
 import { Heading } from "@/components/Heading";
@@ -13,10 +12,12 @@ import { TextArea } from "@/components/TextArea";
 import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { CustomCheckbox } from "@/components/CustomCheckbox";
+import { CustomButton } from "@/components/ProductAddButton";
+import { gridArr } from "@/utils/grid";
 
 export default function AddProductForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [images, setImages] = useState<GridType[] | null>();
+  const [grid, setGrid] = useState<GridType[] | null>();
   const [isProductCreatesd, setIsProductCreated] = useState(false);
 
   const {
@@ -38,13 +39,13 @@ export default function AddProductForm() {
   });
 
   useEffect(() => {
-    setCustomValue("images", images);
-  }, [images]); // eslint-disable-line
+    setCustomValue("grid", grid);
+  }, [grid]); // eslint-disable-line
 
   useEffect(() => {
     if (isProductCreatesd) {
       reset();
-      setImages(null);
+      setGrid(null);
       setIsProductCreated(false);
     }
   }, [isProductCreatesd]); // eslint-disable-line
@@ -60,7 +61,7 @@ export default function AddProductForm() {
   };
 
   const addGridToState = useCallback((value: GridType) => {
-    setImages((prev) => {
+    setGrid((prev) => {
       if (!prev) {
         return [value];
       }
@@ -70,18 +71,22 @@ export default function AddProductForm() {
   }, []);
 
   const removeGridToState = useCallback((value: GridType) => {
-    setImages((prev) => {
+    setGrid((prev) => {
       if (prev) {
-        const filteredImages = prev.filter(
+        const filteredGrid = prev.filter(
           (item) => item.color !== value.color
         );
 
-        return filteredImages;
+        return filteredGrid;
       }
 
       return prev;
     });
   }, []);
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log("Product Data: ", data);
+  };
 
   return (
     <>
@@ -165,7 +170,7 @@ export default function AddProductForm() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
-          {grid.map((item) => {
+          {gridArr.map((item) => {
             return (
               <SelectGrid
                 item={item}
@@ -178,6 +183,12 @@ export default function AddProductForm() {
           })}
         </div>
       </div>
+
+      <CustomButton
+        type="submit"
+        onClick={handleSubmit(onSubmit)}
+        label={isLoading ? "Carregando... " : "Adicionar"}
+      />
     </>
   );
 }

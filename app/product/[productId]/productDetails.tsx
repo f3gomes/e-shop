@@ -34,7 +34,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     description: product.description,
     category: product.category,
     brand: product.brand,
-    selectedImg: { ...product.images[0] },
+    selectedImg: { ...product.grid[0] },
     quantity: 1,
     price: product.price,
   });
@@ -132,7 +132,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <>
             <SetColor
               cartProduct={cartItem}
-              images={product.images}
+              images={product.grid}
               handleColorSelect={handleColorSelect}
             />
             <Horizontal />

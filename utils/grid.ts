@@ -1,6 +1,6 @@
 import { GridType } from "@/types/product";
 
-export const grid: GridType[] = [
+export const gridArr: GridType[] = [
   {
     color: "Branco",
     colorCode: "#ffffff",

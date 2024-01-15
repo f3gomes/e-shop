@@ -9,7 +9,7 @@ export const products: IProduct[] = [
     brand: "apple",
     category: "Phone",
     inStock: true,
-    images: [
+    grid: [
       {
         color: "White",
         colorCode: "#FFFFFF",
@@ -75,7 +75,7 @@ export const products: IProduct[] = [
     brand: "logitech",
     category: "Accesories",
     inStock: true,
-    images: [
+    grid: [
       {
         color: "Black",
         colorCode: "#000000",
@@ -115,7 +115,7 @@ export const products: IProduct[] = [
     brand: "Apple",
     category: "Phone",
     inStock: true,
-    images: [
+    grid: [
       {
         color: "Black",
         colorCode: "#000000",
@@ -188,7 +188,7 @@ export const products: IProduct[] = [
     brand: "logitech",
     category: "Accesories",
     inStock: true,
-    images: [
+    grid: [
       {
         color: "Graphite",
         colorCode: " #383838",
@@ -207,7 +207,7 @@ export const products: IProduct[] = [
     brand: "Nerunsa",
     category: "Watch",
     inStock: true,
-    images: [
+    grid: [
       {
         color: "Black",
         colorCode: "#000000",
