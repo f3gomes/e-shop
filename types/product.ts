@@ -48,3 +48,19 @@ export enum Sizes {
   G,
   GG,
 }
+
+export type GridType = {
+  color: string;
+  colorCode: string;
+  image: File | null;
+  size?: Sizes | string;
+  stock?: number;
+};
+
+export type UploadedGridType = {
+  color: string;
+  colorCode: string;
+  image: string;
+  size?: Sizes;
+  stock?: number;
+};

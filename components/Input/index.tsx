@@ -3,6 +3,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
   id: string;
+  min?: number;
   label: string;
   type?: string;
   disabled?: boolean;
@@ -13,8 +14,9 @@ interface InputProps {
 
 export function Input({
   id,
-  label,
+  min,
   type,
+  label,
   disabled,
   required,
   register,
@@ -24,6 +26,7 @@ export function Input({
     <div className="w-full relative">
       <input
         id={id}
+        min={min}
         type={type}
         placeholder=""
         autoComplete="off"

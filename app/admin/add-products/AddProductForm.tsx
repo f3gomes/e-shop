@@ -1,22 +1,30 @@
 "use client";
 
+import React, { useCallback, useEffect, useState } from "react";
+
+import { FieldValues, useForm } from "react-hook-form";
+
+import { grid } from "@/utils/grid";
+import { Input } from "@/components/Input";
+import { GridType } from "@/types/product";
+import { Heading } from "@/components/Heading";
+import { categories } from "@/utils/categories";
+import { TextArea } from "@/components/TextArea";
+import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { CustomCheckbox } from "@/components/CustomCheckbox";
-import { Heading } from "@/components/Heading";
-import { Input } from "@/components/Input";
-import { TextArea } from "@/components/TextArea";
-import { categories } from "@/utils/categories";
-import React, { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
 
 export default function AddProductForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [images, setImages] = useState<GridType[] | null>();
+  const [isProductCreatesd, setIsProductCreated] = useState(false);
+
   const {
-    register,
-    handleSubmit,
-    setValue,
     watch,
     reset,
+    setValue,
+    register,
+    handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
@@ -29,6 +37,18 @@ export default function AddProductForm() {
     },
   });
 
+  useEffect(() => {
+    setCustomValue("images", images);
+  }, [images]); // eslint-disable-line
+
+  useEffect(() => {
+    if (isProductCreatesd) {
+      reset();
+      setImages(null);
+      setIsProductCreated(false);
+    }
+  }, [isProductCreatesd]); // eslint-disable-line
+
   const category = watch("category");
 
   const setCustomValue = (id: string, value: any) => {
@@ -38,6 +58,30 @@ export default function AddProductForm() {
       shouldValidate: true,
     });
   };
+
+  const addGridToState = useCallback((value: GridType) => {
+    setImages((prev) => {
+      if (!prev) {
+        return [value];
+      }
+
+      return [...prev, value];
+    });
+  }, []);
+
+  const removeGridToState = useCallback((value: GridType) => {
+    setImages((prev) => {
+      if (prev) {
+        const filteredImages = prev.filter(
+          (item) => item.color !== value.color
+        );
+
+        return filteredImages;
+      }
+
+      return prev;
+    });
+  }, []);
 
   return (
     <>
@@ -60,6 +104,7 @@ export default function AddProductForm() {
         register={register}
         errors={errors}
         required
+        min={0}
       />
 
       <Input
@@ -103,6 +148,32 @@ export default function AddProductForm() {
                   onClick={(category) => setCustomValue("category", category)}
                 />
               </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col flex-wrap gap-4">
+        <div>
+          <div className="font-bold">
+            Selecione as cores e tamanhos disponíveis e adicione as fotos do
+            produto.
+          </div>
+
+          <div className="text-sm">
+            Defina também o estoque inicial de cada item
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {grid.map((item) => {
+            return (
+              <SelectGrid
+                item={item}
+                key={item.colorCode}
+                addGridToState={addGridToState}
+                removeGridToState={removeGridToState}
+                isProductCreated={false}
+              />
             );
           })}
         </div>
