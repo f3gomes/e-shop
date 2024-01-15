@@ -4,21 +4,29 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+import axios from "axios";
+import toast from "react-hot-toast";
+
+import { gridArr } from "@/utils/grid";
 import { Input } from "@/components/Input";
-import { GridType } from "@/types/product";
+import { useRouter } from "next/navigation";
+import { firebaseApp } from "@/libs/firebase";
 import { Heading } from "@/components/Heading";
 import { categories } from "@/utils/categories";
 import { TextArea } from "@/components/TextArea";
 import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
+import { GridType, UploadedGridType } from "@/types/product";
 import { CustomCheckbox } from "@/components/CustomCheckbox";
 import { CustomButton } from "@/components/ProductAddButton";
-import { gridArr } from "@/utils/grid";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 export default function AddProductForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [grid, setGrid] = useState<GridType[] | null>();
   const [isProductCreatesd, setIsProductCreated] = useState(false);
+
+  const router = useRouter();
 
   const {
     watch,
@@ -73,9 +81,7 @@ export default function AddProductForm() {
   const removeGridToState = useCallback((value: GridType) => {
     setGrid((prev) => {
       if (prev) {
-        const filteredGrid = prev.filter(
-          (item) => item.color !== value.color
-        );
+        const filteredGrid = prev.filter((item) => item.color !== value.color);
 
         return filteredGrid;
       }
@@ -85,7 +91,96 @@ export default function AddProductForm() {
   }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Product Data: ", data);
+    setIsLoading(true);
+    let uploadedGrid: UploadedGridType[] = [];
+
+    if (!data.category) {
+      setIsLoading(false);
+      return toast.error("Categoria não está selecionada!");
+    }
+
+    if (!data.grid || data.grid.length === 0) {
+      setIsLoading(false);
+      return toast.error("Imagem não foi selecionada!");
+    }
+
+    const handleGridUpload = async () => {
+      toast("Salvando produto, aguarde...");
+
+      try {
+        for (const item of data.grid) {
+          if (item.image) {
+            const fileName = new Date().getTime() + "-" + item.image.name;
+            const storage = getStorage(firebaseApp);
+            const storageRef = ref(storage, `/products/${fileName}`);
+            const uploadTask = uploadBytesResumable(storageRef, item.image);
+
+            await new Promise<void>((resolve, reject) => {
+              uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                  const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log("Upload is " + progress + "% done");
+                  switch (snapshot.state) {
+                    case "paused":
+                      console.log("Upload is paused");
+                      break;
+                    case "running":
+                      console.log("Upload is running");
+                      break;
+                  }
+                },
+
+                (error) => {
+                  console.log("Error uploading image: ", error);
+                  reject(error);
+                },
+
+                () => {
+                  getDownloadURL(uploadTask.snapshot.ref)
+                    .then((downloadUrl) => {
+                      uploadedGrid.push({
+                        ...item,
+                        image: downloadUrl,
+                      });
+
+                      console.log("File avaliable at ", downloadUrl);
+                      resolve();
+                    })
+                    .catch((error) => {
+                      console.log("Error getting the download URL: ", error);
+                      reject(error);
+                    });
+                }
+              );
+            });
+          }
+        }
+      } catch (error) {
+        setIsLoading(false);
+        console.log("Error handling grid upload: ", error);
+        return toast.error("Erro ao fazer upload de imagens");
+      }
+    };
+
+    await handleGridUpload();
+    const productData = { ...data, grid: uploadedGrid };
+
+    axios
+      .post("/api/product", productData)
+      .then(() => {
+        toast.success("Produto criado com sucesso!");
+        setIsProductCreated(true);
+        router.refresh();
+      })
+      .catch((error) => {
+        toast.error("Erro ao criar produto no banco de dados!");
+        console.log("Error into save products on database: ", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
