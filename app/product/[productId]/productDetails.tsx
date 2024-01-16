@@ -132,7 +132,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <>
             <SetColor
               cartProduct={cartItem}
-              images={product.grid}
+              grid={product.grid}
               handleColorSelect={handleColorSelect}
             />
             <Horizontal />
