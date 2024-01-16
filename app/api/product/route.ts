@@ -34,3 +34,34 @@ export async function POST(request: Request) {
 export async function GET() {
   return NextResponse.json({ message: "Hello GET!" });
 }
+
+export async function PUT(request: Request) {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser || currentUser.role !== "ADMIN") {
+    return NextResponse.error();
+  }
+
+  const body = await request.json();
+  const { id, colorCode, newStock } = body;
+
+  const product = await prisma.product.update({
+    where: {
+      id: id,
+    },
+    data: {
+      grid: {
+        updateMany: {
+          where: {
+            colorCode: colorCode,
+          },
+          data: {
+            stock: newStock,
+          },
+        },
+      },
+    },
+  });
+
+  return NextResponse.json(product);
+}

@@ -17,7 +17,6 @@ import { TextArea } from "@/components/TextArea";
 import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { GridType, UploadedGridType } from "@/types/product";
-import { CustomCheckbox } from "@/components/CustomCheckbox";
 import { CustomButton } from "@/components/ProductAddButton";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
@@ -223,12 +222,6 @@ export default function AddProductForm() {
         register={register}
         errors={errors}
         required
-      />
-
-      <CustomCheckbox
-        id="inStock"
-        register={register}
-        label="Disponível em estoque"
       />
 
       <div className="w-full font-medium">
