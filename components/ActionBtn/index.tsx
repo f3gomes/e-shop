@@ -7,6 +7,7 @@ interface ActionBtnProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   tooltip: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 export function ActionBtn({
@@ -14,10 +15,12 @@ export function ActionBtn({
   onClick,
   disabled,
   tooltip,
+  type = "button",
 }: ActionBtnProps) {
   return (
     <Tooltip title={tooltip}>
       <button
+        type={type}
         onClick={onClick}
         disabled={disabled}
         className={cn(

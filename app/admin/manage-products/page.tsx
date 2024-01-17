@@ -16,7 +16,7 @@ export default async function ManageProducts() {
   }
 
   return (
-    <div className="pt-8">
+    <div>
       <Container>
         <ManageProductsClient products={products} />
       </Container>

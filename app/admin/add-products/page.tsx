@@ -15,7 +15,7 @@ export default async function AddProducts() {
   }
 
   return (
-    <div className="p-8">
+    <div className="-mt-16">
       <Container>
         <FormWrap>
           <AddProductForm />

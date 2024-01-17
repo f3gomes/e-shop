@@ -43,25 +43,41 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
-  const { id, colorCode, newStock } = body;
+  const { id, name, price, colorCode, newStock } = body;
 
-  const product = await prisma.product.update({
-    where: {
-      id: id,
-    },
-    data: {
-      grid: {
-        updateMany: {
-          where: {
-            colorCode: colorCode,
-          },
-          data: {
-            stock: newStock,
+  let product = null;
+
+  if (name && price) {
+    product = await prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: name,
+        price: price,
+      },
+    });
+  }
+
+  if (colorCode && newStock) {
+    product = await prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: {
+        grid: {
+          updateMany: {
+            where: {
+              colorCode: colorCode,
+            },
+            data: {
+              stock: newStock,
+            },
           },
         },
       },
-    },
-  });
+    });
+  }
 
   return NextResponse.json(product);
 }
