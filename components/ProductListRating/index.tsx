@@ -10,8 +10,10 @@ interface ProductListRatingProps {
 }
 
 export function ProductListRating({ product }: ProductListRatingProps) {
+  if (product.reviews.length === 0) return null;
+
   return (
-    <div>
+    <div className="mt-8">
       <Heading title="Avaliações de clientes" />
 
       <div className="text-sm mt-2">
