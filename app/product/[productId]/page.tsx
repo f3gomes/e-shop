@@ -10,7 +10,7 @@ interface IParams {
   productId?: string;
 }
 
-export default function Produc({ params }: { params: IParams }) {
+export default function Product({ params }: { params: IParams }) {
   const product = products.find((item) => item.id === params.productId);
 
   return (
