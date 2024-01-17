@@ -6,6 +6,7 @@ import { Container } from "../Container";
 import { CartCount } from "../CartCount";
 import { UserMenu } from "../UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import { NavCategories } from "../NavCategories";
 
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -33,6 +34,8 @@ export async function NavBar() {
           </div>
         </Container>
       </div>
+
+      <NavCategories />
     </div>
   );
 }
