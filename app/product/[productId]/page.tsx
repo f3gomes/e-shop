@@ -1,17 +1,21 @@
 import React from "react";
 
-import { products } from "@/utils/data";
 import { Container } from "@/components/Container";
 import { ProductListRating } from "@/components/ProductListRating";
-
 import ProductDetails from "./productDetails";
+import getProductById from "@/actions/getProductById";
+import { NullData } from "@/components/NullData";
 
 interface IParams {
   productId?: string;
 }
 
-export default function Product({ params }: { params: IParams }) {
-  const product = products.find((item) => item.id === params.productId);
+export default async function Product({ params }: { params: IParams }) {
+  const product = await getProductById(params);
+
+  if (!product) {
+    return <NullData title="O Produto com esse ID não existe!" />;
+  }
 
   return (
     <div className="p-8">

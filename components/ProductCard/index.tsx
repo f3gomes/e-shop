@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { Rating } from "@mui/material";
-import { products } from "@/utils/data";
 import { formatPrice } from "@/utils/formatPrice";
 import { truncateText } from "@/utils/truncateText";
 import { useRouter } from "next/navigation";
+import { IProduct } from "@/types/product";
 
 interface ProductCardProps {
-  product: (typeof products)[0];
+  product: IProduct;
 }
 
 export function ProductCard({ product }: ProductCardProps) {

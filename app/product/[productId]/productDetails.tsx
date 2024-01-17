@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-
-import { cn } from "@/utils/merge";
 import { Rating } from "@mui/material";
 import { useCart } from "@/hooks/useCart";
 import { SetColor } from "@/components/SetColor";
@@ -12,10 +10,9 @@ import { CartProductType, SelectedImgType } from "@/types/cart";
 import { CustomButton } from "@/components/ProductAddButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import { IProduct } from "@/types/product";
 
 interface ProductDetailsProps {
-  product: IProduct;
+  product: any;
 }
 
 const Horizontal = () => {
@@ -40,7 +37,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   });
 
   const productRating =
-    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length;
 
   const handleColorSelect = useCallback((value: SelectedImgType) => {
@@ -107,11 +104,13 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <div>
           <span className="font-semibold">Categoria: {product.brand}</span>
         </div>
-        <div
+
+        {/* Atualizar informação de estoque */}
+        {/* <div
           className={cn(product.inStock ? "text-teal-400" : "text-rose-400")}
         >
           {product.inStock ? "Em estoque" : "Sem estoque"}
-        </div>
+        </div> */}
         <Horizontal />
         {isProductInCart ? (
           <>
