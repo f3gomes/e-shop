@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 
 import toast from "react-hot-toast";
 
+import { Heading } from "../Heading";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/formatPrice";
-import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-
-import { Heading } from "../Heading";
 import { CustomButton } from "../ProductAddButton";
+import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 interface CheckoutFormProps {
   clientSecret: string;
@@ -60,7 +59,10 @@ export function CheckoutForm({
           handleSetPaymentSuccess(true);
           handleSetPaymentIntent(null);
         }
-      });
+      })
+      // .finally(() => {
+      //   setIsLoading(false);
+      // });
   };
 
   return (

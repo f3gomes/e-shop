@@ -33,7 +33,7 @@ export function Footer() {
             <Link href={"/"}>{shopInfo.footer.services.service3}</Link>
           </FooterList>
 
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
+          <div className="w-fit md:w-1/3 mb-6 md:mb-0">
             <h3 className="text-base font-bold mb-2">
               {shopInfo.footer.about.title}
             </h3>
