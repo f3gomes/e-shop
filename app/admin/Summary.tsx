@@ -53,7 +53,7 @@ export default function Summary({ orders, products, users }: SummaryProps) {
       let tempData = { ...prev };
 
       const totalSale = orders.reduce((acc, item: any) => {
-        if (item.status === "complete" || item.status === "pending") {
+        if (item.status === "complete") {
           return acc + item.amount;
         } else return acc;
       }, 0);
