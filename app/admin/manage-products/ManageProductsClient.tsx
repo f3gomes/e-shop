@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 
 import { IProduct } from "@/types/product";
 import { useRouter } from "next/navigation";
-import { Status } from "@/components/Status";
 import { firebaseApp } from "@/libs/firebase";
 import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
@@ -18,11 +17,9 @@ import {
   MdCached,
   MdClose,
   MdDelete,
-  MdDone,
   MdRemoveRedEye,
 } from "react-icons/md";
 import { Box, Button, Modal, TextField } from "@mui/material";
-import { CustomButton } from "@/components/ProductAddButton";
 
 interface ManageProductsClientProps {
   products: IProduct[] | any;
@@ -102,28 +99,8 @@ export default function ManageProductsClient({
     },
   ];
 
-  const handleToggleStock = useCallback(
-    (id: string, colorCode: string, newStock: number) => {
-      axios
-        .put("/api/product", {
-          id,
-          colorCode,
-          newStock,
-        })
-        .then((res) => {
-          toast.success("Produto atualizado!");
-          router.refresh();
-        })
-        .catch((err) => {
-          toast.error("Algo deu errado!");
-          console.log(err);
-        });
-    },
-    [] // eslint-disable-line
-  );
-
   const handleDelete = useCallback(async (id: string, grid: any[]) => {
-    if (confirm("Tem certeza?")) {
+    if (confirm("Excluir produto?")) {
       toast("Removendo produto...");
 
       const handleImageDelete = async () => {

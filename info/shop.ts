@@ -1,3 +1,5 @@
+import { categories } from "./categories";
+
 export const shopInfo = {
   name: "E-shop",
   greeting: "Welcome to my shop!",
@@ -11,9 +13,10 @@ export const shopInfo = {
   footer: {
     categories: {
       title: "Categorias",
-      category1: "Fones",
-      category2: "Laptops",
-      category3: "Desktops",
+      category0: categories[0].label,
+      category1: categories[1].label,
+      category2: categories[2].label,
+      category3: categories[3].label,
     },
 
     services: {

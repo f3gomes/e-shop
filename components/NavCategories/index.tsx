@@ -1,9 +1,10 @@
 "use client";
 
-import { Container } from "../Container";
-import { categories } from "@/utils/categories";
-import { CategoryItem } from "../CategoryItem";
+import { categories } from "@/info/categories";
 import { usePathname, useSearchParams } from "next/navigation";
+
+import { Container } from "../Container";
+import { CategoryItem } from "../CategoryItem";
 
 export function NavCategories() {
   const params = useSearchParams();

@@ -1,5 +1,14 @@
 import { GridType } from "@/types/product";
 
+export enum Sizes {
+  P,
+  PP,
+  M,
+  MM,
+  G,
+  GG,
+}
+
 export const gridArr: GridType[] = [
   {
     color: "Branco",

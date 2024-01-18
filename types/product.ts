@@ -1,3 +1,5 @@
+import { Sizes } from "@/info/grid";
+
 export interface IProduct {
   id: string;
   name: string;
@@ -38,15 +40,6 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: string;
-}
-
-export enum Sizes {
-  P,
-  PP,
-  M,
-  MM,
-  G,
-  GG,
 }
 
 export type GridType = {

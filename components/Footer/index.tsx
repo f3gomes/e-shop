@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { shopInfo } from "@/shop-info/data";
+import { shopInfo } from "@/info/shop";
 import { MdFacebook } from "react-icons/md";
 import { AiFillInstagram, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
 

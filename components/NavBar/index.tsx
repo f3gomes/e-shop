@@ -8,7 +8,7 @@ import { UserMenu } from "../UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { NavCategories } from "../NavCategories";
 import { SearchBar } from "../SearchBar";
-import { shopInfo } from "@/shop-info/data";
+import { shopInfo } from "@/info/shop";
 
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 

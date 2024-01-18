@@ -2,8 +2,8 @@ import type, { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
 import { cn } from "@/utils/merge";
+import { shopInfo } from "@/info/shop";
 import { Poppins } from "next/font/google";
-import { shopInfo } from "@/shop-info/data";
 import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
 import CartProvider from "@/providers/CartProvider";

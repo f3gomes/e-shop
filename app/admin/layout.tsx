@@ -1,5 +1,5 @@
 import { AdminNav } from "@/components/Admin/AdminNav";
-import { shopInfo } from "@/shop-info/data";
+import { shopInfo } from "@/info/shop";
 import React, { ReactNode } from "react";
 
 export const metadata = {

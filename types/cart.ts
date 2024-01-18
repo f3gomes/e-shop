@@ -1,4 +1,4 @@
-import { Sizes } from "./product";
+import { Sizes } from "@/info/grid";
 
 export type CartProductType = {
   id: string;

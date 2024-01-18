@@ -1,4 +1,4 @@
-import { shopInfo } from "@/shop-info/data";
+import { shopInfo } from "@/info/shop";
 import Image from "next/image";
 import { ReactNode } from "react";
 

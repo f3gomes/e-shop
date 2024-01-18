@@ -7,18 +7,19 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { gridArr } from "@/utils/grid";
+import { gridArr } from "@/info/grid";
 import { Input } from "@/components/Input";
 import { useRouter } from "next/navigation";
 import { firebaseApp } from "@/libs/firebase";
 import { Heading } from "@/components/Heading";
-import { categories } from "@/utils/categories";
+
 import { TextArea } from "@/components/TextArea";
 import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { GridType, UploadedGridType } from "@/types/product";
 import { CustomButton } from "@/components/ProductAddButton";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { categories } from "@/info/categories";
 
 export default function AddProductForm() {
   const [isLoading, setIsLoading] = useState(false);
