@@ -45,7 +45,7 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
-  const { id, name, price, colorCode, newStock } = body;
+  const { id, name, price, grid } = body;
 
   let product = null;
 
@@ -63,22 +63,13 @@ export async function PUT(request: Request) {
     return NextResponse.json(product);
   }
 
-  if (colorCode && newStock) {
+  if (grid) {
     product = await prisma.product.update({
       where: {
         id: id,
       },
       data: {
-        grid: {
-          updateMany: {
-            where: {
-              colorCode: colorCode,
-            },
-            data: {
-              stock: newStock,
-            },
-          },
-        },
+        grid: grid,
       },
     });
 

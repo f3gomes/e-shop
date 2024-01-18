@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -26,6 +26,8 @@ export default function ManageProductsClient({
   const storage = getStorage(firebaseApp);
 
   const [openModalDetails, setOpenModalDetails] = useState(false);
+  const [disabledInputs, setDisabledInputs] = useState(false);
+  const [disabledStockInput, setDisabledStockInput] = useState(true);
   const [productData, setProductData] = useState<any>();
 
   let rows: any = [];
@@ -44,6 +46,7 @@ export default function ManageProductsClient({
   }
 
   const [selectedProduct, setSelectedProduct] = useState<any>(rows[0]);
+  const [gridData, setGridData] = useState<any[]>();
 
   const handleUpdateValue = (event: any) => {
     setProductData({
@@ -51,6 +54,12 @@ export default function ManageProductsClient({
       id: selectedProduct?.id,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleChangeStock = (code: string, newStock: any) => {
+    const filteredItem = gridData?.find((item: any) => item.colorCode === code);
+    filteredItem.stock = Number(newStock);
+    setGridData([...gridData!]);
   };
 
   const getProductById = (id: string) => {
@@ -141,40 +150,74 @@ export default function ManageProductsClient({
     p: 4,
   };
 
+  const closeModalEnableInputs = () => {
+    setDisabledInputs(false);
+    setOpenModalDetails(false);
+    setDisabledStockInput(true);
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    axios
-      .put("/api/product", {
-        id: productData?.id,
-        name: productData?.name || selectedProduct.name,
-        price: Number(productData?.price) || selectedProduct.price,
-      })
-      .then((res) => {
-        toast.success("Produto atualizado!");
-        router.refresh();
-      })
-      .catch((err) => {
-        toast.error("Algo deu errado!");
-        console.log(err);
-      })
-      .finally(() => {
-        setOpenModalDetails(false);
-      });
+    if (disabledInputs) {
+      axios
+        .put("/api/product", {
+          id: selectedProduct?.id,
+          grid: gridData,
+        })
+        .then((res) => {
+          toast.success("Estoques atualizados!");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Algo deu errado!");
+          console.log(err);
+        })
+        .finally(() => {
+          closeModalEnableInputs();
+        });
+    } else {
+      axios
+        .put("/api/product", {
+          id: productData?.id,
+          name: productData?.name || selectedProduct.name,
+          price: Number(productData?.price) || selectedProduct.price,
+        })
+        .then((res) => {
+          toast.success("Produto atualizado!");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Algo deu errado!");
+          console.log(err);
+        })
+        .finally(() => {
+          closeModalEnableInputs();
+        });
+    }
   };
+
+  const handleEnableStockInput = () => {
+    setDisabledInputs(true);
+    setDisabledStockInput(false);
+  };
+
+  useEffect(() => {
+    setGridData(selectedProduct.grid);
+  }, [selectedProduct]);
 
   return (
     <div className="max-w-[1100px] m-auto text-xl">
       <Modal
         open={openModalDetails}
-        onClose={() => setOpenModalDetails(false)}
+        onClose={closeModalEnableInputs}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <MdClose
             size={20}
-            onClick={() => setOpenModalDetails(false)}
+            onClick={closeModalEnableInputs}
             className="absolute right-1 top-1 cursor-pointer hover:scale-110 hover:border-slate-800 transition duration-200"
           />
 
@@ -199,6 +242,7 @@ export default function ManageProductsClient({
                 id="outlined-basic"
                 onChange={handleUpdateValue}
                 defaultValue={selectedProduct?.name}
+                disabled={disabledInputs}
               />
 
               <TextField
@@ -209,6 +253,7 @@ export default function ManageProductsClient({
                 id="outlined-basic"
                 onChange={handleUpdateValue}
                 defaultValue={selectedProduct?.price}
+                disabled={disabledInputs}
               />
 
               <div>
@@ -239,16 +284,19 @@ export default function ManageProductsClient({
                           id="outlined-basic"
                           label="Estoque"
                           variant="outlined"
-                          value={item.stock}
                           className="w-20"
-                          disabled
+                          defaultValue={item.stock}
+                          onChange={(e) =>
+                            handleChangeStock(item.colorCode, e.target.value)
+                          }
+                          disabled={disabledStockInput}
                         />
 
                         <div className="-mt-6">
                           <ActionBtn
-                            tooltip="Atualizar estoque"
                             icon={MdCached}
-                            onClick={() => {}}
+                            tooltip="Atualizar estoque"
+                            onClick={handleEnableStockInput}
                           />
                         </div>
                       </div>
