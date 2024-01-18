@@ -7,6 +7,8 @@ import { CartCount } from "../CartCount";
 import { UserMenu } from "../UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { NavCategories } from "../NavCategories";
+import { SearchBar } from "../SearchBar";
+import { shopInfo } from "@/shop-info/data";
 
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -22,10 +24,12 @@ export async function NavBar() {
               href={"/"}
               className={cn(font.className, "font-bold text-2xl")}
             >
-              E-Shop
+              {shopInfo.name}
             </Link>
 
-            <div className="hidden md:block">Buscar</div>
+            <div className="hidden md:block">
+              <SearchBar />
+            </div>
 
             <div className="flex items-center gap-8 md:gap-12">
               <CartCount />
