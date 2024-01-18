@@ -17,6 +17,8 @@ interface OrderDetailsProps {
 }
 
 export default function OrderDetails({ order }: OrderDetailsProps) {
+  console.log(order)
+
   return (
     <div className="max-w-[1150px] m-auto flex flex-col gap-2">
       <div>
@@ -26,7 +28,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
       <div>ID do pedido: {order.id}</div>
       <div>
         Total do pedido:{" "}
-        <span className="font-bold">{formatPrice(order.amount)}</span>
+        <span className="font-bold">{formatPrice(order.amount / 100)}</span>
       </div>
 
       <div className="flex gap-2 items-center">

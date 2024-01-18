@@ -137,7 +137,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
   return (
     <div className="max-w-[1100px] m-auto text-xl">
       <div className="mb-4 mt-8">
-        <Heading title="Editar Pedidos" center />
+        <Heading title="Meus Pedidos" center />
       </div>
 
       <div style={{ height: 600, width: "100%" }}>

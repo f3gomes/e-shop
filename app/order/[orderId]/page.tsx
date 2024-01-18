@@ -18,7 +18,9 @@ export default async function Order({ params }: { params: IParams }) {
 
   return (
     <div className="p-8">
-      <Container>{<OrderDetails order={order} />}</Container>
+      <Container>
+        <OrderDetails order={order} />
+      </Container>
     </div>
   );
 }
