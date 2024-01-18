@@ -1,3 +1,5 @@
+export const revalidate = 0; // get new data from server
+
 import getProducts, { IProductParams } from "@/actions/getProducts";
 import { Container } from "@/components/Container";
 import { HomeBanner } from "@/components/HomeBanner";
