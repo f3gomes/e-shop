@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../libs/prismadb";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import prisma from "../../../libs/prismadb";
+
+export async function GET() {
+  return NextResponse.json({ message: "Hello GET!" });
+}
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
@@ -31,10 +35,6 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
-  return NextResponse.json({ message: "Hello GET!" });
-}
-
 export async function PUT(request: Request) {
   const currentUser = await getCurrentUser();
 
@@ -59,6 +59,8 @@ export async function PUT(request: Request) {
         price: price,
       },
     });
+
+    return NextResponse.json(product);
   }
 
   if (colorCode && newStock) {
@@ -79,7 +81,9 @@ export async function PUT(request: Request) {
         },
       },
     });
+
+    return NextResponse.json(product);
   }
 
-  return NextResponse.json(product);
+  return NextResponse.error();
 }

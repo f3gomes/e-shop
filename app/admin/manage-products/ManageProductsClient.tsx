@@ -9,16 +9,10 @@ import { IProduct } from "@/types/product";
 import { useRouter } from "next/navigation";
 import { firebaseApp } from "@/libs/firebase";
 import { Heading } from "@/components/Heading";
-import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-import {
-  MdCached,
-  MdClose,
-  MdDelete,
-  MdRemoveRedEye,
-} from "react-icons/md";
+import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { Box, Button, Modal, TextField } from "@mui/material";
 
 interface ManageProductsClientProps {
@@ -34,10 +28,6 @@ export default function ManageProductsClient({
   const [openModalDetails, setOpenModalDetails] = useState(false);
   const [productData, setProductData] = useState<any>();
 
-  const handleUpdateValue = (event: any) => {
-    setProductData({ ...productData, [event.target.name]: event.target.value });
-  };
-
   let rows: any = [];
 
   if (products) {
@@ -45,7 +35,7 @@ export default function ManageProductsClient({
       return {
         id: item.id,
         name: item.name,
-        price: formatPrice(item.price),
+        price: item.price,
         category: item.category,
         brand: item.brand,
         grid: item.grid,
@@ -54,6 +44,14 @@ export default function ManageProductsClient({
   }
 
   const [selectedProduct, setSelectedProduct] = useState<any>(rows[0]);
+
+  const handleUpdateValue = (event: any) => {
+    setProductData({
+      ...productData,
+      id: selectedProduct?.id,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const getProductById = (id: string) => {
     const product = rows.filter((item: any) => item.id === id)[0];
@@ -145,7 +143,24 @@ export default function ManageProductsClient({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submit")
+
+    axios
+      .put("/api/product", {
+        id: productData?.id,
+        name: productData?.name || selectedProduct.name,
+        price: Number(productData?.price) || selectedProduct.price,
+      })
+      .then((res) => {
+        toast.success("Produto atualizado!");
+        router.refresh();
+      })
+      .catch((err) => {
+        toast.error("Algo deu errado!");
+        console.log(err);
+      })
+      .finally(() => {
+        setOpenModalDetails(false);
+      });
   };
 
   return (
@@ -167,11 +182,23 @@ export default function ManageProductsClient({
             <div className="flex flex-col gap-2">
               <TextField
                 required
+                name="id"
+                label="ID"
+                variant="outlined"
+                id="outlined-basic"
+                onChange={handleUpdateValue}
+                defaultValue={selectedProduct?.id}
+                disabled
+              />
+
+              <TextField
+                required
                 name="name"
                 label="Nome"
                 variant="outlined"
                 id="outlined-basic"
-                value={selectedProduct?.name}
+                onChange={handleUpdateValue}
+                defaultValue={selectedProduct?.name}
               />
 
               <TextField
@@ -180,7 +207,8 @@ export default function ManageProductsClient({
                 label="Preço"
                 variant="outlined"
                 id="outlined-basic"
-                value={selectedProduct?.price}
+                onChange={handleUpdateValue}
+                defaultValue={selectedProduct?.price}
               />
 
               <div>
