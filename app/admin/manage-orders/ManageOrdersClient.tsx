@@ -13,12 +13,7 @@ import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import {
-  MdAccessTimeFilled,
-  MdDeliveryDining,
-  MdDone,
-  MdRemoveRedEye,
-} from "react-icons/md";
+import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
 
 interface ManageOrdersClientProps {
   orders: ExtendedOrder[];
@@ -44,13 +39,30 @@ export default function ManageOrdersClient({
         paymentStatus: item.status,
         date: moment(item.createDate).fromNow(),
         deliveryStatus: item.deliveryStatus,
+        paymentIntentId: item.paymentIntentId,
       };
     });
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 210 },
+    { field: "id", headerName: "ID", width: 120 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
+    {
+      field: "paymentIntentId",
+      headerName: "Forma",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <>
+            {params.row.paymentIntentId.slice(0, 3) === "pix" ? (
+              <div className="font-bold text-slate-800">PIX</div>
+            ) : (
+              <div className="font-bold text-slate-800">CARTÃO</div>
+            )}
+          </>
+        );
+      },
+    },
     {
       field: "amount",
       headerName: "Valor (R$)",
@@ -133,19 +145,19 @@ export default function ManageOrdersClient({
         return (
           <div className="flex justify-between gap-4 w-full">
             <ActionBtn
-              tooltip=""
+              tooltip="Confirmar entrega"
               icon={MdDeliveryDining}
               onClick={() => handleDispatch(params.row.id)}
             />
 
             <ActionBtn
-              tooltip=""
+              tooltip="Confirmar envio"
               icon={MdDone}
               onClick={() => handleDelivery(params.row.id)}
             />
 
             <ActionBtn
-              tooltip=""
+              tooltip="Ver detalhes"
               icon={MdRemoveRedEye}
               onClick={() => router.push(`/order/${params.row.id}`)}
             />

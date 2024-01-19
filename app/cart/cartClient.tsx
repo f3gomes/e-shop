@@ -11,6 +11,7 @@ import { Heading } from "@/components/Heading";
 import { CartItem } from "@/components/CartItem";
 import { formatPrice } from "@/utils/formatPrice";
 import { CustomButton } from "@/components/ProductAddButton";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 interface CartClientProps {
   currentUser: SafeUser | any;
@@ -69,15 +70,19 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
         <div className="text-sm flex flex-col gap-1 items-start">
           <div>
-            <div className="py-4 flex gap-1">
-              <h1 className="font-semibold">Forma de Pagamento:</h1>
-              <select
-                name="payway"
-                onChange={(event) => setSelectedOption(event.target.value)}
-              >
-                <option value="checkout">Cartão</option>
-                <option value="pix">PIX</option>
-              </select>
+            <div className="py-4 min-w-[274px]">
+              <span className="font-semibold text-base">
+                Forma de pagamento
+              </span>
+              <FormControl fullWidth>
+                <Select
+                  value={selectedOption}
+                  onChange={(event) => setSelectedOption(event.target.value)}
+                >
+                  <MenuItem value={"checkout"}>Cartão</MenuItem>
+                  <MenuItem value={"pix"}>PIX</MenuItem>
+                </Select>
+              </FormControl>
             </div>
 
             <div className="flex justify-between w-64 text-base font-semibold">

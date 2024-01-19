@@ -20,7 +20,7 @@ export function CartItem({ item }: CartItemProps) {
 
   return (
     <div className="grid grid-cols-5 text-xs md:text-sm gap-4 border-[1.5px] border-slate-200 py-4 pr-2 items-center">
-      <div className="col-span-2 justify-self-start flex gap-2 md:gap-4">
+      <div className="col-span-2 justify-self-start flex gap-2 md:gap-4 ml-2">
         <Link href={`/product/${item.id}`}>
           <div className="relative w-[70px] aspect-square">
             <Image

@@ -17,8 +17,6 @@ interface OrderDetailsProps {
 }
 
 export default function OrderDetails({ order }: OrderDetailsProps) {
-  console.log(order)
-
   return (
     <div className="max-w-[1150px] m-auto flex flex-col gap-2">
       <div>
@@ -29,6 +27,17 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
       <div>
         Total do pedido:{" "}
         <span className="font-bold">{formatPrice(order.amount / 100)}</span>
+      </div>
+
+      <div className="flex gap-2">
+        Forma de pagamento:
+        <>
+          {order.paymentIntentId.slice(0, 3) === "pix" ? (
+            <div className="font-bold">PIX</div>
+          ) : (
+            <div className="font-bold">CARTÃO</div>
+          )}
+        </>
       </div>
 
       <div className="flex gap-2 items-center">

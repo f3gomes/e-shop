@@ -105,12 +105,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <span className="font-semibold">Categoria: {product.brand}</span>
         </div>
 
-        {/* Atualizar informação de estoque */}
-        {/* <div
-          className={cn(product.inStock ? "text-teal-400" : "text-rose-400")}
-        >
-          {product.inStock ? "Em estoque" : "Sem estoque"}
-        </div> */}
         <Horizontal />
         {isProductInCart ? (
           <>
@@ -140,6 +134,13 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               handleQtyDecrease={handleQtyDecrease}
               handleQtyIncrease={handleQtyIncrease}
             />
+            <Horizontal />
+
+            <div className="flex gap-2 items-center">
+              <span className="font-semibold">Preço: </span>
+              <span className="font-medium text-lg">{product.price}</span>
+            </div>
+
             <Horizontal />
 
             <div className="max-w-[300px]">

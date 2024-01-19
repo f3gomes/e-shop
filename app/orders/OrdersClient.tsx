@@ -35,20 +35,37 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         paymentStatus: item.status,
         date: moment(item.createDate).fromNow(),
         deliveryStatus: item.deliveryStatus,
+        paymentIntentId: item.paymentIntentId,
       };
     });
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 210 },
+    { field: "id", headerName: "ID", width: 150 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
     {
       field: "amount",
       headerName: "Valor (R$)",
-      width: 120,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="font-bold text-slate-800">{params.row.amount}</div>
+        );
+      },
+    },
+    {
+      field: "paymentIntentId",
+      headerName: "Forma",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <>
+            {params.row.paymentIntentId.slice(0, 3) === "pix" ? (
+              <div className="font-bold text-slate-800">PIX</div>
+            ) : (
+              <div className="font-bold text-slate-800">CARTÃO</div>
+            )}
+          </>
         );
       },
     },
@@ -124,7 +141,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         return (
           <div className="flex justify-between gap-4 w-full">
             <ActionBtn
-              tooltip=""
+              tooltip="Ver Detalhes"
               icon={MdRemoveRedEye}
               onClick={() => router.push(`/order/${params.row.id}`)}
             />
