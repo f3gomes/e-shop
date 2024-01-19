@@ -37,13 +37,15 @@ export function UserMenu({ currentUser }: UserMenuProps) {
           <div className="absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
             {currentUser ? (
               <div>
-                <Link href={"/orders"}>
-                  <UserMenuItem onClick={toggleOpen}>Meus Pedidos</UserMenuItem>
-                </Link>
-
-                {currentUser.role === "ADMIN" && (
+                {currentUser.role === "ADMIN" ? (
                   <Link href={"/admin"}>
                     <UserMenuItem onClick={toggleOpen}>Painel</UserMenuItem>
+                  </Link>
+                ) : (
+                  <Link href={"/orders"}>
+                    <UserMenuItem onClick={toggleOpen}>
+                      Meus Pedidos
+                    </UserMenuItem>
                   </Link>
                 )}
 
