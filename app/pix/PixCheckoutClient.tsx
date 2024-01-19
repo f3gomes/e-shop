@@ -12,7 +12,11 @@ import { CustomButton } from "@/components/ProductAddButton";
 import { PiSealCheckBold } from "react-icons/pi";
 import QRCode from "@/components/QrCode";
 
-export default function PixCheckoutClient() {
+interface PixCheckoutClientProps {
+  user: any;
+}
+
+export default function PixCheckoutClient({ user }: PixCheckoutClientProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [checkoutCreated, setCheckoutCreated] = useState(false);
   const [qrCode, setQRCode] = useState("");
@@ -25,9 +29,8 @@ export default function PixCheckoutClient() {
     setIsLoading(true);
 
     const data = {
-      email: "user@fomes.com.br",
-      firstName: "Usuário",
-      lastName: "Test",
+      email: user.email,
+      firstName: user.name,
       items: cartProducts,
     };
 

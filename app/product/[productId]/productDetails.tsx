@@ -10,6 +10,7 @@ import { CartProductType, SelectedImgType } from "@/types/cart";
 import { CustomButton } from "@/components/ProductAddButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface ProductDetailsProps {
   product: any;
@@ -138,7 +139,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
             <div className="flex gap-2 items-center">
               <span className="font-semibold">Preço: </span>
-              <span className="font-medium text-lg">{product.price}</span>
+              <span className="font-medium text-lg">
+                {formatPrice(product.price)}
+              </span>
             </div>
 
             <Horizontal />

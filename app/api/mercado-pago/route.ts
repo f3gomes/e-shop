@@ -32,7 +32,7 @@ export async function POST(req: Request) {
 
   const body = await req.json();
 
-  const { lastName, firstName, email, items } = body;
+  const { firstName, email, items } = body;
 
   const total = calculateOrderAmount(items) * 100;
 
@@ -53,8 +53,7 @@ export async function POST(req: Request) {
     installments: 1,
     payer: {
       email,
-      first_name: lastName,
-      last_name: firstName,
+      first_name: firstName
     },
   };
 
