@@ -41,10 +41,12 @@ export function UserMenu({ currentUser }: UserMenuProps) {
                   <UserMenuItem onClick={toggleOpen}>Meus Pedidos</UserMenuItem>
                 </Link>
 
-                <Link href={"/admin"}>
-                  <UserMenuItem onClick={toggleOpen}>Painel</UserMenuItem>
-                </Link>
-                
+                {currentUser.role === "ADMIN" && (
+                  <Link href={"/admin"}>
+                    <UserMenuItem onClick={toggleOpen}>Painel</UserMenuItem>
+                  </Link>
+                )}
+
                 <hr />
                 <UserMenuItem
                   onClick={() => {
