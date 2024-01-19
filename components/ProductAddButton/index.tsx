@@ -12,6 +12,7 @@ interface CustomButtonProps {
   disabled?: boolean;
   icon?: IconType;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
 }
 
 export function CustomButton({
@@ -23,10 +24,12 @@ export function CustomButton({
   disabled,
   icon: Icon,
   onClick,
+  className,
 }: CustomButtonProps) {
   return (
     <button
       className={cn(
+        className,
         "disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition duration-300 w-full border-slate-700 flex items-center justify-center gap-2",
         outline ? "bg-white text-slate-700" : "bg-slate-700 text-white",
         small

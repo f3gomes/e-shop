@@ -14,6 +14,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { Box, Button, Modal, TextField } from "@mui/material";
+import { CustomButton } from "@/components/ProductAddButton";
 
 interface ManageProductsClientProps {
   products: IProduct[] | any;
@@ -29,6 +30,7 @@ export default function ManageProductsClient({
   const [disabledInputs, setDisabledInputs] = useState(false);
   const [disabledStockInput, setDisabledStockInput] = useState(true);
   const [productData, setProductData] = useState<any>();
+  const [isLoading, setIsLoading] = useState(false);
 
   let rows: any = [];
 
@@ -154,10 +156,12 @@ export default function ManageProductsClient({
     setDisabledInputs(false);
     setOpenModalDetails(false);
     setDisabledStockInput(true);
+    setIsLoading(false);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    setIsLoading(true);
 
     if (disabledInputs) {
       axios
@@ -305,13 +309,13 @@ export default function ManageProductsClient({
               </div>
             </div>
 
-            <Button
+            <CustomButton
               type="submit"
-              variant="contained"
+              onClick={() => {}}
+              disabled={isLoading}
+              label={isLoading ? "Salvando..." : "Salvar"}
               className="mt-2 bg-slate-700 font-semibold"
-            >
-              Salvar
-            </Button>
+            />
           </form>
         </Box>
       </Modal>

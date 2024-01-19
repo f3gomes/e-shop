@@ -99,8 +99,9 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       />
 
       <CustomButton
-        label={isLoading ? "Entrando..." : "Entrar"}
+        disabled={isLoading}
         onClick={handleSubmit(onSubmit)}
+        label={isLoading ? "Entrando..." : "Entrar"}
       />
 
       <p className="text-sm flex gap-1">
