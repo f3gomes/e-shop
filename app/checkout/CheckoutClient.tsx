@@ -9,6 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { CheckoutForm } from "@/components/CheckoutForm";
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { CustomButton } from "@/components/ProductAddButton";
+import { FiCheck } from "react-icons/fi";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -85,7 +86,10 @@ export default function CheckoutClient() {
 
       {paymentSuccess && (
         <div className="flex flex-col items-center gap-3">
-          <div className="text-teal-500 text-center">Pagamento confirmado!</div>
+          <div className="text-teal-500 text-center flex gap-2">
+            <FiCheck size={22} />
+            Pagamento confirmado!
+          </div>
           <div className="max-w-[220px] w-full">
             <CustomButton
               label="Meus Pedidos"

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import Link from "next/link";
 import { SafeUser } from "@/types";
@@ -18,6 +18,7 @@ interface CartClientProps {
 
 export default function CartClient({ currentUser }: CartClientProps) {
   const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
+  const [selectedOption, setSelectedOption] = useState("checkout");
 
   const router = useRouter();
 
@@ -68,6 +69,17 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
         <div className="text-sm flex flex-col gap-1 items-start">
           <div>
+            <div className="py-4 flex gap-1">
+              <h1 className="font-semibold">Forma de Pagamento:</h1>
+              <select
+                name="payway"
+                onChange={(event) => setSelectedOption(event.target.value)}
+              >
+                <option value="checkout">Cartão</option>
+                <option value="pix">PIX</option>
+              </select>
+            </div>
+
             <div className="flex justify-between w-64 text-base font-semibold">
               <span>Subtotal</span>
               <span>{formatPrice(cartTotalAmout)}</span>
@@ -78,7 +90,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
               <CustomButton
                 outline
                 label="Confirmar"
-                onClick={() => router.push("/checkout")}
+                onClick={() => router.push(`/${selectedOption}`)}
               />
             ) : (
               <CustomButton

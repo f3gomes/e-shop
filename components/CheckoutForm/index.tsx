@@ -60,15 +60,15 @@ export function CheckoutForm({
           handleSetPaymentIntent(null);
         }
       })
-      // .finally(() => {
-      //   setIsLoading(false);
-      // });
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <form onSubmit={handleSubmit} id="payment-form">
       <div className="mb-6">
-        <Heading title="Informe seus dados para finalizar" />
+        <Heading title="Pagamento via Cartão" />
       </div>
 
       <h2 className="font-semibold mb-2">Endereço</h2>
