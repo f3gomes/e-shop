@@ -32,7 +32,7 @@ export default function OrderItem({ item }: OrderItemProps) {
       <div className="justify-self-center">{formatPrice(item.price)}</div>
       <div className="justify-self-center">{item.quantity}</div>
       <div className="justify-self-end font-semibold">
-        {(item.price * item.quantity).toFixed(2)}
+        {formatPrice(item.price * item.quantity)}
       </div>
     </div>
   );
