@@ -95,7 +95,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
         <div className="flex items-center gap-2">
           <Rating value={productRating} readOnly />
-          <div>{product.reviews.length} reviews</div>
+          <div>
+            {product.reviews.length}{" "}
+            {product.reviews.length === 1 ? "avaliação" : "avaliações"}
+          </div>
         </div>
 
         <Horizontal />

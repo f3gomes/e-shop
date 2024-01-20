@@ -16,9 +16,7 @@ const calculateOrderAmount = (items: CartProductType[]) => {
     return acc + totalItem;
   }, 0);
 
-  const formatedPrice: any = Math.floor(totalPrice);
-
-  return formatedPrice;
+  return totalPrice;
 };
 
 export async function POST(request: Request) {

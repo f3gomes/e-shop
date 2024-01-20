@@ -37,7 +37,7 @@ export default function ManageOrdersClient({
         customer: item.user.name,
         amount: formatPrice(item.amount / 100),
         paymentStatus: item.status,
-        date: moment(item.createDate).fromNow(),
+        date: moment(item.createDate).format("DD-MM-YY | HH:mm"),
         deliveryStatus: item.deliveryStatus,
         paymentIntentId: item.paymentIntentId,
       };
@@ -45,12 +45,12 @@ export default function ManageOrdersClient({
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 120 },
+    { field: "id", headerName: "ID", width: 150 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
     {
       field: "paymentIntentId",
       headerName: "Forma",
-      width: 100,
+      width: 80,
       renderCell: (params) => {
         return (
           <>
@@ -66,7 +66,7 @@ export default function ManageOrdersClient({
     {
       field: "amount",
       headerName: "Valor (R$)",
-      width: 120,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="font-bold text-slate-800">{params.row.amount}</div>

@@ -10,13 +10,11 @@ const newId = uuidv4();
 const calculateOrderAmount = (items: CartProductType[]) => {
   const totalPrice = items.reduce((acc, item) => {
     const totalItem = item.price * item.quantity;
-
+    
     return acc + totalItem;
   }, 0);
 
-  const formatedPrice: any = Math.floor(totalPrice);
-
-  return formatedPrice;
+  return totalPrice;
 };
 
 export async function POST(req: Request) {
@@ -35,6 +33,7 @@ export async function POST(req: Request) {
   const { firstName, email, items } = body;
 
   const total = calculateOrderAmount(items) * 100;
+
 
   const orderData = {
     user: { connect: { id: currentUser.id } },

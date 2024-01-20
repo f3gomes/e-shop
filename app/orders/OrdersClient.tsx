@@ -33,7 +33,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         customer: item.user.name,
         amount: formatPrice(item.amount / 100),
         paymentStatus: item.status,
-        date: moment(item.createDate).fromNow(),
+        date: moment(item.createDate).format("DD-MM-YY | HH:mm"),
         deliveryStatus: item.deliveryStatus,
         paymentIntentId: item.paymentIntentId,
       };
@@ -132,7 +132,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         );
       },
     },
-    { field: "date", headerName: "Data", width: 130 },
+    { field: "date", headerName: "Data", width: 150 },
     {
       field: "actions",
       headerName: "Ações",

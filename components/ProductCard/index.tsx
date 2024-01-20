@@ -38,7 +38,10 @@ export function ProductCard({ product }: ProductCardProps) {
         <div>
           <Rating value={productRating} readOnly />
         </div>
-        <div>{reviews.length} reviews</div>
+        <div>
+          {product.reviews.length}{" "}
+          {product.reviews.length === 1 ? "avaliação" : "avaliações"}
+        </div>
         <div className="font-semibold">{formatPrice(price)}</div>
       </div>
     </div>
