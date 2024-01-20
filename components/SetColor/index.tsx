@@ -1,12 +1,12 @@
 "use client";
 
-import { CartProductType, SelectedImgType } from "@/types/cart";
+import { CartProductType, SelectedGridType } from "@/types/cart";
 import { cn } from "@/utils/merge";
 
 interface SetColorProps {
-  grid: SelectedImgType[];
+  grid: SelectedGridType[];
   cartProduct: CartProductType;
-  handleColorSelect: (value: SelectedImgType) => void;
+  handleColorSelect: (value: SelectedGridType) => void;
 }
 
 export function SetColor({

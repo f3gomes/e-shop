@@ -45,12 +45,22 @@ export default function ManageOrdersClient({
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 150 },
+    { field: "id", headerName: "ID", width: 160 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
+    {
+      field: "amount",
+      headerName: "Valor (R$)",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <div className="font-bold text-slate-800">{params.row.amount}</div>
+        );
+      },
+    },
     {
       field: "paymentIntentId",
       headerName: "Forma",
-      width: 80,
+      width: 60,
       renderCell: (params) => {
         return (
           <>
@@ -60,16 +70,6 @@ export default function ManageOrdersClient({
               <div className="font-bold text-slate-800">CARTÃO</div>
             )}
           </>
-        );
-      },
-    },
-    {
-      field: "amount",
-      headerName: "Valor (R$)",
-      width: 100,
-      renderCell: (params) => {
-        return (
-          <div className="font-bold text-slate-800">{params.row.amount}</div>
         );
       },
     },

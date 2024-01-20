@@ -1,4 +1,4 @@
-import { Sizes } from "@/info/grid";
+import { Size } from "@/info/grid";
 
 export interface IProduct {
   id: string;
@@ -16,7 +16,7 @@ export interface Grid {
   color: string;
   colorCode: string;
   image: string;
-  size?: Sizes;
+  size?: Size;
   stock?: number;
 }
 
@@ -46,7 +46,7 @@ export type GridType = {
   color: string;
   colorCode: string;
   image: File | null;
-  size?: Sizes | string;
+  size?: Size | string;
   stock?: number;
 };
 
@@ -54,6 +54,6 @@ export type UploadedGridType = {
   color: string;
   colorCode: string;
   image: string;
-  size?: Sizes;
+  size?: Size;
   stock?: number;
 };

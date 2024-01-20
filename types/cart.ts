@@ -1,4 +1,4 @@
-import { Sizes } from "@/info/grid";
+import { Size } from "@/info/grid";
 
 export type CartProductType = {
   id: string;
@@ -6,16 +6,16 @@ export type CartProductType = {
   description: string;
   category: string;
   brand: string;
-  selectedImg?: SelectedImgType;
+  selectedImg?: SelectedGridType;
   color?: string;
   quantity: number;
   price: number;
 };
 
-export type SelectedImgType = {
+export type SelectedGridType = {
   color: string;
   colorCode: string;
   image: string;
-  size?: Sizes;
+  size?: Size;
   stock?: number;
 };

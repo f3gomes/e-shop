@@ -1,6 +1,6 @@
 "use client";
 
-import { CartProductType, SelectedImgType } from "@/types/cart";
+import { CartProductType, SelectedGridType } from "@/types/cart";
 import { IProduct } from "@/types/product";
 import { cn } from "@/utils/merge";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import Image from "next/image";
 interface ProductImageProps {
   product: IProduct;
   cartProduct: CartProductType;
-  handleColorSelect: (value: SelectedImgType) => void;
+  handleColorSelect: (value: SelectedGridType) => void;
 }
 
 export function ProductImage({
@@ -19,7 +19,7 @@ export function ProductImage({
   return (
     <div className="grid grid-cols-6 gap-2 h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
       <div className="flex flex-col items-center justify-items-center gap-4 cursor-pointer border h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
-        {product.grid.map((item: SelectedImgType) => {
+        {product.grid.map((item: SelectedGridType) => {
           return (
             <div
               key={item.color}

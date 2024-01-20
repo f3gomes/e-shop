@@ -1,6 +1,6 @@
 import { GridType } from "@/types/product";
 
-export enum Sizes {
+export enum Size {
   P,
   PP,
   M,

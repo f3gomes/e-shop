@@ -11,7 +11,7 @@ import { Heading } from "@/components/Heading";
 import { CartItem } from "@/components/CartItem";
 import { formatPrice } from "@/utils/formatPrice";
 import { CustomButton } from "@/components/ProductAddButton";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 
 interface CartClientProps {
   currentUser: SafeUser | any;
@@ -20,8 +20,14 @@ interface CartClientProps {
 export default function CartClient({ currentUser }: CartClientProps) {
   const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
   const [selectedOption, setSelectedOption] = useState("checkout");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+
+  const handlePushCheckout = () => {
+    setIsLoading(true);
+    router.push(`/${selectedOption}`);
+  };
 
   if (!cartProducts || cartProducts.length === 0) {
     return (
@@ -94,8 +100,9 @@ export default function CartClient({ currentUser }: CartClientProps) {
             {currentUser ? (
               <CustomButton
                 outline
-                label="Confirmar"
-                onClick={() => router.push(`/${selectedOption}`)}
+                disabled={isLoading}
+                label={isLoading ? "Aguarde..." : "Confirmar"}
+                onClick={handlePushCheckout}
               />
             ) : (
               <CustomButton

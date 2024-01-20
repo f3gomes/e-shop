@@ -6,7 +6,7 @@ import { useCart } from "@/hooks/useCart";
 import { SetColor } from "@/components/SetColor";
 import { SetQuantity } from "@/components/SetQuantity";
 import { ProductImage } from "@/components/ProductImage";
-import { CartProductType, SelectedImgType } from "@/types/cart";
+import { CartProductType, SelectedGridType } from "@/types/cart";
 import { CustomButton } from "@/components/ProductAddButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -41,7 +41,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
     product.reviews.length;
 
-  const handleColorSelect = useCallback((value: SelectedImgType) => {
+  const handleColorSelect = useCallback((value: SelectedGridType) => {
     setCartItem((prev) => {
       return { ...prev, selectedImg: value };
     });
