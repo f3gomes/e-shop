@@ -12,14 +12,25 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
-  const { id, deliveryStatus } = body;
+  const { id, deliveryStatus, paymentStatus } = body;
 
-  const order = await prisma.order.update({
-    where: { id },
-    data: {
-      deliveryStatus,
-    },
-  });
+  let order = null;
+
+  if (deliveryStatus) {
+    order = await prisma.order.update({
+      where: { id },
+      data: {
+        deliveryStatus,
+      },
+    });
+  } else if (paymentStatus) {
+    order = await prisma.order.update({
+      where: { id },
+      data: {
+        status: paymentStatus,
+      },
+    });
+  }
 
   return NextResponse.json(order);
 }

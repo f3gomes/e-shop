@@ -13,7 +13,7 @@ import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdRemoveRedEye } from "react-icons/md";
+import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdPayments, MdRemoveRedEye } from "react-icons/md";
 
 interface ManageOrdersClientProps {
   orders: ExtendedOrder[];
@@ -145,13 +145,19 @@ export default function ManageOrdersClient({
         return (
           <div className="flex justify-between gap-4 w-full">
             <ActionBtn
-              tooltip="Confirmar entrega"
+              tooltip="Confirmar pagamento"
+              icon={MdPayments}
+              onClick={() => handlePayment(params.row.id)}
+            />
+
+            <ActionBtn
+              tooltip="Confirmar envio"
               icon={MdDeliveryDining}
               onClick={() => handleDispatch(params.row.id)}
             />
 
             <ActionBtn
-              tooltip="Confirmar envio"
+              tooltip="Confirmar recebimento"
               icon={MdDone}
               onClick={() => handleDelivery(params.row.id)}
             />
@@ -167,9 +173,30 @@ export default function ManageOrdersClient({
     },
   ];
 
+  const handlePayment = useCallback(
+    (id: string) => {
+      if (confirm("Confirmar pagamento deste pedido?")) {
+        axios
+          .put("/api/order", {
+            id,
+            paymentStatus: "complete",
+          })
+          .then((res) => {
+            toast.success("Pagamento confirmado!");
+            router.refresh();
+          })
+          .catch((err) => {
+            toast.error("Algo deu errado!");
+            console.log(err);
+          });
+      }
+    },
+    [] // eslint-disable-line
+  );
+
   const handleDispatch = useCallback(
     (id: string) => {
-      if (confirm("Confirmar envio?")) {
+      if (confirm("Confirmar envio do pedido?")) {
         axios
           .put("/api/order", {
             id,
@@ -190,14 +217,14 @@ export default function ManageOrdersClient({
 
   const handleDelivery = useCallback(
     (id: string) => {
-      if (confirm("Confirmar entrega?")) {
+      if (confirm("Confirmar recebimento do pedido?")) {
         axios
           .put("/api/order", {
             id,
             deliveryStatus: "delivered",
           })
           .then((res) => {
-            toast.success("Pedido entregue!");
+            toast.success("Pedido recebido!");
             router.refresh();
           })
           .catch((err) => {
