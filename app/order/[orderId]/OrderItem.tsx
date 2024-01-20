@@ -19,13 +19,13 @@ export default function OrderItem({ item }: OrderItemProps) {
             fill
             alt={item.name}
             className="object-contain"
-            src={item.selectedImg.image}
+            src={item.grid.image}
           />
         </div>
 
         <div className="flex flex-col gap-1">
           <div>{truncateText(item.name)}</div>
-          <div>{item.selectedImg.color}</div>
+          <div>{item.grid.color}</div>
         </div>
       </div>
 

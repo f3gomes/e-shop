@@ -26,7 +26,7 @@ export function ProductImage({
               onClick={() => handleColorSelect(item)}
               className={cn(
                 "relative w-[80%] aspect-square rounded border-teal-300",
-                cartProduct.selectedImg?.color === item.color
+                cartProduct.grid?.color === item.color
                   ? "border-[1.5px]"
                   : "border-none"
               )}
@@ -47,7 +47,7 @@ export function ProductImage({
           fill
           priority
           alt={cartProduct.name}
-          src={cartProduct.selectedImg!.image}
+          src={cartProduct.grid!.image}
           className="w-full h-full object-contain max-h-[500px] min-h-[300px] sm:min-h-[400px]"
         />
       </div>

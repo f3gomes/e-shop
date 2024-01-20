@@ -32,7 +32,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     description: product.description,
     category: product.category,
     brand: product.brand,
-    selectedImg: { ...product.grid[0] },
+    grid: { ...product.grid[0] },
     quantity: 1,
     price: product.price,
   });
@@ -43,7 +43,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   const handleColorSelect = useCallback((value: SelectedGridType) => {
     setCartItem((prev) => {
-      return { ...prev, selectedImg: value };
+      return { ...prev, grid: value };
     });
   }, []);
 

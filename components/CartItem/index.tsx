@@ -26,7 +26,7 @@ export function CartItem({ item }: CartItemProps) {
             <Image
               fill
               alt={item.name}
-              src={item.selectedImg!.image}
+              src={item.grid!.image}
               className="object-contain"
             />
           </div>
@@ -34,7 +34,7 @@ export function CartItem({ item }: CartItemProps) {
 
         <div className="flex flex-col justify-between">
           {truncateText(item.name)}
-          <div>{item.selectedImg?.color}</div>
+          <div>{item.grid?.color}</div>
 
           <div className="w-[70px]">
             <button

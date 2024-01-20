@@ -87,7 +87,7 @@ type CartProductType {
   description String
   category String
   brand String
-  selectedImg Grid
+  grid Grid
   quantity Int
   price Float
 }

@@ -6,7 +6,7 @@ export type CartProductType = {
   description: string;
   category: string;
   brand: string;
-  selectedImg?: SelectedGridType;
+  grid?: SelectedGridType;
   color?: string;
   quantity: number;
   price: number;
