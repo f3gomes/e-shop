@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { v4 as uuidv4 } from "uuid";
+import { shopInfo } from "@/info/shop";
 
 const newId = uuidv4();
 
@@ -34,7 +35,6 @@ export async function POST(req: Request) {
 
   const total = calculateOrderAmount(items) * 100;
 
-
   const orderData = {
     user: { connect: { id: currentUser.id } },
     amount: total,
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
   const preference = {
     transaction_amount: total,
-    description: "Descrição do produto",
+    description: "Compra na loja " + shopInfo.name,
     payment_method_id: "pix",
     installments: 1,
     payer: {
@@ -59,6 +59,8 @@ export async function POST(req: Request) {
   try {
     const response = await mercadopago.payment.create(preference);
     const status = response.status;
+
+    console.log("status: ", status)
 
     if (status) {
       const qrCode =
