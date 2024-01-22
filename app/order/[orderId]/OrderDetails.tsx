@@ -93,7 +93,29 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
         </div>
       </div>
 
-      <div>Data da compra: {moment(order.createDate).format("DD-MM-YY | HH:mm")}</div>
+      <div>
+        Data da compra: {moment(order.createDate).format("DD-MM-YY | HH:mm")}
+      </div>
+
+      <div>
+        <h2 className="font-semibold mt-4 mb-2">Endereço de entrega</h2>
+
+        <div className="flex gap-1">
+          <div>{order.address?.line1}</div>
+          <span>-</span>
+          <div>{order.address?.line2}</div>
+        </div>
+
+        <div className="flex gap-1">
+          <div>{order.address?.city}</div>
+          <span>,</span>
+          <div>{order.address?.state}</div>
+        </div>
+
+        <div>{order.address?.postal_code}</div>
+        <div>{order.address?.country}</div>
+      </div>
+
       <div>
         <h2 className="font-semibold mt-4 mb-2">Items do pedido</h2>
         <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center">

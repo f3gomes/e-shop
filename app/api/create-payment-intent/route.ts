@@ -4,6 +4,7 @@ import prisma from "@/libs/prismadb";
 import { NextResponse } from "next/server";
 import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import { Address } from "@prisma/client";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2023-10-16",
@@ -20,7 +21,7 @@ const calculateOrderAmount = (items: CartProductType[]) => {
 };
 
 export async function POST(request: Request) {
-  const currentUser = await getCurrentUser();
+  const currentUser: any = await getCurrentUser();
 
   if (!currentUser) {
     return NextResponse.error();
@@ -28,8 +29,17 @@ export async function POST(request: Request) {
 
   const body = await request.json();
 
-  const { items, payment_intent_id } = body;
+  const { items, payment_intent_id, address } = body;
   const total = calculateOrderAmount(items) * 100;
+
+  const addressData: Address = {
+    city: currentUser.city,
+    country: currentUser.country,
+    line1: currentUser.line1,              
+    line2: currentUser.line2,           
+    postal_code: currentUser.postal_code,       
+    state: currentUser.state          
+  }
 
   const orderData = {
     user: { connect: { id: currentUser.id } },
@@ -39,6 +49,7 @@ export async function POST(request: Request) {
     deliveryStatus: "pending",
     paymentIntentId: payment_intent_id,
     products: items,
+    address: addressData
   };
 
   if (payment_intent_id) {

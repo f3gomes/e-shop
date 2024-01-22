@@ -5,13 +5,14 @@ import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { v4 as uuidv4 } from "uuid";
 import { shopInfo } from "@/info/shop";
+import { Address } from "@prisma/client";
 
 const newId = uuidv4();
 
 const calculateOrderAmount = (items: CartProductType[]) => {
   const totalPrice = items.reduce((acc, item) => {
     const totalItem = item.price * item.quantity;
-    
+
     return acc + totalItem;
   }, 0);
 
@@ -19,7 +20,7 @@ const calculateOrderAmount = (items: CartProductType[]) => {
 };
 
 export async function POST(req: Request) {
-  const currentUser = await getCurrentUser();
+  const currentUser: any = await getCurrentUser();
 
   if (!currentUser) {
     return NextResponse.error();
@@ -35,6 +36,15 @@ export async function POST(req: Request) {
 
   const total = calculateOrderAmount(items) * 100;
 
+  const addressData: Address = {
+    city: currentUser.city,
+    country: currentUser.country,
+    line1: currentUser.line1,
+    line2: currentUser.line2,
+    postal_code: currentUser.postal_code,
+    state: currentUser.state,
+  };
+
   const orderData = {
     user: { connect: { id: currentUser.id } },
     amount: total,
@@ -43,6 +53,7 @@ export async function POST(req: Request) {
     deliveryStatus: "pending",
     paymentIntentId: "pix-" + newId,
     products: items,
+    address: addressData,
   };
 
   const preference = {
@@ -52,7 +63,7 @@ export async function POST(req: Request) {
     installments: 1,
     payer: {
       email,
-      first_name: firstName
+      first_name: firstName,
     },
   };
 
@@ -60,7 +71,7 @@ export async function POST(req: Request) {
     const response = await mercadopago.payment.create(preference);
     const status = response.status;
 
-    console.log("status: ", status)
+    console.log("status: ", status);
 
     if (status) {
       const qrCode =
