@@ -6,14 +6,21 @@ import { Heading } from "../Heading";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/formatPrice";
 import { CustomButton } from "../ProductAddButton";
-import { AddressElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  AddressElement,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 interface CheckoutFormProps {
+  user: any;
   clientSecret: string;
   handleSetPaymentSuccess: (value: boolean) => void;
 }
 
 export function CheckoutForm({
+  user,
   clientSecret,
   handleSetPaymentSuccess,
 }: CheckoutFormProps) {
@@ -76,6 +83,17 @@ export function CheckoutForm({
         options={{
           mode: "shipping",
           allowedCountries: ["BR"],
+          defaultValues: {
+            name: user.name,
+            address: {
+              city: user.city,
+              country: user.country,
+              line1: user.line1,
+              line2: user.line2,
+              postal_code: user.postal_code,
+              state: user.state,
+            },
+          },
         }}
       />
 

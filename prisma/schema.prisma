@@ -36,6 +36,13 @@ model User {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
+  city               String?
+  country            String?
+  line1              String?
+  line2              String?
+  postal_code        String?
+  state              String?
+
   role Role @default(USER)
 
   accounts           Account[]
@@ -103,7 +110,8 @@ type Grid {
 type Address {
   city String
   country String
-  street String?
+  line1 String
+  line2 String?
   postal_code String
   state String
 }

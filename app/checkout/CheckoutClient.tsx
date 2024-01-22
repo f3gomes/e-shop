@@ -15,7 +15,11 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
 );
 
-export default function CheckoutClient() {
+interface CheckoutClientProps {
+  user: any
+}
+
+export default function CheckoutClient({user}: CheckoutClientProps) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
@@ -74,6 +78,7 @@ export default function CheckoutClient() {
       {clientSecret && cartProducts && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm
+            user={user}
             clientSecret={clientSecret}
             handleSetPaymentSuccess={handleSetPaymentSuccess}
           />

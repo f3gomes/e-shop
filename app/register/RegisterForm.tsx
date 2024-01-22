@@ -32,6 +32,12 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       name: "",
       email: "",
       password: "",
+      country: "",
+      city: "",
+      line1: "",
+      line2: "",
+      postal_code: "",
+      state: "",
     },
   });
 
@@ -61,7 +67,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       .catch(() => toast.error("Algo deu errado!"))
       .finally(() => setIsLoading(false));
   };
-
 
   useEffect(() => {
     if (currentUser) {
@@ -114,6 +119,70 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
         errors={errors}
         required
       />
+
+      <Heading title="Endereço de Entrega" />
+
+      <Input
+        id="line1"
+        label="Rua"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+
+      <Input
+        id="line2"
+        label="Complemento"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+
+      <div className="flex gap-2">
+        <Input
+          id="postal_code"
+          label="CEP"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          length={8}
+          size="w-72"
+        />
+
+        <Input
+          id="state"
+          label="Estado"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          size="w-72"
+        />
+      </div>
+
+      <div className="flex gap-2">
+        <Input
+          id="country"
+          label="País (Ex: BR)"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          length={2}
+        />
+
+        <Input
+          id="city"
+          label="Cidade"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
 
       <CustomButton
         label={isLoading ? "Carregando..." : "Registrar"}
