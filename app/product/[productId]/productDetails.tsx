@@ -87,8 +87,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <ProductImage
         product={product}
-        cartProduct={cartItem}
-        handleColorSelect={handleColorSelect}
       />
 
       <div className="flex flex-col gap-1 text-slate-500 text-sm">

@@ -1,34 +1,38 @@
 "use client";
 
-import { CartProductType, SelectedGridType } from "@/types/cart";
+import { SelectedGridType } from "@/types/cart";
 import { IProduct } from "@/types/product";
 import { cn } from "@/utils/merge";
 import Image from "next/image";
+import { useState } from "react";
 
 interface ProductImageProps {
   product: IProduct;
-  cartProduct: CartProductType;
-  handleColorSelect: (value: SelectedGridType) => void;
 }
 
-export function ProductImage({
-  product,
-  cartProduct,
-  handleColorSelect,
-}: ProductImageProps) {
+export function ProductImage({ product }: ProductImageProps) {
+  const [selectedImage, setSeletedImage] = useState<IProduct["grid"][0]>({
+    color: "",
+    colorCode: "",
+    image: product.grid[0].image,
+    size: undefined,
+    stock: 0,
+  });
+
+  const handleImageSelect = (grid: IProduct["grid"][0]) => {
+    setSeletedImage(grid);
+  };
+
   return (
     <div className="grid grid-cols-6 gap-2 h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
       <div className="flex flex-col items-center justify-items-center gap-4 cursor-pointer border h-full max-h-[500px] min-h-[300px] sm:min-h-[400px]">
-        {product.grid.map((item: SelectedGridType) => {
+        {product.grid.map((item: IProduct["grid"][0]) => {
           return (
             <div
               key={item.color}
-              onClick={() => handleColorSelect(item)}
+              onClick={() => handleImageSelect(item)}
               className={cn(
-                "relative w-[80%] aspect-square rounded border-teal-300",
-                cartProduct.grid?.color === item.color
-                  ? "border-[1.5px]"
-                  : "border-none"
+                "relative w-[80%] aspect-square rounded border-teal-300 active:border-[2px]"
               )}
             >
               <Image
@@ -46,8 +50,8 @@ export function ProductImage({
         <Image
           fill
           priority
-          alt={cartProduct.name}
-          src={cartProduct.grid!.image}
+          alt={selectedImage.color}
+          src={selectedImage.image}
           className="w-full h-full object-contain max-h-[500px] min-h-[300px] sm:min-h-[400px]"
         />
       </div>
