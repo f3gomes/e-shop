@@ -60,7 +60,7 @@ export default function ManageOrdersClient({
     {
       field: "paymentIntentId",
       headerName: "Forma",
-      width: 60,
+      width: 70,
       renderCell: (params) => {
         return (
           <>

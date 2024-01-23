@@ -5,7 +5,7 @@ import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { v4 as uuidv4 } from "uuid";
 import { shopInfo } from "@/info/shop";
-import { Address } from "@prisma/client";
+import { Address, Product } from "@prisma/client";
 
 const newId = uuidv4();
 
@@ -17,6 +17,38 @@ const calculateOrderAmount = (items: CartProductType[]) => {
   }, 0);
 
   return totalPrice;
+};
+
+const updateProductStock = async (
+  products: Product[],
+  cart: CartProductType[]
+) => {
+  for (const product of products) {
+    for (const item of cart) {
+      if (product.id === item.id) {
+        await prisma.product.update({
+          where: {
+            id: item.id,
+          },
+          data: {
+            grid: {
+              updateMany: {
+                where: {
+                  colorCode: item.grid?.colorCode,
+                },
+
+                data: {
+                  stock: {
+                    decrement: item.quantity,
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+    }
+  }
 };
 
 export async function POST(req: Request) {
@@ -80,6 +112,9 @@ export async function POST(req: Request) {
       await prisma.order.create({
         data: orderData,
       });
+
+      const products = await prisma.product.findMany({});
+      await updateProductStock(products, items);
 
       return NextResponse.json({
         code: qrCode,

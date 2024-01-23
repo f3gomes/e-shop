@@ -4,7 +4,7 @@ import prisma from "@/libs/prismadb";
 import { NextResponse } from "next/server";
 import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import { Address } from "@prisma/client";
+import { Address, Product } from "@prisma/client";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2023-10-16",
@@ -20,6 +20,38 @@ const calculateOrderAmount = (items: CartProductType[]) => {
   return totalPrice;
 };
 
+const updateProductStock = async (
+  products: Product[],
+  cart: CartProductType[]
+) => {
+  for (const product of products) {
+    for (const item of cart) {
+      if (product.id === item.id) {
+        await prisma.product.update({
+          where: {
+            id: item.id,
+          },
+          data: {
+            grid: {
+              updateMany: {
+                where: {
+                  colorCode: item.grid?.colorCode,
+                },
+
+                data: {
+                  stock: {
+                    decrement: item.quantity,
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+    }
+  }
+};
+
 export async function POST(request: Request) {
   const currentUser: any = await getCurrentUser();
 
@@ -29,17 +61,17 @@ export async function POST(request: Request) {
 
   const body = await request.json();
 
-  const { items, payment_intent_id, address } = body;
+  const { items, payment_intent_id } = body;
   const total = calculateOrderAmount(items) * 100;
 
   const addressData: Address = {
     city: currentUser.city,
     country: currentUser.country,
-    line1: currentUser.line1,              
-    line2: currentUser.line2,           
-    postal_code: currentUser.postal_code,       
-    state: currentUser.state          
-  }
+    line1: currentUser.line1,
+    line2: currentUser.line2,
+    postal_code: currentUser.postal_code,
+    state: currentUser.state,
+  };
 
   const orderData = {
     user: { connect: { id: currentUser.id } },
@@ -49,7 +81,7 @@ export async function POST(request: Request) {
     deliveryStatus: "pending",
     paymentIntentId: payment_intent_id,
     products: items,
-    address: addressData
+    address: addressData,
   };
 
   if (payment_intent_id) {
@@ -95,6 +127,9 @@ export async function POST(request: Request) {
     await prisma.order.create({
       data: orderData,
     });
+
+    const products = await prisma.product.findMany({});
+    await updateProductStock(products, items);
 
     return NextResponse.json({ paymentIntent });
   }

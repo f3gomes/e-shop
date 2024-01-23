@@ -24,7 +24,7 @@ import { categories } from "@/info/categories";
 export default function AddProductForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [grid, setGrid] = useState<GridType[] | null>();
-  const [isProductCreatesd, setIsProductCreated] = useState(false);
+  const [isProductCreated, setIsProductCreated] = useState(false);
 
   const router = useRouter();
 
@@ -51,12 +51,12 @@ export default function AddProductForm() {
   }, [grid]); // eslint-disable-line
 
   useEffect(() => {
-    if (isProductCreatesd) {
+    if (isProductCreated) {
       reset();
       setGrid(null);
       setIsProductCreated(false);
     }
-  }, [isProductCreatesd]); // eslint-disable-line
+  }, [isProductCreated]); // eslint-disable-line
 
   const category = watch("category");
 
@@ -275,6 +275,7 @@ export default function AddProductForm() {
 
       <CustomButton
         type="submit"
+        disabled={isLoading}
         onClick={handleSubmit(onSubmit)}
         label={isLoading ? "Carregando... " : "Adicionar"}
       />
