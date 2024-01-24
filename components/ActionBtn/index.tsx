@@ -25,7 +25,7 @@ export function ActionBtn({
         disabled={disabled}
         className={cn(
           disabled && "opacity-50 cursor-not-allowed",
-          "flex items-center justify-center rounded cursor-pointer w-[40px] h-[30px] text-slate-700 border border-slate-400 hover:border-[2px] transition duration-200"
+          "flex items-center justify-center rounded cursor-pointer w-[40px] h-[30px] text-shop-title border border-slate-400 hover:border-[2px] transition duration-200"
         )}
       >
         <Icon size={18} />

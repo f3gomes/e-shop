@@ -37,7 +37,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
         <div>
           <Link
             href={"/"}
-            className="text-slate-500 flex items-center gap-1 mt-2"
+            className="text-shop-link flex items-center gap-1 mt-2"
           >
             <MdArrowBack />
             <span>Ver Produtos</span>
@@ -114,7 +114,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
             <Link
               href={"/"}
-              className="text-slate-500 flex items-center gap-1 mt-2"
+              className="text-shop-link flex items-center gap-1 mt-2"
             >
               <MdArrowBack />
               <span>Continar comprando</span>

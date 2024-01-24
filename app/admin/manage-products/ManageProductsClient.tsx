@@ -79,7 +79,7 @@ export default function ManageProductsClient({
       width: 120,
       renderCell: (params) => {
         return (
-          <div className="font-bold text-slate-800">{params.row.price}</div>
+          <div className="font-bold text-shop-title">{params.row.price}</div>
         );
       },
     },

@@ -42,7 +42,7 @@ export function Input({
           "peer p-4 pt-6 outline-none bg-white font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
           errors[id]
             ? "border-rose-400 focus:border-rose-400 text-rose-500"
-            : "border-slate-300 focus:border-slate-300 text-slate-400"
+            : "border-slate-300 focus:border-slate-300 text-shop-input-text"
         )}
       />
       <label

@@ -15,10 +15,10 @@ export function AdminNavItem({
   return (
     <div
       className={cn(
-        "flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-slate-800 transition cursor-pointer",
+        "flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-shop-title transition cursor-pointer",
         selected
-          ? "border-b-slate-800 text-slate-800"
-          : "border-transparent text-slate-500"
+          ? "border-b-slate-800 text-shop-title"
+          : "border-transparent text-shop-link"
       )}
     >
       <Icon size={20} />

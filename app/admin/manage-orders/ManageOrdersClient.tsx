@@ -53,7 +53,7 @@ export default function ManageOrdersClient({
       width: 100,
       renderCell: (params) => {
         return (
-          <div className="font-bold text-slate-800">{params.row.amount}</div>
+          <div className="font-bold text-shop-title">{params.row.amount}</div>
         );
       },
     },
@@ -65,9 +65,9 @@ export default function ManageOrdersClient({
         return (
           <>
             {params.row.paymentIntentId.slice(0, 3) === "pix" ? (
-              <div className="font-bold text-slate-800">PIX</div>
+              <div className="font-bold text-shop-title">PIX</div>
             ) : (
-              <div className="font-bold text-slate-800">CARTÃO</div>
+              <div className="font-bold text-shop-title">CARTÃO</div>
             )}
           </>
         );
@@ -85,7 +85,7 @@ export default function ManageOrdersClient({
                 text="Pendente"
                 icon={MdAccessTimeFilled}
                 bg="bg-slate-200"
-                color="text-slate-700"
+                color="text-shop-title"
               />
             ) : params.row.paymentStatus === "complete" ? (
               <Status
@@ -113,7 +113,7 @@ export default function ManageOrdersClient({
                 text="Pendente"
                 icon={MdAccessTimeFilled}
                 bg="bg-slate-200"
-                color="text-slate-700"
+                color="text-shop-title"
               />
             ) : params.row.deliveryStatus === "dispatched" ? (
               <Status

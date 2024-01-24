@@ -48,7 +48,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
               text="pendente"
               icon={MdAccessTimeFilled}
               bg="bg-slate-200"
-              color="text-slate-700"
+              color="text-shop-title"
             />
           ) : order.status === "complete" ? (
             <Status
@@ -71,7 +71,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
               text="pendente"
               icon={MdAccessTimeFilled}
               bg="bg-slate-200"
-              color="text-slate-700"
+              color="text-shop-title"
             />
           ) : order.deliveryStatus === "dispatched" ? (
             <Status

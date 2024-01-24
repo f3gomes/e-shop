@@ -38,7 +38,7 @@ export function CartItem({ item }: CartItemProps) {
 
           <div className="w-[70px]">
             <button
-              className="text-slate-500 underline"
+              className="text-shop-link underline"
               onClick={() => handleRemoveProductFromCart(item)}
             >
               Remover

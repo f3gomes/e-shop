@@ -93,8 +93,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <ProductImage product={product} />
 
-      <div className="flex flex-col gap-1 text-slate-500 text-sm">
-        <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
+      <div className="flex flex-col gap-1 text-shop-link text-sm">
+        <h2 className="text-3xl font-medium text-shop-title">{product.name}</h2>
         <div className="flex items-center gap-2">
           <Rating value={productRating} readOnly />
           <div>
@@ -117,7 +117,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <Horizontal />
         {isProductInCart ? (
           <>
-            <p className="mb-2 text-slate-500 flex items-center gap-1">
+            <p className="mb-2 text-shop-link flex items-center gap-1">
               <MdCheckCircle size={20} className="text-teal-400" />
               <span>Produto adicionado ao carrinho</span>
             </p>

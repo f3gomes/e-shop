@@ -99,7 +99,7 @@ export function CheckoutForm({
 
       <h2 className="font-semibold mt-4 mb-2">Informações de Pagamento</h2>
       <PaymentElement id="payment-element" options={{ layout: "tabs" }} />
-      <div className="py-4 text-center text-slate-700 text-4xl font-bold">
+      <div className="py-4 text-center text-shop-title text-4xl font-bold">
         Total: {formattedPrice}
       </div>
       <CustomButton
