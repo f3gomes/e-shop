@@ -18,8 +18,8 @@ export function SetQuantity({
   handleQtyIncrease,
 }: SetQuantityProps) {
   return (
-    <div className="flex gap-4 items-center">
-      {cartCounter ? null : <div className="font-semibold">QTD:</div>}
+    <div className="flex gap-3 items-center">
+      {cartCounter ? null : <div className="font-semibold">Qtd:</div>}
       <div className="flex gap-2 items-center text-base select-none">
         <button onClick={handleQtyDecrease} className={btnStyles}>
           -

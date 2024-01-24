@@ -11,18 +11,20 @@ import { CustomButton } from "@/components/ProductAddButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/formatPrice";
+import { IProduct } from "@/types/product";
 
 interface ProductDetailsProps {
-  product: any;
+  product: IProduct;
 }
 
-const Horizontal = () => {
+export const Horizontal = () => {
   return <hr className="w-full my-3" />;
 };
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
   const { handleAddProductToCart, cartProducts } = useCart();
   const [isProductInCart, setIsProductInCart] = useState(false);
+  const [buyDisabled, setBuyDisabled] = useState(false);
 
   const router = useRouter();
 
@@ -50,7 +52,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const handleQtyIncrease = useCallback(() => {
     if (cartItem.quantity < 99) {
       setCartItem((prev) => {
-        return { ...prev, quantity: prev.quantity++ };
+        return { ...prev, quantity: ++prev.quantity };
       });
     }
   }, [cartItem]);
@@ -58,7 +60,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const handleQtyDecrease = useCallback(() => {
     if (cartItem.quantity > 1) {
       setCartItem((prev) => {
-        return { ...prev, quantity: prev.quantity-- };
+        return { ...prev, quantity: --prev.quantity };
       });
     }
   }, [cartItem]);
@@ -67,7 +69,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     setCartItem((prev) => {
       return { ...prev, quantity: 1 };
     });
-  }, []);
+
+    if (product.grid.length === 1 && product.grid[0].stock === 0) {
+      setBuyDisabled(true);
+    }
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     setIsProductInCart(false);
@@ -85,9 +91,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <ProductImage
-        product={product}
-      />
+      <ProductImage product={product} />
 
       <div className="flex flex-col gap-1 text-slate-500 text-sm">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
@@ -104,7 +108,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <Horizontal />
 
         <div>
-          <span className="font-semibold">Categoria: {product.brand}</span>
+          <div className="flex gap-3">
+            <span className="font-semibold">Categoria:</span>
+            <span>{product.category}</span>
+          </div>
         </div>
 
         <Horizontal />
@@ -130,6 +137,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               grid={product.grid}
               handleColorSelect={handleColorSelect}
             />
+
+            {buyDisabled && (
+              <>
+                <Horizontal />
+                <span className="text-rose-500">Sem Estoque</span>
+              </>
+            )}
+
             <Horizontal />
             <SetQuantity
               cartProduct={cartItem}
@@ -138,7 +153,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             />
             <Horizontal />
 
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-3 items-center">
               <span className="font-semibold">Preço: </span>
               <span className="font-medium text-lg">
                 {formatPrice(product.price)}
@@ -150,6 +165,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <div className="max-w-[300px]">
               <CustomButton
                 label="Comprar"
+                disabled={buyDisabled}
                 onClick={() => handleAddProductToCart(cartItem)}
               />
             </div>
