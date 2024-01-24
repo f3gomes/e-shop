@@ -14,7 +14,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import { IProduct } from "@/types/product";
 
 interface ProductDetailsProps {
-  product: IProduct;
+  product: IProduct | any;
 }
 
 export const Horizontal = () => {

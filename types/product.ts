@@ -7,7 +7,6 @@ export interface IProduct {
   price: number;
   brand: string;
   category: string;
-  inStock?: boolean;
   grid: Grid[];
   reviews: Review[];
 }

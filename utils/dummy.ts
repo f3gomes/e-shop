@@ -8,7 +8,6 @@ export const products: IProduct[] = [
     price: 2999,
     brand: "apple",
     category: "Phone",
-    inStock: true,
     grid: [
       {
         color: "Branco",
@@ -74,7 +73,6 @@ export const products: IProduct[] = [
     price: 102.99,
     brand: "logitech",
     category: "Accesories",
-    inStock: true,
     grid: [
       {
         color: "Preto",
@@ -114,7 +112,6 @@ export const products: IProduct[] = [
     price: 40,
     brand: "Apple",
     category: "Phone",
-    inStock: true,
     grid: [
       {
         color: "Preto",
@@ -187,7 +184,6 @@ export const products: IProduct[] = [
     price: 70,
     brand: "logitech",
     category: "Accesories",
-    inStock: true,
     grid: [
       {
         color: "Graphite",
@@ -206,7 +202,6 @@ export const products: IProduct[] = [
     price: 50,
     brand: "Nerunsa",
     category: "Watch",
-    inStock: true,
     grid: [
       {
         color: "Preto",
