@@ -11,16 +11,32 @@ const config: Config = {
     extend: {
       colors: {
         shop: {
-          black: "#000000",
+          bg: "#ffffff",
           white: "#ffffff",
-          title: "#1e293b",         // slate-800
-          btn: "#334155",           // slate-700
-          link: "#64748b",          // slate-500
-          "input-text": "#94a3b8",  // slate-400
-          line: "#cbd5e1",          // slate-300
+          card: "#f8fafc", // slate-50
+          navbar: "#e2e8f0", // slate-200
           "footer-link": "#e2e8f0", // slate-200
-          card: "#f8fafc",          // slate-50
+          line: "#cbd5e1", // slate-300
+          "input-text": "#94a3b8", // slate-400
+          link: "#64748b", // slate-500
+          btn: "#334155", // slate-700
+          title: "#1e293b", // slate-800
+          black: "#000000",
         },
+
+        // shop: {
+        //   bg: "#ffffff",
+        //   white: "#ffffff",
+        //   card: "#f8fafc",
+        //   navbar: "#CDA140",
+        //   "footer-link": "#e2e8f0",
+        //   line: "#cbd5e1",
+        //   "input-text": "#94a3b8",
+        //   link: "#64748b",
+        //   btn: "#CDA140",
+        //   title: "#1e293b",
+        //   black: "#000000",
+        // },
       },
 
       backgroundImage: {

@@ -12,7 +12,7 @@ export function AdminNav() {
   const pathName = usePathname();
 
   return (
-    <div className="w-full shadow-sm top-20 border-b-[1px] pt-4">
+    <div className="w-full shadow-sm top-20 border-b-[1px] pt-2">
       <Container>
         <div className="flex flex-row items-center justify-between md:justify-center md:gap-12 overflow-x-auto flex-nowrap">
           <Link href={"/admin"}>

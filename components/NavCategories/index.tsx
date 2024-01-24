@@ -18,7 +18,7 @@ export function NavCategories() {
   return (
     <div className="bg-shop-white">
       <Container>
-        <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
+        <div className="pt-2 flex flex-row items-center justify-between overflow-x-auto">
           {categories.map((item) => {
             return (
               <CategoryItem
