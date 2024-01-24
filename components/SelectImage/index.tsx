@@ -30,7 +30,7 @@ export function SelectImage({ item, handleFileChange }: SelectImageProps) {
       {isDragActive ? (
         <p>Arraste a imagem aqui...</p>
       ) : (
-        <p>+ Imagem {item?.color}</p>
+        <p>+ Adicionar imagem</p>
       )}
     </div>
   );

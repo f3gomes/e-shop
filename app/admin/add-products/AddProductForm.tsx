@@ -18,7 +18,12 @@ import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { GridType, UploadedGridType } from "@/types/product";
 import { CustomButton } from "@/components/ProductAddButton";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { categories } from "@/info/categories";
 
 export default function AddProductForm() {
@@ -250,12 +255,7 @@ export default function AddProductForm() {
       <div className="w-full flex flex-col flex-wrap gap-4">
         <div>
           <div className="font-bold">
-            Selecione as cores e tamanhos disponíveis e adicione as fotos do
-            produto.
-          </div>
-
-          <div className="text-sm">
-            Defina também o estoque inicial de cada item
+            Selecione as cores disponíveis e adicione as fotos do produto.
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">

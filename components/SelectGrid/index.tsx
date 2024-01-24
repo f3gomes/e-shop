@@ -54,7 +54,7 @@ export function SelectGrid({
         />
 
         <label htmlFor={item.color} className="font-medium cursor-pointer">
-          {item.color}
+          {item.color} ({item.size})
         </label>
       </div>
 

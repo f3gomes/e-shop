@@ -47,16 +47,16 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       ...data,
       redirect: false,
     }).then((callback) => {
-      setIsLoading(false);
-
       if (callback?.ok) {
         router.push("/cart");
         router.refresh();
         toast.success("Bem vindo!");
+        setIsLoading(false);
       }
 
       if (callback?.error) {
         toast.error(callback.error);
+        setIsLoading(false);
       }
     });
   };
