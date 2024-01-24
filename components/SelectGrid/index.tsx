@@ -43,7 +43,7 @@ export function SelectGrid({
   }, []); // eslint-disable-line
 
   return (
-    <div className="gird grid-cols-1 overflow-auto border-b-[1.2px] border-slate-200 items-center p-2">
+    <div className="gird grid-cols-1 overflow-auto border-b-[1.2px] border-shop-footer-link items-center p-2">
       <div className="flex flex-row gap-2 items-center h-[60px]">
         <input
           id={item.color}

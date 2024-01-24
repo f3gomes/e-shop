@@ -80,7 +80,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
               <Status
                 text="Pendente"
                 icon={MdAccessTimeFilled}
-                bg="bg-slate-200"
+                bg="bg-shop-footer-link"
                 color="text-shop-title"
               />
             ) : params.row.paymentStatus === "complete" ? (
@@ -108,7 +108,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
               <Status
                 text="Pendente"
                 icon={MdAccessTimeFilled}
-                bg="bg-slate-200"
+                bg="bg-shop-footer-link"
                 color="text-shop-title"
               />
             ) : params.row.deliveryStatus === "dispatched" ? (

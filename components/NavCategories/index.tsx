@@ -16,7 +16,7 @@ export function NavCategories() {
   if (!isMainPage) return null;
 
   return (
-    <div className="bg-white">
+    <div className="bg-shop-white">
       <Container>
         <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
           {categories.map((item) => {

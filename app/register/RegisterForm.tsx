@@ -89,7 +89,7 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
         icon={AiOutlineGoogle}
         label="Cadastrar com Google"
       />
-      <hr className="bg-slate-300 w-full h-px" />
+      <hr className="bg-shop-line w-full h-px" />
 
       <Input
         id="name"

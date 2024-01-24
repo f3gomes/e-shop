@@ -26,10 +26,10 @@ export function TextArea({
         disabled={disabled}
         {...register(id, { required })}
         className={cn(
-          "peer w-full p-4 pt-6 max-h-[150px] min-h-[150px] min outline-none bg-white font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
+          "peer w-full p-4 pt-6 max-h-[150px] min-h-[150px] min outline-none bg-shop-white font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
           errors[id]
             ? "border-rose-400 focus:border-rose-400 text-rose-500"
-            : "border-slate-300 focus:border-slate-300 text-shop-input-text"
+            : "border-shop-line focus:border-shop-line text-shop-input-text"
         )}
       />
       <label

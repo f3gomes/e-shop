@@ -52,7 +52,7 @@ export function CategoryItem({
       onClick={handleClick}
       className={cn(
         selected
-          ? "border-b-slate-800 text-shop-title"
+          ? "border-b-shop-title text-shop-title"
           : "border-transparent text-shop-link",
         "flex items-center gap-1 p-2 border-b-2 hover:text-shop-title transition duration-200 cursor-pointer"
       )}

@@ -11,7 +11,7 @@ export const products: IProduct[] = [
     inStock: true,
     grid: [
       {
-        color: "White",
+        color: "Branco",
         colorCode: "#FFFFFF",
         image:
           "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -68,7 +68,7 @@ export const products: IProduct[] = [
   },
   {
     id: "64a4ebe300900d44bb50628a",
-    name: "Logitech MX Keys Advanced Wireless Illuminated Keyboard, Tactile Responsive Typing, Backlighting, Bluetooth, USB-C, Apple macOS, Microsoft Windows, Linux, iOS, Android, Metal Build (Black)",
+    name: "Logitech MX Keys Advanced Wireless Illuminated Keyboard, Tactile Responsive Typing, Backlighting, Bluetooth, USB-C, Apple macOS, Microsoft Windows, Linux, iOS, Android, Metal Build (Preto)",
     description:
       "PERFECT STROKE KEYS - Spherically-dished keys match the shape of your fingertips, offering satisfying feedback with every tap\nCOMFORT AND STABILITY - Type with confidence on a keyboard crafted for comfort, stability, and precision",
     price: 102.99,
@@ -77,7 +77,7 @@ export const products: IProduct[] = [
     inStock: true,
     grid: [
       {
-        color: "Black",
+        color: "Preto",
         colorCode: "#000000",
         image:
           "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -117,7 +117,7 @@ export const products: IProduct[] = [
     inStock: true,
     grid: [
       {
-        color: "Black",
+        color: "Preto",
         colorCode: "#000000",
         image:
           "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -209,7 +209,7 @@ export const products: IProduct[] = [
     inStock: true,
     grid: [
       {
-        color: "Black",
+        color: "Preto",
         colorCode: "#000000",
         image:
           "https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",

@@ -23,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <div
       onClick={() => router.push(`/product/${product.id}`)}
-      className="col-span-1 cursor-pointer border-[1.2px] border-slate-200 bg-slate-50 rounded-sm p-2 transition duration-300 hover:scale-105 text-center text-sm"
+      className="col-span-1 cursor-pointer border-[1.2px] border-shop-footer-link bg-shop-card rounded-sm p-2 transition duration-300 hover:scale-105 text-center text-sm"
     >
       <div className="flex flex-col items-center w-full gap-1">
         <div className="aspect-square overflow-hidden relative w-full">

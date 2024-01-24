@@ -222,7 +222,7 @@ export default function ManageProductsClient({
           <MdClose
             size={20}
             onClick={closeModalEnableInputs}
-            className="absolute right-1 top-1 cursor-pointer hover:scale-110 hover:border-slate-800 transition duration-200"
+            className="absolute right-1 top-1 cursor-pointer hover:scale-110 hover:border-shop-title transition duration-200"
           />
 
           <form onSubmit={handleSubmit}>
@@ -314,7 +314,7 @@ export default function ManageProductsClient({
               onClick={() => {}}
               disabled={isLoading}
               label={isLoading ? "Salvando..." : "Salvar"}
-              className="mt-2 bg-slate-700 font-semibold"
+              className="mt-2 bg-shop-btn font-semibold"
             />
           </form>
         </Box>

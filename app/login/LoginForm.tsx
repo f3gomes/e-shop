@@ -76,7 +76,7 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
         icon={AiOutlineGoogle}
         label="Continuar com Google"
       />
-      <hr className="bg-slate-300 w-full h-px" />
+      <hr className="bg-shop-line w-full h-px" />
 
       <Input
         id="email"

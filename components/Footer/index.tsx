@@ -10,7 +10,7 @@ export function Footer() {
   const iconStyle = "hover:scale-110 transition duration-300";
 
   return (
-    <footer className="bg-slate-700 text-shop-footer-link text-sm mt-16">
+    <footer className="bg-shop-btn text-shop-footer-link text-sm mt-16">
       <Container>
         <div className="flex flex-col md:flex-row justify-between pt-16 pb-8">
           <FooterList>

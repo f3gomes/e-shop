@@ -17,7 +17,7 @@ export function AdminNavItem({
       className={cn(
         "flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-shop-title transition cursor-pointer",
         selected
-          ? "border-b-slate-800 text-shop-title"
+          ? "border-b-shop-title text-shop-title"
           : "border-transparent text-shop-link"
       )}
     >

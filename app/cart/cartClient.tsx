@@ -64,7 +64,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
           })}
       </div>
 
-      <div className="border-t-[1.5px] border-slate-200 py-4 flex justify-between gap-4">
+      <div className="border-t-[1.5px] border-shop-footer-link py-4 flex justify-between gap-4">
         <div className="w-[140px]">
           <CustomButton
             small
