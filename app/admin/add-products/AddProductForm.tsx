@@ -178,6 +178,7 @@ export default function AddProductForm() {
         toast.success("Produto criado com sucesso!");
         setIsProductCreated(true);
         router.refresh();
+        window.location.reload();
       })
       .catch((error) => {
         toast.error("Erro ao criar produto no banco de dados!");

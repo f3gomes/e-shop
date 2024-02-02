@@ -1,12 +1,7 @@
 import { GridType } from "@/types/product";
 
 export enum Size {
-  P,
-  PP,
-  M,
-  MM,
-  G,
-  GG,
+  U,
 }
 
 export const gridArr: GridType[] = [
@@ -14,49 +9,35 @@ export const gridArr: GridType[] = [
     color: "Branco",
     colorCode: "#ffffff",
     image: null,
-    size: "P",
+    size: "U",
     stock: 1,
   },
   {
     color: "Preto",
     colorCode: "#000000",
     image: null,
-    size: "M",
+    size: "U",
     stock: 1,
   },
   {
-    color: "Prata",
-    colorCode: "#c0c0c0",
+    color: "Pink",
+    colorCode: "#f10175",
     image: null,
-    size: "P",
-    stock: 1,
-  },
-  {
-    color: "Verde",
-    colorCode: "#808080",
-    image: null,
-    size: "G",
+    size: "U",
     stock: 1,
   },
   {
     color: "Vermelho",
-    colorCode: "#ffd700",
+    colorCode: "#e40127",
     image: null,
-    size: "P",
+    size: "U",
     stock: 1,
   },
   {
     color: "Azul",
-    colorCode: "#0000ff",
+    colorCode: "#0a22cd",
     image: null,
-    size: "P",
-    stock: 1,
-  },
-  {
-    color: "Grafite",
-    colorCode: "#383838",
-    image: null,
-    size: "GG",
+    size: "U",
     stock: 1,
   },
 ];

@@ -43,7 +43,7 @@ export function SetColor({
                 style={{ background: item.colorCode }}
                 className="h-6 w-6 rounded-full border-[1.2px] border-shop-line cursor-pointer disabled:cursor-not-allowed"
               >
-                <span>{item.size}</span>
+                {/* <span>{item.size}</span> */}
               </button>
             </div>
           );

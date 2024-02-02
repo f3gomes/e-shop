@@ -104,7 +104,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </div>
 
         <Horizontal />
-        <div className="text-justify">{product.description}</div>
+        <div className="text-justify">
+          {product.description.split(",").map((char: any, index: number) => (
+            <div key={index}>{char}</div>
+          ))}
+        </div>
         <Horizontal />
 
         <div>

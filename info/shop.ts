@@ -1,8 +1,8 @@
 import { categories } from "./categories";
 
 export const shopInfo = {
-  name: "E-shop",
-  greeting: "Welcome to my shop!",
+  name: "Fashion Indiscreta",
+  greeting: "Bem vindos a minha loja!",
 
   promo: {
     title: "Promoção de Verão",
