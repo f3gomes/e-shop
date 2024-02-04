@@ -6,6 +6,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import { truncateText } from "@/utils/truncateText";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/types/product";
+import { MdOutlineStarOutline } from "react-icons/md";
 
 interface ProductCardProps {
   product: IProduct;
@@ -36,7 +37,11 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
         <div className="mt-4">{truncateText(name)}</div>
         <div>
-          <Rating value={productRating} readOnly />
+          <Rating
+            readOnly
+            value={productRating}
+            emptyIcon={<MdOutlineStarOutline className="text-shop-star" />}
+          />
         </div>
         <div>
           {product.reviews.length}{" "}

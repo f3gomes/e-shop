@@ -52,9 +52,9 @@ export function CategoryItem({
       onClick={handleClick}
       className={cn(
         selected
-          ? "border-b-shop-title text-shop-title"
+          ? "border-b-shop-title text-shop-category-selected"
           : "border-transparent text-shop-link",
-        "flex items-center gap-1 p-2 border-b-2 hover:text-shop-title transition duration-200 cursor-pointer"
+        "flex items-center gap-1 p-2 border-b-2 hover:opacity-65 transition duration-200 cursor-pointer"
       )}
     >
       <Icon size={20} />

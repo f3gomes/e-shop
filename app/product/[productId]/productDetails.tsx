@@ -12,6 +12,7 @@ import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/formatPrice";
 import { IProduct } from "@/types/product";
+import { MdOutlineStarOutline } from "react-icons/md";
 
 interface ProductDetailsProps {
   product: IProduct | any;
@@ -93,10 +94,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <ProductImage product={product} />
 
-      <div className="flex flex-col gap-1 text-shop-link text-sm">
+      <div className="flex flex-col gap-1 text-shop-default text-sm">
         <h2 className="text-3xl font-medium text-shop-title">{product.name}</h2>
         <div className="flex items-center gap-2">
-          <Rating value={productRating} readOnly />
+          <Rating
+            readOnly
+            value={productRating}
+            emptyIcon={<MdOutlineStarOutline className="text-shop-star" />}
+          />
           <div>
             {product.reviews.length}{" "}
             {product.reviews.length === 1 ? "avaliação" : "avaliações"}
@@ -121,7 +126,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         <Horizontal />
         {isProductInCart ? (
           <>
-            <p className="mb-2 text-shop-link flex items-center gap-1">
+            <p className="mb-2 flex items-center gap-1">
               <MdCheckCircle size={20} className="text-teal-400" />
               <span>Produto adicionado ao carrinho</span>
             </p>

@@ -99,14 +99,13 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
             {currentUser ? (
               <CustomButton
-                outline
                 disabled={isLoading}
                 label={isLoading ? "Aguarde..." : "Confirmar"}
                 onClick={handlePushCheckout}
               />
             ) : (
               <CustomButton
-                outline={false}
+                outline
                 label="Login para confirmar"
                 onClick={() => router.push("/login")}
               />
