@@ -8,18 +8,33 @@ import { Order } from "@prisma/client";
 import { Status } from "@/components/Status";
 import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
-import { MdAccessTimeFilled, MdDeliveryDining, MdDone } from "react-icons/md";
+import {
+  MdAccessTimeFilled,
+  MdArrowBack,
+  MdDeliveryDining,
+  MdDone,
+} from "react-icons/md";
 
 import OrderItem from "./OrderItem";
+import { useRouter } from "next/navigation";
 
 interface OrderDetailsProps {
   order: Order;
 }
 
 export default function OrderDetails({ order }: OrderDetailsProps) {
+  const router = useRouter();
+
   return (
     <div className="max-w-[1150px] m-auto flex flex-col gap-2">
-      <div>
+      <div
+        className="flex gap1 items-center cursor-pointer"
+        onClick={() => router.back()}
+      >
+        <MdArrowBack size={22} />
+        voltar
+      </div>
+      <div className="flex gap-1 items-center">
         <Heading title="Detalhes do pedido" />
       </div>
 
@@ -117,7 +132,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
       </div>
 
       <div>
-        <h2 className="font-semibold mt-4 mb-2">Items do pedido</h2>
+        <h2 className="font-semibold mt-4 mb-2">Itens do pedido</h2>
         <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center">
           <div className="col-span-2 justify-self-start">PRODUTO</div>
           <div className="justify-self-center">PREÇO</div>

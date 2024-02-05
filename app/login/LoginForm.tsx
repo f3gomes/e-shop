@@ -48,7 +48,7 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       redirect: false,
     }).then((callback) => {
       if (callback?.ok) {
-        router.push("/cart");
+        router.push("/");
         router.refresh();
         toast.success("Bem vindo!");
         setIsLoading(false);
@@ -72,7 +72,7 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       <CustomButton
         outline
         disabled
-        onClick={() => {}}
+        onClick={() => { }}
         icon={AiOutlineGoogle}
         label="Continuar com Google"
       />
