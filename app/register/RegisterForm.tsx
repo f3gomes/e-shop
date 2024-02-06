@@ -150,7 +150,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
           errors={errors}
           required
           length={8}
-          size="w-72"
         />
 
         <Input
@@ -160,7 +159,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
           register={register}
           errors={errors}
           required
-          size="w-72"
         />
       </div>
 
