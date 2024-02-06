@@ -47,7 +47,7 @@ export function CartItem({ item }: CartItemProps) {
         </div>
       </div>
       <div className="justify-self-center">{formatPrice(item.price)}</div>
-      <div className="justify-self-center ml-4">
+      <div className="justify-self-center ml-4 max-sm:ml-0">
         <SetQuantity
           cartCounter
           cartProduct={item}

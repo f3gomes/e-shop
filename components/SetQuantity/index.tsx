@@ -9,7 +9,7 @@ interface SetQuantityProps {
   handleQtyDecrease: () => void;
 }
 
-const btnStyles = "border-[1.2px] border-shop-text-border px-2 rounded";
+const btnStyles = "border-[1.2px] border-shop-text-border px-2 rounded max-sm:px-1 max-sm:h-6";
 
 export function SetQuantity({
   cartCounter,
@@ -24,7 +24,7 @@ export function SetQuantity({
         <button onClick={handleQtyDecrease} className={btnStyles}>
           -
         </button>
-        <div className="w-6 flex justify-center">{cartProduct.quantity}</div>
+        <div className="w-6 flex justify-center max-sm:text-sm">{cartProduct.quantity}</div>
         <button onClick={handleQtyIncrease} className={btnStyles}>
           +
         </button>

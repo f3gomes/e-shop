@@ -135,11 +135,11 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         );
       },
     },
-    { field: "date", headerName: "Data", width: 150 },
+    { field: "date", headerName: "Data", width: 140 },
     {
       field: "actions",
       headerName: "Ações",
-      width: 200,
+      width: 140,
       renderCell: (params) => {
         return (
           <div className="flex justify-between gap-4 w-full">
