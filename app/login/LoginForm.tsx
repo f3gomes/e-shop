@@ -78,31 +78,37 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       />
       <hr className="bg-shop-text-sub w-full h-px" />
 
-      <Input
-        id="email"
-        label="E-mail"
-        type="email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col gap-5"
+      >
+        <Input
+          id="email"
+          label="E-mail"
+          type="email"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
 
-      <Input
-        id="password"
-        label="Senha"
-        type="password"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
+        <Input
+          id="password"
+          label="Senha"
+          type="password"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
 
-      <CustomButton
-        disabled={isLoading}
-        onClick={handleSubmit(onSubmit)}
-        label={isLoading ? "Entrando..." : "Entrar"}
-      />
+        <CustomButton
+          type="submit"
+          disabled={isLoading}
+          onClick={() => { }}
+          label={isLoading ? "Entrando..." : "Entrar"}
+        />
+      </form>
 
       <p className="text-sm flex gap-1">
         Não tem uma conta?
