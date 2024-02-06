@@ -52,8 +52,8 @@ export function CategoryItem({
       onClick={handleClick}
       className={cn(
         selected
-          ? "border-b-shop-title text-shop-category-selected"
-          : "border-transparent text-shop-link",
+          ? "border-b-shop-nav-border text-shop-nav-selected"
+          : "border-transparent text-shop-nav-text",
         "flex items-center gap-1 p-2 border-b-2 hover:opacity-65 transition duration-200 cursor-pointer"
       )}
     >

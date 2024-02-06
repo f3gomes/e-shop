@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { shopInfo } from "@/info/shop";
 import { MdFacebook } from "react-icons/md";
-import { AiFillInstagram, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
+import {
+  AiFillInstagram,
+  AiFillTwitterCircle,
+  AiFillYoutube,
+} from "react-icons/ai";
 
 import { Container } from "../Container";
 import { FooterList } from "../FooterList";
@@ -10,7 +14,7 @@ export function Footer() {
   const iconStyle = "hover:scale-110 transition duration-300";
 
   return (
-    <footer className="bg-shop-btn text-shop-footer-link text-sm mt-16">
+    <footer className="bg-shop-footer-bg text-shop-footer-text text-sm mt-16">
       <Container>
         <div className="flex flex-col md:flex-row justify-between pt-16 pb-8">
           <FooterList>

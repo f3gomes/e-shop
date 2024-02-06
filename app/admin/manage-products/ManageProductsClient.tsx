@@ -79,7 +79,7 @@ export default function ManageProductsClient({
       width: 120,
       renderCell: (params) => {
         return (
-          <div className="font-bold text-shop-title">{params.row.price}</div>
+          <div className="font-bold">{params.row.price}</div>
         );
       },
     },
@@ -222,7 +222,7 @@ export default function ManageProductsClient({
           <MdClose
             size={20}
             onClick={closeModalEnableInputs}
-            className="absolute right-1 top-1 cursor-pointer hover:scale-110 hover:border-shop-title transition duration-200"
+            className="absolute right-1 top-1 cursor-pointer hover:scale-110 transition duration-200"
           />
 
           <form onSubmit={handleSubmit}>
@@ -311,10 +311,10 @@ export default function ManageProductsClient({
 
             <CustomButton
               type="submit"
-              onClick={() => {}}
+              onClick={() => { }}
               disabled={isLoading}
               label={isLoading ? "Salvando..." : "Salvar"}
-              className="mt-2 bg-shop-btn font-semibold"
+              className="mt-2 bg-shop-btn-bg font-semibold"
             />
           </form>
         </Box>
@@ -328,6 +328,7 @@ export default function ManageProductsClient({
         <DataGrid
           rows={rows}
           columns={columns}
+          className="text-shop-text-default"
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },

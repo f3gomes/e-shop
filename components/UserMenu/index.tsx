@@ -27,14 +27,14 @@ export function UserMenu({ currentUser }: UserMenuProps) {
       <div className="relative z-30">
         <div
           onClick={toggleOpen}
-          className="p-2 border-[1px] border-shop-input-text flex flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition duration-300 text-shop-title"
+          className="p-2 border-[1px] border-shop-menu-item-border flex flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition duration-300"
         >
           <Avatar src={""} />
           <AiFillCaretDown />
         </div>
 
         {isOpen && (
-          <div className="absolute rounded-md shadow-md w-[170px] bg-shop-white overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
+          <div className="absolute rounded-md shadow-md w-[170px] bg-shop-menu-bg overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
             {currentUser ? (
               <div>
                 {currentUser.role === "ADMIN" ? (

@@ -9,7 +9,7 @@ interface SetQuantityProps {
   handleQtyDecrease: () => void;
 }
 
-const btnStyles = "border-[1.2px] border-shop-line px-2 rounded";
+const btnStyles = "border-[1.2px] border-shop-text-border px-2 rounded";
 
 export function SetQuantity({
   cartCounter,

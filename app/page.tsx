@@ -24,7 +24,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <div className="p-8">
       <Container>
         <div>
-          <HomeBanner />
+          {/* <HomeBanner /> */}
         </div>
 
         <ProductList products={shuffledProducts} />

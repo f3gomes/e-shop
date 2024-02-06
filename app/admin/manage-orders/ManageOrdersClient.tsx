@@ -13,7 +13,13 @@ import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { MdAccessTimeFilled, MdDeliveryDining, MdDone, MdPayments, MdRemoveRedEye } from "react-icons/md";
+import {
+  MdAccessTimeFilled,
+  MdDeliveryDining,
+  MdDone,
+  MdPayments,
+  MdRemoveRedEye,
+} from "react-icons/md";
 
 interface ManageOrdersClientProps {
   orders: ExtendedOrder[];
@@ -53,7 +59,7 @@ export default function ManageOrdersClient({
       width: 100,
       renderCell: (params) => {
         return (
-          <div className="font-bold text-shop-title">{params.row.amount}</div>
+          <div className="font-bold">{params.row.amount}</div>
         );
       },
     },
@@ -65,9 +71,9 @@ export default function ManageOrdersClient({
         return (
           <>
             {params.row.paymentIntentId.slice(0, 3) === "pix" ? (
-              <div className="font-bold text-shop-title">PIX</div>
+              <div className="font-bold">PIX</div>
             ) : (
-              <div className="font-bold text-shop-title">CARTÃO</div>
+              <div className="font-bold">CARTÃO</div>
             )}
           </>
         );
@@ -84,8 +90,8 @@ export default function ManageOrdersClient({
               <Status
                 text="Pendente"
                 icon={MdAccessTimeFilled}
-                bg="bg-shop-footer-link"
-                color="text-shop-title"
+                bg="bg-shop-tb-bg"
+                color=""
               />
             ) : params.row.paymentStatus === "complete" ? (
               <Status
@@ -112,8 +118,8 @@ export default function ManageOrdersClient({
               <Status
                 text="Pendente"
                 icon={MdAccessTimeFilled}
-                bg="bg-shop-footer-link"
-                color="text-shop-title"
+                bg="bg-shop-tb-bg"
+                color=""
               />
             ) : params.row.deliveryStatus === "dispatched" ? (
               <Status
@@ -246,6 +252,7 @@ export default function ManageOrdersClient({
         <DataGrid
           rows={rows}
           columns={columns}
+          className="text-shop-text-default"
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },

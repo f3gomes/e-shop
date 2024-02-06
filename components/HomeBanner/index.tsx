@@ -1,20 +1,15 @@
 import { shopInfo } from "@/info/shop";
 import Image from "next/image";
-import { ReactNode } from "react";
 
-interface HomeBannerProps {
-  children?: ReactNode;
-}
-
-export function HomeBanner({ children }: HomeBannerProps) {
+export function HomeBanner() {
   return (
     <div className="relative bg-gradient-to-r from-sky-500 to-sky-700 mb-8">
       <div className="mx-auto px-8 py-12 flex flex-col gap-2 md:flex-row items-center justify-evenly">
         <div className="mb-8 md:mb-0 text-center select-none">
-          <h1 className="text-4xl md:text-6xl font-bold text-shop-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-shop-body-banner-text mb-4">
             {shopInfo.promo.title}
           </h1>
-          <p className="text-lg md:text-xl text-shop-white mb-2">
+          <p className="text-lg md:text-xl text-shop-body-banner-text mb-2">
             {shopInfo.promo.description}
           </p>
           <p className="text-2xl md:text-5xl text-yellow-400 font-bold">

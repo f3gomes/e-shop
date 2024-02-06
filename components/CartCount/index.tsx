@@ -17,7 +17,7 @@ export function CartCount() {
         <CiShoppingCart />
       </div>
 
-      <span className="absolute top-[10px] right-[-10px] bg-shop-link text-shop-white h-6 w-6 rounded-full flex items-center justify-center text-sm">
+      <span className="absolute top-[10px] right-[-10px] bg-shop-header-icon-bg text-shop-header-icon-text h-6 w-6 rounded-full flex items-center justify-center text-sm">
         {cartTotalQty}
       </span>
     </div>

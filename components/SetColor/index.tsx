@@ -41,7 +41,7 @@ export function SetColor({
               <button
                 disabled={item.stock === 0}
                 style={{ background: item.colorCode }}
-                className="h-6 w-6 rounded-full border-[1.2px] border-shop-line cursor-pointer disabled:cursor-not-allowed"
+                className="h-6 w-6 rounded-full border-[1.2px] border-shop-text-sub cursor-pointer disabled:cursor-not-allowed"
               >
                 {/* <span>{item.size}</span> */}
               </button>

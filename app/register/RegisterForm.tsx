@@ -85,11 +85,12 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
 
       <CustomButton
         outline
-        onClick={() => {}}
+        onClick={() => { }}
         icon={AiOutlineGoogle}
         label="Cadastrar com Google"
+        disabled
       />
-      <hr className="bg-shop-line w-full h-px" />
+      <hr className="bg-shop-text-sub w-full h-px" />
 
       <Input
         id="name"

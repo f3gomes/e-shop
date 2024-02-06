@@ -9,7 +9,7 @@ export function UserMenuItem({ children, onClick }: UserMenuItemProps) {
   return (
     <div
       onClick={onClick}
-      className=" px-4 py-3 hover:bg-shop-footer-link transition duration-300"
+      className=" px-4 py-3 hover:bg-shop-menu-item-hover transition duration-300"
     >
       {children}
     </div>

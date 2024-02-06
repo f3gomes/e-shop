@@ -44,7 +44,7 @@ export function SearchBar() {
           type="text"
           autoComplete="off"
           placeholder="Buscar no site"
-          className="w-80 py-2 px-9 border bg-shop-input border-shop-line rounded-md focus:outline-none focus:border-[0.5px] focus:border-shop-link"
+          className="w-80 py-2 px-9 border bg-shop-input-bg border-shop-input-border rounded-md focus:outline-none focus:border-[0.5px] focus:border-shop-text-sub"
           {...register("searchTerm")}
         />
 

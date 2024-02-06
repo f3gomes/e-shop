@@ -39,10 +39,10 @@ export function Input({
         {...register(id, { required })}
         className={cn(
           size,
-          "peer p-4 pt-6 outline-none bg-shop-input font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
+          "peer p-4 pt-6 outline-none bg-shop-input-bg font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
           errors[id]
             ? "border-rose-400 focus:border-rose-400 text-rose-500"
-            : "border-shop-line focus:border-shop-line text-shop-input-text"
+            : "border-shop-input-border focus:border-shop-input-border text-shop-input-text"
         )}
       />
       <label

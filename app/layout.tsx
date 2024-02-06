@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(font.className, "text-shop-title bg-shop-bg")}>
+      <body className={cn(font.className, "text-shop-text-default bg-shop-body-bg")}>
         <Toaster
           toastOptions={{
             style: { background: "rgb(51 65 85)", color: "#fff" },

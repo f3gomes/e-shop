@@ -24,7 +24,7 @@ export function SelectImage({ item, handleFileChange }: SelectImageProps) {
   return (
     <div
       {...getRootProps()}
-      className="border-2 border-shop-input-text p-2 border-dashed cursor-pointer text-sm font-normal text-shop-input-text  flex items-center"
+      className="border-2 border-shop-input-border p-2 border-dashed cursor-pointer text-sm font-normal text-shop-input-text  flex items-center"
     >
       <input type="text" {...getInputProps()} />
       {isDragActive ? (

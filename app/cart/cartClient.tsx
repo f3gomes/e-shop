@@ -37,7 +37,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
         <div>
           <Link
             href={"/"}
-            className="text-shop-link flex items-center gap-1 mt-2"
+            className="text-shop-text-sub flex items-center gap-1 mt-2"
           >
             <MdArrowBack />
             <span>Ver Produtos</span>
@@ -64,7 +64,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
           })}
       </div>
 
-      <div className="border-t-[1.5px] border-shop-footer-link py-4 flex justify-between gap-4">
+      <div className="border-t-[1.5px] py-4 flex justify-between gap-4">
         <div className="w-[140px]">
           <CustomButton
             small
@@ -74,51 +74,51 @@ export default function CartClient({ currentUser }: CartClientProps) {
           />
         </div>
 
-        <div className="text-sm flex flex-col gap-1 items-start">
-          <div>
-            <div className="py-4 min-w-[274px]">
-              <span className="font-semibold text-base">
-                Forma de pagamento
-              </span>
-              <FormControl fullWidth>
-                <Select
-                  value={selectedOption}
-                  onChange={(event) => setSelectedOption(event.target.value)}
-                >
-                  <MenuItem value={"checkout"}>Cartão</MenuItem>
-                  <MenuItem value={"pix"}>PIX</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-
-            <div className="flex justify-between w-64 text-base font-semibold">
-              <span>Subtotal</span>
-              <span>{formatPrice(cartTotalAmout)}</span>
-            </div>
-            <p>Frete e Taxas</p>
-
-            {currentUser ? (
-              <CustomButton
-                disabled={isLoading}
-                label={isLoading ? "Aguarde..." : "Confirmar"}
-                onClick={handlePushCheckout}
-              />
-            ) : (
-              <CustomButton
-                outline
-                label="Login para confirmar"
-                onClick={() => router.push("/login")}
-              />
-            )}
-
-            <Link
-              href={"/"}
-              className="text-shop-link flex items-center gap-1 mt-2"
-            >
-              <MdArrowBack />
-              <span>Continar comprando</span>
-            </Link>
+        <div className="text-sm flex flex-col gap-2 items-start">
+          <div className="py-4 min-w-[274px]">
+            <span className="font-semibold text-base">Forma de pagamento</span>
+            <FormControl fullWidth>
+              <Select
+                value={selectedOption}
+                onChange={(event) => setSelectedOption(event.target.value)}
+              >
+                <MenuItem value={"checkout"}>Cartão</MenuItem>
+                <MenuItem value={"pix"}>PIX</MenuItem>
+              </Select>
+            </FormControl>
           </div>
+
+          <div className="flex justify-between w-full text-base font-semibold">
+            <span>Subtotal</span>
+            <span>{formatPrice(cartTotalAmout)}</span>
+          </div>
+
+          <div className="flex justify-between w-full text-base">
+            <span>Frete e Taxas</span>
+            <span>R$ 0,00</span>
+          </div>
+
+          {currentUser ? (
+            <CustomButton
+              disabled={isLoading}
+              label={isLoading ? "Aguarde..." : "Confirmar"}
+              onClick={handlePushCheckout}
+            />
+          ) : (
+            <CustomButton
+              outline
+              label="Login para confirmar"
+              onClick={() => router.push("/login")}
+            />
+          )}
+
+          <Link
+            href={"/"}
+            className="text-shop-text-default flex items-center gap-1 mt-2"
+          >
+            <MdArrowBack />
+            <span>Continar comprando</span>
+          </Link>
         </div>
       </div>
     </div>
