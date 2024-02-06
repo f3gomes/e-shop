@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.MuiInputBase-input {
+.MuiSelect-select {
   @apply !text-shop-text-default;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  @apply !text-black;
 }

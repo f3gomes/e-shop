@@ -14,6 +14,14 @@ export async function DELETE(
     return NextResponse.error();
   }
 
+  const orderWithProduct = await prisma.order.findFirst({
+    where: { products: { some: { id: params.id } } },
+  });
+
+  if (orderWithProduct) {
+    return NextResponse.error();
+  }
+
   const product = await prisma.product.delete({
     where: {
       id: params.id,

@@ -133,6 +133,9 @@ export default function ManageProductsClient({
           router.refresh();
         })
         .catch((err) => {
+          toast.error(
+            "Este produto não pode ser excluido pois está em um pedido!"
+          );
           console.log(err);
         });
     }
@@ -219,7 +222,7 @@ export default function ManageProductsClient({
           <MdClose
             size={20}
             onClick={closeModalEnableInputs}
-            className="absolute right-1 top-1 cursor-pointer hover:scale-110 transition duration-200"
+            className="absolute right-1 top-1 cursor-pointer hover:scale-110 transition duration-200 text-black"
           />
 
           <form onSubmit={handleSubmit}>
@@ -244,6 +247,7 @@ export default function ManageProductsClient({
                 onChange={handleUpdateValue}
                 defaultValue={selectedProduct?.name}
                 disabled={disabledInputs}
+                sx={{ input: { color: "black" } }}
               />
 
               <TextField
@@ -302,6 +306,7 @@ export default function ManageProductsClient({
                               icon={MdCached}
                               tooltip="Atualizar estoque"
                               onClick={handleEnableStockInput}
+                              className="text-black"
                             />
                           </div>
                         )}

@@ -8,6 +8,7 @@ interface ActionBtnProps {
   disabled?: boolean;
   tooltip: string;
   type?: "button" | "submit" | "reset" | undefined;
+  className?: string;
 }
 
 export function ActionBtn({
@@ -16,6 +17,7 @@ export function ActionBtn({
   disabled,
   tooltip,
   type = "button",
+  className,
 }: ActionBtnProps) {
   return (
     <Tooltip title={tooltip}>
@@ -24,6 +26,7 @@ export function ActionBtn({
         onClick={onClick}
         disabled={disabled}
         className={cn(
+          className,
           disabled && "opacity-50 cursor-not-allowed",
           "flex items-center justify-center rounded cursor-pointer w-[40px] h-[30px] border border-shop-tb-border hover:border-[2px] transition duration-200"
         )}
