@@ -252,7 +252,7 @@ export default function ManageOrdersClient({
         <DataGrid
           rows={rows}
           columns={columns}
-          className="text-shop-text-default"
+          className="!text-shop-text-default"
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },

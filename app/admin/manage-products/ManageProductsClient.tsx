@@ -13,7 +13,7 @@ import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
-import { Box, Button, Modal, TextField } from "@mui/material";
+import { Box, Modal, TextField } from "@mui/material";
 import { CustomButton } from "@/components/ProductAddButton";
 
 interface ManageProductsClientProps {
@@ -78,9 +78,7 @@ export default function ManageProductsClient({
       headerName: "Preço (R$)",
       width: 120,
       renderCell: (params) => {
-        return (
-          <div className="font-bold">{params.row.price}</div>
-        );
+        return <div className="font-bold">{params.row.price}</div>;
       },
     },
     { field: "category", headerName: "Categoria", width: 120 },
@@ -146,7 +144,6 @@ export default function ManageProductsClient({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
@@ -183,7 +180,7 @@ export default function ManageProductsClient({
     } else {
       axios
         .put("/api/product", {
-          id: productData?.id,
+          id: productData?.id || selectedProduct.id,
           name: productData?.name || selectedProduct.name,
           price: Number(productData?.price) || selectedProduct.price,
         })
@@ -218,7 +215,7 @@ export default function ManageProductsClient({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="bg-slate-300">
           <MdClose
             size={20}
             onClick={closeModalEnableInputs}
@@ -262,7 +259,7 @@ export default function ManageProductsClient({
 
               <div>
                 {selectedProduct &&
-                  selectedProduct?.grid.map((item: any) => {
+                  selectedProduct?.grid.map((item: any, index: number) => {
                     return (
                       <div
                         key={item.colorCode}
@@ -273,7 +270,7 @@ export default function ManageProductsClient({
                           label="Cor"
                           variant="outlined"
                           value={item.color}
-                          className="w-24"
+                          className="w-[6.8rem]"
                           disabled
                         />
                         <TextField
@@ -283,7 +280,9 @@ export default function ManageProductsClient({
                           value={item.size}
                           className="w-20"
                           disabled
+                          inputProps={{ style: { textAlign: "center" } }}
                         />
+
                         <TextField
                           id="outlined-basic"
                           label="Estoque"
@@ -294,15 +293,18 @@ export default function ManageProductsClient({
                             handleChangeStock(item.colorCode, e.target.value)
                           }
                           disabled={disabledStockInput}
+                          inputProps={{ style: { textAlign: "center" } }}
                         />
 
-                        <div className="-mt-6">
-                          <ActionBtn
-                            icon={MdCached}
-                            tooltip="Atualizar estoque"
-                            onClick={handleEnableStockInput}
-                          />
-                        </div>
+                        {index === 0 && (
+                          <div className="-mt-6">
+                            <ActionBtn
+                              icon={MdCached}
+                              tooltip="Atualizar estoque"
+                              onClick={handleEnableStockInput}
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -328,7 +330,7 @@ export default function ManageProductsClient({
         <DataGrid
           rows={rows}
           columns={columns}
-          className="text-shop-text-default"
+          className="!text-shop-text-default"
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
