@@ -19,6 +19,12 @@ export const shopInfo = {
       category3: categories[3].label,
     },
 
+    navigation: {
+      category1: "/?category=Vestidos",
+      category2: "/?category=Conjuntos",
+      category3: "/?category=Macaquinhos",
+    },
+
     services: {
       title: "Atendimento ao Cliente",
       service1: "Contato",

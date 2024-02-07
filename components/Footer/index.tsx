@@ -22,9 +22,15 @@ export function Footer() {
               {shopInfo.footer.categories.title}
             </h3>
 
-            <Link href={"/"}>{shopInfo.footer.categories.category1}</Link>
-            <Link href={"/"}>{shopInfo.footer.categories.category2}</Link>
-            <Link href={"/"}>{shopInfo.footer.categories.category3}</Link>
+            <Link href={shopInfo.footer.navigation.category1}>
+              {shopInfo.footer.categories.category1}
+            </Link>
+            <Link href={shopInfo.footer.navigation.category2}>
+              {shopInfo.footer.categories.category2}
+            </Link>
+            <Link href={shopInfo.footer.navigation.category3}>
+              {shopInfo.footer.categories.category3}
+            </Link>
           </FooterList>
 
           <FooterList>
