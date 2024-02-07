@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import CartProvider from "@/providers/CartProvider";
 
 import "./globals.css";
+import WhatsappBtn from "@/components/WhatsappBtn";
 
 const font = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(font.className, "text-shop-text-default bg-shop-body-bg")}>
+      <body
+        className={cn(font.className, "text-shop-text-default bg-shop-body-bg")}
+      >
         <Toaster
           toastOptions={{
             style: { background: "rgb(51 65 85)", color: "#fff" },
@@ -37,6 +40,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </CartProvider>
+        <WhatsappBtn />
       </body>
     </html>
   );
