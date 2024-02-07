@@ -124,11 +124,10 @@ export default function ManageProductsClient({
         }
       };
 
-      await handleImageDelete();
-
       axios
         .delete(`/api/product/${id}`)
         .then((res) => {
+          handleImageDelete();
           toast.success("Produto removido do banco de dados!");
           router.refresh();
         })
