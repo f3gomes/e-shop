@@ -38,8 +38,8 @@ export const shopInfo = {
     },
 
     socials: {
+      instagram: "https://www.instagram.com/fashion_indiscreta/",
       facebook: "https://www.facebook.com/",
-      instagram: "https://www.instagram.com/",
       twitter: "https://twitter.com/",
       youtube: "https://www.youtube.com/@",
     },

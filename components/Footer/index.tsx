@@ -60,13 +60,7 @@ export function Footer() {
             <h3 className="text-balance font-bold">Redes sociais</h3>
             <div className="flex gap-2">
               <Link
-                className={iconStyle}
-                href={shopInfo.footer.socials.facebook}
-              >
-                <MdFacebook size={24} />{" "}
-              </Link>
-
-              <Link
+                target="_blank"
                 className={iconStyle}
                 href={shopInfo.footer.socials.instagram}
               >
@@ -74,6 +68,15 @@ export function Footer() {
               </Link>
 
               <Link
+                target="_blank"
+                className={iconStyle}
+                href={shopInfo.footer.socials.facebook}
+              >
+                <MdFacebook size={24} />{" "}
+              </Link>
+
+              <Link
+                target="_blank"
                 className={iconStyle}
                 href={shopInfo.footer.socials.twitter}
               >
@@ -81,6 +84,7 @@ export function Footer() {
               </Link>
 
               <Link
+                target="_blank"
                 className={iconStyle}
                 href={shopInfo.footer.socials.youtube}
               >
