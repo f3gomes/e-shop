@@ -124,62 +124,46 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         </div>
 
         <Horizontal />
-        {isProductInCart ? (
-          <>
-            <p className="mb-2 flex items-center gap-1">
-              <MdCheckCircle size={20} className="text-teal-400" />
-              <span>Produto adicionado ao carrinho</span>
-            </p>
 
-            <div>
-              <CustomButton
-                outline
-                label="Ver carrinho"
-                onClick={() => router.push("/cart")}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <SetColor
-              cartProduct={cartItem}
-              grid={product.grid}
-              handleColorSelect={handleColorSelect}
+        <>
+          <SetColor
+            cartProduct={cartItem}
+            grid={product.grid}
+            handleColorSelect={handleColorSelect}
+          />
+
+          {buyDisabled && (
+            <>
+              <Horizontal />
+              <span className="text-rose-500">Sem Estoque</span>
+            </>
+          )}
+
+          <Horizontal />
+          <SetQuantity
+            cartProduct={cartItem}
+            handleQtyDecrease={handleQtyDecrease}
+            handleQtyIncrease={handleQtyIncrease}
+          />
+          <Horizontal />
+
+          <div className="flex gap-3 items-center">
+            <span className="font-semibold">Preço: </span>
+            <span className="font-medium text-lg">
+              {formatPrice(product.price)}
+            </span>
+          </div>
+
+          <Horizontal />
+
+          <div className="max-w-[300px]">
+            <CustomButton
+              label="Comprar"
+              disabled={buyDisabled}
+              onClick={() => handleAddProductToCart(cartItem)}
             />
-
-            {buyDisabled && (
-              <>
-                <Horizontal />
-                <span className="text-rose-500">Sem Estoque</span>
-              </>
-            )}
-
-            <Horizontal />
-            <SetQuantity
-              cartProduct={cartItem}
-              handleQtyDecrease={handleQtyDecrease}
-              handleQtyIncrease={handleQtyIncrease}
-            />
-            <Horizontal />
-
-            <div className="flex gap-3 items-center">
-              <span className="font-semibold">Preço: </span>
-              <span className="font-medium text-lg">
-                {formatPrice(product.price)}
-              </span>
-            </div>
-
-            <Horizontal />
-
-            <div className="max-w-[300px]">
-              <CustomButton
-                label="Comprar"
-                disabled={buyDisabled}
-                onClick={() => handleAddProductToCart(cartItem)}
-              />
-            </div>
-          </>
-        )}
+          </div>
+        </>
       </div>
     </div>
   );

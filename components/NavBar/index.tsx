@@ -9,6 +9,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import { NavCategories } from "../NavCategories";
 import { SearchBar } from "../SearchBar";
 import { shopInfo } from "@/info/shop";
+import Image from "next/image";
 
 const font = Redressed({ subsets: ["latin"], weight: ["400"] });
 
@@ -24,7 +25,16 @@ export async function NavBar() {
               href={"/"}
               className={cn(font.className, "font-bold text-2xl")}
             >
-              {shopInfo.name}
+              <div className="flex gap-2 items-center">
+                <Image
+                  alt="logo"
+                  src={"/assets/logo.jpeg"}
+                  width={30}
+                  height={30}
+                  className="static"
+                />
+                {shopInfo.name}
+              </div>
             </Link>
 
             <div className="hidden md:block">
