@@ -70,8 +70,6 @@ export async function POST(req: Request) {
 
   const orderCount = await prisma.order.count();
 
-  console.log("orderCount: ", orderCount);
-
   const addressData: Address = {
     city: currentUser.city,
     country: currentUser.country,
