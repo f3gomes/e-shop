@@ -1,9 +1,11 @@
 "use client";
 
-import moment from "moment";
 import { Heading } from "../Heading";
 import { Rating } from "@mui/material";
 import { Avatar } from "../Avatar";
+import dayjs from "dayjs";
+
+import "dayjs/locale/pt-br";
 
 interface ProductListRatingProps {
   product: any;
@@ -11,6 +13,8 @@ interface ProductListRatingProps {
 
 export function ProductListRating({ product }: ProductListRatingProps) {
   if (product.reviews.length === 0) return null;
+
+  dayjs.locale("pt-br");
 
   return (
     <div className="mt-8">
@@ -20,12 +24,12 @@ export function ProductListRating({ product }: ProductListRatingProps) {
         {product.reviews &&
           product.reviews.map((item: any) => {
             return (
-              <div key={item.id} className="max-w-[300px]">
+              <div key={item.id} className="max-w-[310px]">
                 <div className="flex items-center gap-2">
                   <Avatar src={item?.user.image} />
                   <div className="font-semibold">{item?.user.name}</div>
                   <div className="font-light">
-                    {moment(item.createDate).fromNow()}
+                    {dayjs(item.createDate).format("DD [de] MMMM [de] YYYY")}
                   </div>
                 </div>
 
