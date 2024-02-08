@@ -40,6 +40,7 @@ export default function ManageOrdersClient({
     rows = orders.map((item: any) => {
       return {
         id: item.id,
+        orderNumber: item.orderNumber,
         customer: item.user.name,
         amount: formatPrice(item.amount / 100),
         paymentStatus: item.status,
@@ -51,16 +52,14 @@ export default function ManageOrdersClient({
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 160 },
+    { field: "orderNumber", headerName: "Número do Pedido", width: 160 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
     {
       field: "amount",
       headerName: "Valor (R$)",
       width: 100,
       renderCell: (params) => {
-        return (
-          <div className="font-bold">{params.row.amount}</div>
-        );
+        return <div className="font-bold">{params.row.amount}</div>;
       },
     },
     {

@@ -64,6 +64,10 @@ export async function POST(request: Request) {
   const { items, payment_intent_id } = body;
   const total = calculateOrderAmount(items) * 100;
 
+  const orderCount = await prisma.order.count();
+
+  console.log("orderCount: ", orderCount);
+
   const addressData: Address = {
     city: currentUser.city,
     country: currentUser.country,
@@ -75,6 +79,7 @@ export async function POST(request: Request) {
 
   const orderData = {
     user: { connect: { id: currentUser.id } },
+    orderNumber: orderCount + 1,
     amount: total,
     currency: "brl",
     status: "pending",
