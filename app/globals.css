@@ -10,7 +10,7 @@
   @apply !text-shop-text-default;
 }
 
-svg {
+.MuiSvgIcon-fontSizeMedium {
   @apply !text-shop-text-default;
 }
 

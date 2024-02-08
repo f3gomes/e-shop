@@ -17,10 +17,10 @@ interface AddRatingProps {
   };
 
   user:
-    | (any & {
-        orders: Order[];
-      })
-    | null;
+  | (any & {
+    orders: Order[];
+  })
+  | null;
 }
 
 export default function AddRating({ product, user }: AddRatingProps) {
@@ -50,7 +50,7 @@ export default function AddRating({ product, user }: AddRatingProps) {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    if (data.rating === 0) {
+    if (data.rating === 0 || !data.rating) {
       setIsLoading(false);
       return toast.error("Selecione uma nota!");
     }

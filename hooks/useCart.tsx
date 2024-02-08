@@ -159,11 +159,9 @@ export const CartContextProvider = (props: Props) => {
   );
 
   const handleClearCart = useCallback(() => {
-    if (confirm("Remover todos os produtos do carrinho?")) {
-      setCartProducts(null);
-      setCartTotalQty(0);
-      setItem("eShopCartItems", null);
-    }
+    setCartProducts(null);
+    setCartTotalQty(0);
+    setItem("eShopCartItems", null);
   }, [cartProducts]);
 
   const handleSetPaymentIntent = useCallback(

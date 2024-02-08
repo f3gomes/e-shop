@@ -22,8 +22,26 @@ export async function POST(request: Request) {
     return review.userId === currentUser.id;
   });
 
-  if (userReview || !deliveredOrder) {
-    return NextResponse.error();
+  if (userReview) {
+    const error = {
+      code: 400,
+      message: "User has already rated this product.",
+    };
+
+    return NextResponse.json(error, {
+      status: 400,
+    });
+  }
+
+  if (!deliveredOrder) {
+    const error = {
+      code: 400,
+      message: "Order has not yet been delivered.",
+    };
+
+    return NextResponse.json(error, {
+      status: 400,
+    });
   }
 
   const review = await prisma?.review.create({
