@@ -11,6 +11,7 @@ import { Heading } from "@/components/Heading";
 import { CustomButton } from "@/components/ProductAddButton";
 import { PiSealCheckBold } from "react-icons/pi";
 import QRCode from "@/components/QrCode";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface PixCheckoutClientProps {
   user: any;
@@ -63,7 +64,9 @@ export default function PixCheckoutClient({ user }: PixCheckoutClientProps) {
             label={isLoading ? "Gerando..." : "Gerar QR Code"}
           />
 
-          <div className="font-semibold">Valor: R$ {cartTotalAmout}</div>
+          <div className="font-semibold">
+            Valor: {formatPrice(cartTotalAmout)}
+          </div>
           <div className="flex items-center gap-1">
             <p className="text-sm">Pagamento através do Mercado Pago</p>
             <PiSealCheckBold className="text-blue-600" />

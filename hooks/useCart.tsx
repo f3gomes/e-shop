@@ -77,7 +77,7 @@ export const CartContextProvider = (props: Props) => {
 
   const handleAddProductToCart = useCallback((product: CartProductType) => {
     setCartProducts((prev) => {
-      let updatedCart;
+      let updatedCart = [];
 
       if (prev) {
         updatedCart = [...prev, product];
@@ -95,7 +95,7 @@ export const CartContextProvider = (props: Props) => {
     (product: CartProductType) => {
       if (cartProducts) {
         const filteredProducts = cartProducts.filter((item) => {
-          return item.id !== product.id;
+          return item.grid?.image !== product.grid?.image;
         });
 
         setCartProducts(filteredProducts);
@@ -118,7 +118,7 @@ export const CartContextProvider = (props: Props) => {
         updatedCart = [...cartProducts];
 
         const existingIndex = cartProducts.findIndex(
-          (item) => item.id === product.id
+          (item) => item.grid?.image === product.grid?.image
         );
 
         if (existingIndex > -1) {
@@ -142,7 +142,7 @@ export const CartContextProvider = (props: Props) => {
           updatedCart = [...cartProducts];
 
           const existingIndex = cartProducts.findIndex(
-            (item) => item.id === product.id
+            (item) => item.grid?.image === product.grid?.image
           );
 
           if (existingIndex > -1) {
@@ -159,9 +159,11 @@ export const CartContextProvider = (props: Props) => {
   );
 
   const handleClearCart = useCallback(() => {
-    setCartProducts(null);
-    setCartTotalQty(0);
-    setItem("eShopCartItems", null);
+    if (confirm("Remover todos os produtos do carrinho?")) {
+      setCartProducts(null);
+      setCartTotalQty(0);
+      setItem("eShopCartItems", null);
+    }
   }, [cartProducts]);
 
   const handleSetPaymentIntent = useCallback(

@@ -59,8 +59,8 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
       <div>
         {cartProducts &&
-          cartProducts.map((item) => {
-            return <CartItem key={item.id} item={item} />;
+          cartProducts.map((item, index) => {
+            return <CartItem key={item.id + index} item={item} />;
           })}
       </div>
 
