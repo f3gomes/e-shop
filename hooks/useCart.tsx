@@ -75,21 +75,30 @@ export const CartContextProvider = (props: Props) => {
     getTotals();
   }, [cartProducts]);
 
-  const handleAddProductToCart = useCallback((product: CartProductType) => {
-    setCartProducts((prev) => {
-      let updatedCart = [];
+  const handleAddProductToCart = (product: CartProductType) => {
+    const alreadyAdded = cartProducts?.find(
+      (item) =>
+        item.grid?.color === product.grid?.color && item.id === product.id
+    );
 
-      if (prev) {
-        updatedCart = [...prev, product];
-      } else {
-        updatedCart = [product];
-      }
+    if (alreadyAdded) {
+      toast.error("A cor selecionada já está no carrinho!");
+    } else {
+      setCartProducts((prev) => {
+        let updatedCart = [];
 
-      toast.success("Produto adicionado ao carrinho!");
-      setItem("eShopCartItems", updatedCart);
-      return updatedCart;
-    });
-  }, []);
+        if (prev) {
+          updatedCart = [...prev, product];
+        } else {
+          updatedCart = [product];
+        }
+
+        toast.success("Produto adicionado ao carrinho!");
+        setItem("eShopCartItems", updatedCart);
+        return updatedCart;
+      });
+    }
+  };
 
   const handleRemoveProductFromCart = useCallback(
     (product: CartProductType) => {
