@@ -71,7 +71,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       return { ...prev, quantity: 1 };
     });
 
-    if (product.grid.length === 1 && product.grid[0].stock === 0) {
+    if (product.grid.every((item: any) => item.stock === 0)) {
       setBuyDisabled(true);
     }
   }, []); // eslint-disable-line

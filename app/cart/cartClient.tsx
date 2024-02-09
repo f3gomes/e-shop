@@ -29,6 +29,12 @@ export default function CartClient({ currentUser }: CartClientProps) {
     router.push(`/${selectedOption}`);
   };
 
+  const confirmClearCart = () => {
+    if (confirm("Remover todos os produtos do carrinho?")) {
+      handleClearCart();
+    }
+  };
+
   if (!cartProducts || cartProducts.length === 0) {
     return (
       <div className="flex flex-col items-center">
@@ -70,7 +76,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
             small
             outline
             label="Limpar carrinho"
-            onClick={handleClearCart}
+            onClick={confirmClearCart}
           />
         </div>
 

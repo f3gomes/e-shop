@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 import { CartProductType } from "@/types/cart";
 import { useLocalStorage } from "./useLocal";
+import { AddedProduct } from "@/components/AddedProduct";
 
 type CartContextType = {
   cartTotalQty: number;
@@ -82,7 +83,8 @@ export const CartContextProvider = (props: Props) => {
     );
 
     if (alreadyAdded) {
-      toast.error("A cor selecionada já está no carrinho!");
+      toast((t) => <AddedProduct />);
+      toast.error("Essa cor já está no carrinho!");
     } else {
       setCartProducts((prev) => {
         let updatedCart = [];
@@ -93,7 +95,9 @@ export const CartContextProvider = (props: Props) => {
           updatedCart = [product];
         }
 
+        toast((t) => <AddedProduct />);
         toast.success("Produto adicionado ao carrinho!");
+
         setItem("eShopCartItems", updatedCart);
         return updatedCart;
       });
