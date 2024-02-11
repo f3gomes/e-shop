@@ -38,7 +38,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
         <Heading title="Detalhes do pedido" />
       </div>
 
-      <div>ID do pedido: {order.id}</div>
+      <div>Número do pedido: {order.orderNumber}</div>
       <div>
         Total do pedido:{" "}
         <span className="font-bold">{formatPrice(order.amount / 100)}</span>
