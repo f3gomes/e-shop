@@ -6,7 +6,14 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    const error = {
+      code: 400,
+      message: "User not found.",
+    };
+
+    return NextResponse.json(error, {
+      status: 400,
+    });
   }
 
   const body = await request.json();
@@ -18,7 +25,7 @@ export async function POST(request: Request) {
     )
   );
 
-  const userReview = product?.reviews.find((review: Review) => {
+  const userReview = await product?.reviews.find((review: Review) => {
     return review.userId === currentUser.id;
   });
 
