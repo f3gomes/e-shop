@@ -16,49 +16,54 @@ export async function POST(request: Request) {
     });
   }
 
-  const body = await request.json();
-  const { comment, rating, product, userId } = body;
+  try {
+    const body = await request.json();
+    const { comment, rating, product, userId } = body;
 
-  const deliveredOrder = currentUser?.orders.some((order) =>
-    order.products.find(
-      (item) => item.id === product.id && order.deliveryStatus === "delivered"
-    )
-  );
+    const deliveredOrder = currentUser?.orders.some((order) =>
+      order.products.find(
+        (item) => item.id === product.id && order.deliveryStatus === "delivered"
+      )
+    );
 
-  const userReview = await product?.reviews.find((review: Review) => {
-    return review.userId === currentUser.id;
-  });
-
-  if (userReview) {
-    const error = {
-      code: 400,
-      message: "User has already rated this product.",
-    };
-
-    return NextResponse.json(error, {
-      status: 400,
+    const userReview = await product?.reviews.find((review: Review) => {
+      return review.userId === currentUser.id;
     });
-  }
 
-  if (!deliveredOrder) {
-    const error = {
-      code: 400,
-      message: "Order has not yet been delivered.",
-    };
+    if (userReview) {
+      const error = {
+        code: 400,
+        message: "User has already rated this product.",
+      };
 
-    return NextResponse.json(error, {
-      status: 400,
+      return NextResponse.json(error, {
+        status: 400,
+      });
+    }
+
+    if (!deliveredOrder) {
+      const error = {
+        code: 400,
+        message: "Order has not yet been delivered.",
+      };
+
+      return NextResponse.json(error, {
+        status: 400,
+      });
+    }
+
+    const review = await prisma?.review.create({
+      data: {
+        comment,
+        rating,
+        productId: product.id,
+        userId,
+      },
     });
+
+    return NextResponse.json(review);
+  } catch (error: any) {
+    console.error(error);
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
-
-  const review = await prisma?.review.create({
-    data: {
-      comment,
-      rating,
-      productId: product.id,
-      userId,
-    },
-  });
-
-  return NextResponse.json(review);
 }
