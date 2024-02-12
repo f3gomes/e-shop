@@ -20,12 +20,12 @@ export async function NavBar() {
     <div className="sticky top-0 w-full bg-shop-header-bg z-30 shadow-sm">
       <div className="py-4 border-b-[1px]">
         <Container>
-          <div className="flex items-center justify-between gap-3 md:gap-0">
+          <div className="flex items-center justify-between gap-3 md:gap-0 select-none">
             <Link
               href={"/"}
               className={cn(font.className, "font-bold text-2xl")}
             >
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center max-sm:text-xl">
                 <Image
                   alt="logo"
                   src={"/assets/logo.jpeg"}

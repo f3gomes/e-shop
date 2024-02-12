@@ -92,101 +92,107 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       />
       <hr className="bg-shop-text-sub w-full h-px" />
 
-      <Input
-        id="name"
-        label="Nome"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-
-      <Input
-        id="email"
-        label="E-mail"
-        type="email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-
-      <Input
-        id="password"
-        label="Senha"
-        type="password"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-
-      <Heading title="Endereço de Entrega" />
-
-      <Input
-        id="line1"
-        label="Rua"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-
-      <Input
-        id="line2"
-        label="Complemento"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-
-      <div className="flex gap-2">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col gap-5"
+      >
         <Input
-          id="postal_code"
-          label="CEP"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-          length={8}
-        />
-
-        <Input
-          id="state"
-          label="Estado"
+          id="name"
+          label="Nome"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
         />
-      </div>
-
-      <div className="flex gap-2">
-        <Input
-          id="country"
-          label="País (Ex: BR)"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-          length={2}
-        />
 
         <Input
-          id="city"
-          label="Cidade"
+          id="email"
+          label="E-mail"
+          type="email"
           disabled={isLoading}
           register={register}
           errors={errors}
           required
         />
-      </div>
 
-      <CustomButton
-        label={isLoading ? "Carregando..." : "Registrar"}
-        onClick={handleSubmit(onSubmit)}
-      />
+        <Input
+          id="password"
+          label="Senha"
+          type="password"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+
+        <Heading title="Endereço de Entrega" />
+
+        <Input
+          id="line1"
+          label="Rua"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+
+        <Input
+          id="line2"
+          label="Complemento"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+
+        <div className="flex gap-2">
+          <Input
+            id="postal_code"
+            label="CEP"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            length={8}
+          />
+
+          <Input
+            id="state"
+            label="Estado"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+
+        <div className="flex gap-2">
+          <Input
+            id="country"
+            label="País (Ex: BR)"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            length={2}
+          />
+
+          <Input
+            id="city"
+            label="Cidade"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+
+        <CustomButton
+          type="submit"
+          onClick={() => { }}
+          label={isLoading ? "Carregando..." : "Registrar"}
+        />
+      </form>
 
       <p className="text-sm flex gap-1">
         Já tem uma conta?
