@@ -1,3 +1,4 @@
+import prisma from "@/libs/prismadb";
 import { Review } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/actions/getCurrentUser";
