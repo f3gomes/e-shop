@@ -15,6 +15,8 @@ export async function POST(request: Request) {
       line2,
       postal_code,
       state,
+      number,
+      comp,
     } = body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,6 +32,8 @@ export async function POST(request: Request) {
         line2,
         postal_code,
         state,
+        number,
+        comp,
       },
     });
 

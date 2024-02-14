@@ -77,6 +77,8 @@ export async function POST(req: Request) {
     line2: currentUser.line2,
     postal_code: currentUser.postal_code,
     state: currentUser.state,
+    number: currentUser.number,
+    comp: currentUser.comp,
   };
 
   const orderData = {
@@ -123,11 +125,8 @@ export async function POST(req: Request) {
         code: qrCode,
       });
     }
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
   return NextResponse.error();

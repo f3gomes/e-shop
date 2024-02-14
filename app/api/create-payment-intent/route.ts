@@ -73,6 +73,8 @@ export async function POST(request: Request) {
     line2: currentUser.line2,
     postal_code: currentUser.postal_code,
     state: currentUser.state,
+    number: currentUser.number,
+    comp: currentUser.comp,
   };
 
   const orderData = {
