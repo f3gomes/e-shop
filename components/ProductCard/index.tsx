@@ -18,8 +18,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
 
   const productRating =
-    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-    product.reviews.length;
+    reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length;
 
   return (
     <div

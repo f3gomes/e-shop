@@ -1,45 +1,38 @@
 import { cn } from "@/utils/merge";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  min?: number;
   label: string;
-  type?: string;
-  disabled?: boolean;
-  required?: boolean;
+  required: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
-  size?: string;
-  length?: number;
+  size?: any;
 }
 
 export function Input({
   id,
   min,
-  type,
   label,
-  disabled,
-  required,
+  required = true,
   register,
   errors,
-  length = 255,
   size = "w-full",
 }: InputProps) {
+  const deafaultClass =
+    "peer p-4 pt-6 outline-none bg-shop-input-bg font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed";
+
   return (
     <div className="w-full relative">
       <input
         id={id}
         min={min}
-        type={type}
         placeholder=""
         autoComplete="off"
-        maxLength={length}
-        disabled={disabled}
         {...register(id, { required })}
         className={cn(
           size,
-          "peer p-4 pt-6 outline-none bg-shop-input-bg font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed",
+          deafaultClass,
           errors[id]
             ? "border-rose-400 focus:border-rose-400 text-rose-500"
             : "border-shop-input-border focus:border-shop-input-border text-shop-input-text"

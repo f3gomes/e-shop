@@ -20,8 +20,8 @@ export function CategoryInput({
     <div
       onClick={() => onClick(label)}
       className={cn(
-        "rounded-xl border-2 p-4 flex  flex-col items-center gap-2 hover:border-shop-card-selected transition cursor-pointer",
-        selected ? "border-shop-card-selected" : "border-shop-card-border"
+        "rounded-xl border-[3px] p-4 flex  flex-col items-center gap-2 hover:border-shop-btn-border transition cursor-pointer",
+        selected ? "border-shop-btn-border/80" : "border-shop-card-border"
       )}
     >
       <Icon size={30} />
