@@ -3,21 +3,23 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  label: string;
-  required: boolean;
-  register: UseFormRegister<FieldValues>;
-  errors: FieldErrors;
   size?: any;
+  onBlur?: any;
+  label: string;
+  required?: boolean;
+  errors: FieldErrors;
+  register: UseFormRegister<FieldValues>;
 }
 
 export function Input({
   id,
-  min,
   label,
-  required = true,
-  register,
   errors,
+  onBlur,
+  register,
+  required = false,
   size = "w-full",
+  ...props
 }: InputProps) {
   const deafaultClass =
     "peer p-4 pt-6 outline-none bg-shop-input-bg font-light border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed";
@@ -26,10 +28,10 @@ export function Input({
     <div className="w-full relative">
       <input
         id={id}
-        min={min}
         placeholder=""
         autoComplete="off"
-        {...register(id, { required })}
+        {...props}
+        {...register(id, { required, onBlur })}
         className={cn(
           size,
           deafaultClass,

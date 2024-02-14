@@ -116,19 +116,19 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
         <h2 className="font-semibold mt-4 mb-2">Endereço de entrega</h2>
 
         <div className="flex gap-1">
-          <div>{order.address?.line1}</div>
-          <span>-</span>
-          <div>{order.address?.line2}</div>
+          <div>{order.address?.line1},</div>
+          <div>{order.address?.number}</div>
         </div>
 
         <div className="flex gap-1">
-          <div>{order.address?.city}</div>
-          <span>,</span>
+          <div>{order.address?.city},</div>
           <div>{order.address?.state}</div>
         </div>
 
-        <div>{order.address?.postal_code}</div>
-        <div>{order.address?.country}</div>
+        <div>
+          <div>{order.address?.line2}</div>
+          <div>{order.address?.postal_code}</div>
+        </div>
       </div>
 
       <div>

@@ -42,6 +42,8 @@ model User {
   line2              String?
   postal_code        String?
   state              String?
+  number             String?
+  comp               String?
 
   role Role @default(USER)
 
@@ -115,6 +117,8 @@ type Address {
   line2 String?
   postal_code String
   state String
+  number String?
+  comp String?
 }
 
 enum Role {

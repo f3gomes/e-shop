@@ -25,19 +25,22 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
-      email: "",
-      password: "",
-      country: "",
       city: "",
       line1: "",
       line2: "",
-      postal_code: "",
+      email: "",
       state: "",
+      password: "",
+      country: "BR",
+      postal_code: "",
+      number: "",
+      comp: "",
     },
   });
 
@@ -47,7 +50,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       .post("/api/register", data)
       .then(() => {
         toast.success("Conta criada!");
-
         signIn("credentials", {
           email: data.email,
           password: data.password,
@@ -58,7 +60,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
             router.refresh();
             toast.success("Bem vindo!");
           }
-
           if (callback?.error) {
             toast.error(callback.error);
           }
@@ -66,6 +67,24 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       })
       .catch(() => toast.error("Algo deu errado!"))
       .finally(() => setIsLoading(false));
+  };
+
+  const handleGetAddress = async (event: any) => {
+    const { value } = event.target;
+
+    if (value) {
+      try {
+        const res = await axios.get(`https://viacep.com.br/ws/${value}/json/`);
+        const address = await res.data;
+
+        setValue("state", address.uf);
+        setValue("line2", address.bairro);
+        setValue("city", address.localidade);
+        setValue("line1", address.logradouro);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -97,6 +116,7 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
       >
         <Input
           id="name"
+          type="text"
           label="Nome"
           disabled={isLoading}
           register={register}
@@ -127,17 +147,21 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
         <Heading title="Endereço de Entrega" />
 
         <Input
-          id="line1"
-          label="Rua"
+          id="postal_code"
+          type="text"
+          label="CEP"
+          onBlur={handleGetAddress}
           disabled={isLoading}
           register={register}
           errors={errors}
+          maxLength={8}
           required
         />
 
         <Input
-          id="line2"
-          label="Complemento"
+          id="line1"
+          type="text"
+          label="Rua"
           disabled={isLoading}
           register={register}
           errors={errors}
@@ -146,13 +170,43 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
 
         <div className="flex gap-2">
           <Input
-            id="postal_code"
-            label="CEP"
+            id="number"
+            type="text"
+            label="Número"
             disabled={isLoading}
             register={register}
             errors={errors}
             required
-            maxLength={8}
+          />
+
+          <Input
+            id="line2"
+            type="text"
+            label="Bairro"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+
+        <Input
+          id="comp"
+          type="text"
+          label="Complemento"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+        />
+
+        <div className="flex gap-2">
+          <Input
+            id="city"
+            label="Cidade"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
           />
 
           <Input
@@ -161,27 +215,7 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
             disabled={isLoading}
             register={register}
             errors={errors}
-            required
-          />
-        </div>
-
-        <div className="flex gap-2">
-          <Input
-            id="country"
-            label="País (Ex: BR)"
-            disabled={isLoading}
-            register={register}
-            errors={errors}
-            required
             maxLength={2}
-          />
-
-          <Input
-            id="city"
-            label="Cidade"
-            disabled={isLoading}
-            register={register}
-            errors={errors}
             required
           />
         </div>

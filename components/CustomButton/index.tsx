@@ -3,7 +3,8 @@
 import { cn } from "@/utils/merge";
 import { IconType } from "react-icons";
 
-interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CustomButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   small?: boolean;
   custom?: string;
@@ -21,6 +22,7 @@ export function CustomButton({
   disabled,
   icon: Icon,
   className,
+  ...props
 }: CustomButtonProps) {
   return (
     <button
@@ -36,6 +38,7 @@ export function CustomButton({
         custom ? custom : ""
       )}
       disabled={disabled}
+      {...props}
     >
       {Icon && <Icon size={24} />}
       {label}
