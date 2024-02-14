@@ -10,7 +10,7 @@ import { MdArrowBack } from "react-icons/md";
 import { Heading } from "@/components/Heading";
 import { CartItem } from "@/components/CartItem";
 import { formatPrice } from "@/utils/formatPrice";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import { FormControl, MenuItem, Select } from "@mui/material";
 
 interface CartClientProps {

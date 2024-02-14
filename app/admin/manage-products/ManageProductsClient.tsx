@@ -14,7 +14,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { Box, Modal, TextField } from "@mui/material";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 
 interface ManageProductsClientProps {
   products: IProduct[] | any;

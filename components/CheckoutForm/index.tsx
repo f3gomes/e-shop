@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { Heading } from "../Heading";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/utils/formatPrice";
-import { CustomButton } from "../ProductAddButton";
+import { CustomButton } from "../CustomButton";
 import {
   AddressElement,
   PaymentElement,

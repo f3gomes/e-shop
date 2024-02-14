@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Elements } from "@stripe/react-stripe-js";
 import { CheckoutForm } from "@/components/CheckoutForm";
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import { FiCheck } from "react-icons/fi";
 
 const stripePromise = loadStripe(
@@ -19,7 +19,7 @@ interface CheckoutClientProps {
   user: any
 }
 
-export default function CheckoutClient({user}: CheckoutClientProps) {
+export default function CheckoutClient({ user }: CheckoutClientProps) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState("");

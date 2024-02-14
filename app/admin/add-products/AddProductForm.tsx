@@ -17,7 +17,7 @@ import { TextArea } from "@/components/TextArea";
 import { SelectGrid } from "@/components/SelectGrid";
 import { CategoryInput } from "@/components/CategoryInput";
 import { GridType, UploadedGridType } from "@/types/product";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import {
   getDownloadURL,
   getStorage,

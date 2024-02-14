@@ -12,7 +12,7 @@ import { Input } from "@/components/Input";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/Heading";
 import { AiOutlineGoogle } from "react-icons/ai";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 
 interface LoginFormProps {
   currentUser: SafeUser | any;

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useCart } from "@/hooks/useCart";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/Heading";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import { PiSealCheckBold } from "react-icons/pi";
 import QRCode from "@/components/QrCode";
 import { formatPrice } from "@/utils/formatPrice";

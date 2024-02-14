@@ -3,7 +3,7 @@
 import { GridType } from "@/types/product";
 import { useCallback, useEffect, useState } from "react";
 import { SelectImage } from "../SelectImage";
-import { CustomButton } from "../ProductAddButton";
+import { CustomButton } from "../CustomButton";
 
 interface SelectGridProps {
   item: GridType;

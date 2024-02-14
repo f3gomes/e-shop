@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { Heading } from "@/components/Heading";
 import { Order, Product, Review } from "@prisma/client";
 import { Input } from "@/components/Input";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import toast from "react-hot-toast";
 import axios from "axios";
 

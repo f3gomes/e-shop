@@ -7,7 +7,7 @@ import { SetColor } from "@/components/SetColor";
 import { SetQuantity } from "@/components/SetQuantity";
 import { ProductImage } from "@/components/ProductImage";
 import { CartProductType, SelectedGridType } from "@/types/cart";
-import { CustomButton } from "@/components/ProductAddButton";
+import { CustomButton } from "@/components/CustomButton";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/formatPrice";
