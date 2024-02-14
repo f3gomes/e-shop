@@ -3,27 +3,23 @@
 import { cn } from "@/utils/merge";
 import { IconType } from "react-icons";
 
-interface CustomButtonProps {
-  type?: "button" | "submit" | "reset" | undefined;
+interface CustomButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   small?: boolean;
   custom?: string;
   outline?: boolean;
   disabled?: boolean;
   icon?: IconType;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
 export function CustomButton({
   label,
   small,
-  type = "button",
   custom,
   outline,
   disabled,
   icon: Icon,
-  onClick,
   className,
 }: CustomButtonProps) {
   return (
@@ -40,8 +36,6 @@ export function CustomButton({
         custom ? custom : ""
       )}
       disabled={disabled}
-      onClick={onClick}
-      type={type}
     >
       {Icon && <Icon size={24} />}
       {label}

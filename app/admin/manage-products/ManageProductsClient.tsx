@@ -317,7 +317,6 @@ export default function ManageProductsClient({
 
             <CustomButton
               type="submit"
-              onClick={() => { }}
               disabled={isLoading}
               label={isLoading ? "Salvando..." : "Salvar"}
               className="mt-2 bg-shop-btn-bg font-semibold"

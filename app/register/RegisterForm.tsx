@@ -85,7 +85,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
 
       <CustomButton
         outline
-        onClick={() => { }}
         icon={AiOutlineGoogle}
         label="Cadastrar com Google"
         disabled
@@ -153,7 +152,7 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
             register={register}
             errors={errors}
             required
-            length={8}
+            maxLength={8}
           />
 
           <Input
@@ -174,7 +173,7 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
             register={register}
             errors={errors}
             required
-            length={2}
+            maxLength={2}
           />
 
           <Input
@@ -189,7 +188,6 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
 
         <CustomButton
           type="submit"
-          onClick={() => { }}
           label={isLoading ? "Carregando..." : "Registrar"}
         />
       </form>

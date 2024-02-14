@@ -72,7 +72,6 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
       <CustomButton
         outline
         disabled
-        onClick={() => { }}
         icon={AiOutlineGoogle}
         label="Continuar com Google"
       />
@@ -105,7 +104,6 @@ export default function LoginForm({ currentUser }: LoginFormProps) {
         <CustomButton
           type="submit"
           disabled={isLoading}
-          onClick={() => { }}
           label={isLoading ? "Entrando..." : "Entrar"}
         />
       </form>

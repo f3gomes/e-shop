@@ -106,7 +106,6 @@ export function CheckoutForm({
         type="submit"
         disabled={isLoading || !stripe || !elements}
         label={isLoading ? "Processando..." : "Pagar"}
-        onClick={() => { }}
       />
     </form>
   );
