@@ -14,6 +14,7 @@ import { Heading } from "@/components/Heading";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { CustomButton } from "@/components/CustomButton";
 import { SafeUser } from "@/types";
+import { cepMask } from "@/utils/masks";
 
 interface RegisterFormProps {
   currentUser: SafeUser | any;
@@ -154,7 +155,11 @@ export default function RegisterForm({ currentUser }: RegisterFormProps) {
           disabled={isLoading}
           register={register}
           errors={errors}
-          maxLength={8}
+          maxLength={9}
+          onChange={(event) => {
+            const { value } = event.target;
+            event.target.value = cepMask(value);
+          }}
           required
         />
 

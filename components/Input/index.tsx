@@ -5,9 +5,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   size?: any;
   onBlur?: any;
+  onChange?: (value: any) => any;
   label: string;
   required?: boolean;
   errors: FieldErrors;
+  mask?: (value: string) => string;
   register: UseFormRegister<FieldValues>;
 }
 
@@ -16,9 +18,11 @@ export function Input({
   label,
   errors,
   onBlur,
+  onChange,
   register,
-  required = false,
   size = "w-full",
+  required = false,
+  mask = (value: string) => value,
   ...props
 }: InputProps) {
   const deafaultClass =
@@ -30,8 +34,8 @@ export function Input({
         id={id}
         placeholder=""
         autoComplete="off"
+        {...register(id, { required, onBlur, onChange })}
         {...props}
-        {...register(id, { required, onBlur })}
         className={cn(
           size,
           deafaultClass,

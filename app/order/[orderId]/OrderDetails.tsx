@@ -17,6 +17,7 @@ import {
 
 import OrderItem from "./OrderItem";
 import { useRouter } from "next/navigation";
+import { cepMask } from "@/utils/masks";
 
 interface OrderDetailsProps {
   order: Order;
@@ -127,7 +128,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
 
         <div>
           <div>{order.address?.line2}</div>
-          <div>{order.address?.postal_code}</div>
+          <div>{cepMask(order.address?.postal_code!)}</div>
         </div>
       </div>
 

@@ -29,10 +29,10 @@ export default async function getProducts(params: IProductParams) {
               contains: searchString,
               mode: "insensitive",
             },
-            description: {
-              contains: searchString,
-              mode: "insensitive",
-            },
+            // description: {
+            //   contains: searchString,
+            //   mode: "insensitive",
+            // },
           },
         ],
       },
@@ -49,7 +49,6 @@ export default async function getProducts(params: IProductParams) {
     });
 
     return products;
-
   } catch (error: any) {
     throw new Error(error);
   }
