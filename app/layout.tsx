@@ -30,6 +30,7 @@ export default function RootLayout({
       >
         <Toaster
           toastOptions={{
+            duration: 1500,
             style: { background: "rgb(51 65 85)", color: "#fff" },
           }}
         />

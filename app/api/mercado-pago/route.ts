@@ -3,11 +3,9 @@ import prisma from "@/libs/prismadb";
 import { NextResponse } from "next/server";
 import { CartProductType } from "@/types/cart";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as newId } from "uuid";
 import { shopInfo } from "@/info/shop";
 import { Address, Product } from "@prisma/client";
-
-const newId = uuidv4();
 
 const calculateOrderAmount = (items: CartProductType[]) => {
   const totalPrice = items.reduce((acc, item) => {
@@ -66,7 +64,7 @@ export async function POST(req: Request) {
 
   const { firstName, email, items } = body;
 
-  const total = calculateOrderAmount(items) * 100;
+  const total = Math.round(calculateOrderAmount(items) * 100);
 
   const orderCount = await prisma.order.count();
 
@@ -88,7 +86,7 @@ export async function POST(req: Request) {
     currency: "brl",
     status: "pending",
     deliveryStatus: "pending",
-    paymentIntentId: "pix-" + newId,
+    paymentIntentId: "",
     products: items,
     address: addressData,
   };
@@ -107,10 +105,11 @@ export async function POST(req: Request) {
   try {
     const response = await mercadopago.payment.create(preference);
     const status = response.status;
+    orderData.paymentIntentId = "pix-" + newId();
 
     console.log("status: ", status);
 
-    if (status) {
+    if (status === 201) {
       const qrCode =
         response.body.point_of_interaction.transaction_data.qr_code;
 

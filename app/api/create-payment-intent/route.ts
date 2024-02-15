@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   const body = await request.json();
 
   const { items, payment_intent_id } = body;
-  const total = calculateOrderAmount(items) * 100;
+  const total = Math.round(calculateOrderAmount(items) * 100);
 
   const orderCount = await prisma.order.count();
 
