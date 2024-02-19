@@ -8,11 +8,11 @@ import { SetQuantity } from "@/components/SetQuantity";
 import { ProductImage } from "@/components/ProductImage";
 import { CartProductType, SelectedGridType } from "@/types/cart";
 import { CustomButton } from "@/components/CustomButton";
-import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/utils/formatPrice";
 import { IProduct } from "@/types/product";
 import { MdOutlineStarOutline } from "react-icons/md";
+import Link from "next/link";
 
 interface ProductDetailsProps {
   product: IProduct | any;
@@ -102,10 +102,13 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             value={productRating}
             emptyIcon={<MdOutlineStarOutline className="text-shop-star-text" />}
           />
-          <div>
+          <Link
+            href="#rating"
+            className="hover:brightness-75 transition duration-200"
+          >
             {product.reviews.length}{" "}
             {product.reviews.length === 1 ? "avaliação" : "avaliações"}
-          </div>
+          </Link>
         </div>
 
         <Horizontal />

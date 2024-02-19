@@ -38,7 +38,7 @@ export function ProductListRating({ product }: ProductListRatingProps) {
   if (product.reviews.length === 0) return null;
 
   return (
-    <div className="mt-8">
+    <div className="mt-8" id="rating">
       <Heading title="Avaliações de clientes" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-sm mt-12">
@@ -70,8 +70,8 @@ export function ProductListRating({ product }: ProductListRatingProps) {
 
               <div>
                 <LinearProgress
-                  className="w-72"
                   variant="determinate"
+                  className="w-72 md:w-64"
                   value={ratingPercentages[item]}
                 />
               </div>
@@ -105,7 +105,7 @@ export function ProductListRating({ product }: ProductListRatingProps) {
                     </div>
 
                     <div className="font-light">
-                      {dayjs(item.createDate).format("DD [de] MMMM [de] YYYY")}
+                      {dayjs(item.createdAt).format("DD-MM-YYYY")}
                     </div>
                   </div>
 
