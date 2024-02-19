@@ -10,6 +10,7 @@ import { Input } from "@/components/Input";
 import { CustomButton } from "@/components/CustomButton";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { MdOutlineStarOutline } from "react-icons/md";
 
 interface AddRatingProps {
   product: Product & {
@@ -92,6 +93,7 @@ export default function AddRating({ product, user }: AddRatingProps) {
       <Heading title="Avalie este produto" />
       <Rating
         className="w-fit"
+        emptyIcon={<MdOutlineStarOutline className="text-shop-star-text" />}
         onChange={(event, newValue) => {
           setCustomvalue("rating", newValue);
         }}
