@@ -62,7 +62,7 @@ export function ProductListRating({ product }: ProductListRatingProps) {
           <div>Classificação</div>
 
           {[0, 1, 2, 3, 4, 5].reverse().map((item, index) => (
-            <div key={index} className="flex items-center justify-between mt-4">
+            <div key={index} className="flex items-center justify-between gap-2 mt-4">
               <div className="flex items-center gap-1">
                 <div className="w-3 flex justify-center">{item}</div>
                 <MdOutlineStar size={15} className="text-[#faaf00]" />
@@ -71,7 +71,7 @@ export function ProductListRating({ product }: ProductListRatingProps) {
               <div>
                 <LinearProgress
                   variant="determinate"
-                  className="w-72 md:w-64"
+                  className="w-64"
                   value={ratingPercentages[item]}
                 />
               </div>
