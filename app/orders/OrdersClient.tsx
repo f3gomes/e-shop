@@ -35,6 +35,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
     rows = orders.map((item: any) => {
       return {
         id: item.id,
+        orderNumber: item.orderNumber,
         customer: item.user.name,
         amount: formatPrice(item.amount / 100),
         paymentStatus: item.status,
@@ -46,7 +47,7 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 150 },
+    { field: "orderNumber", headerName: "Número do Pedido", width: 150 },
     { field: "customer", headerName: "Nome do Cliente", width: 130 },
     {
       field: "amount",

@@ -46,15 +46,17 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   const handleColorSelect = useCallback((value: SelectedGridType) => {
     setCartItem((prev) => {
-      return { ...prev, grid: value };
+      return { ...prev, grid: value, quantity: 1 };
     });
   }, []);
 
   const handleQtyIncrease = useCallback(() => {
     if (cartItem.quantity < 99) {
-      setCartItem((prev) => {
-        return { ...prev, quantity: ++prev.quantity };
-      });
+      if (cartItem?.grid?.stock && cartItem.quantity < cartItem?.grid?.stock) {
+        setCartItem((prev) => {
+          return { ...prev, quantity: ++prev.quantity };
+        });
+      }
     }
   }, [cartItem]);
 
@@ -71,7 +73,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       return { ...prev, quantity: 1 };
     });
 
-    if (product.grid.every((item: any) => item.stock === 0)) {
+    if (product.grid.every((item: any) => item.stock <= 0)) {
       setBuyDisabled(true);
     }
   }, []); // eslint-disable-line
@@ -135,30 +137,48 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             handleColorSelect={handleColorSelect}
           />
 
-          {buyDisabled && (
-            <>
-              <Horizontal />
-              <span className="text-rose-500">Sem Estoque</span>
-            </>
-          )}
-
           <Horizontal />
           <SetQuantity
             cartProduct={cartItem}
             handleQtyDecrease={handleQtyDecrease}
             handleQtyIncrease={handleQtyIncrease}
           />
-          <Horizontal />
 
+          {cartItem?.grid?.stock! <= 10 &&
+            cartItem?.grid?.stock! > 0 &&
+            cartItem?.grid?.stock! !== 1 && (
+              <>
+                <Horizontal />
+                <span className="text-rose-500 font-semibold">
+                  Restam menos de 10 unidades
+                </span>
+              </>
+            )}
+
+          {cartItem?.grid?.stock! === 1 && (
+            <>
+              <Horizontal />
+              <span className="text-rose-500 font-semibold">
+                Resta apenas 1 unidade
+              </span>
+            </>
+          )}
+
+          {buyDisabled && (
+            <>
+              <Horizontal />
+              <span className="text-rose-500 font-semibold">Sem Estoque</span>
+            </>
+          )}
+
+          <Horizontal />
           <div className="flex gap-3 items-center">
             <span className="font-semibold">Preço: </span>
             <span className="font-medium text-lg">
               {formatPrice(product.price)}
             </span>
           </div>
-
           <Horizontal />
-
           <div className="max-w-[300px]">
             <CustomButton
               label="Comprar"

@@ -53,6 +53,7 @@ export function ProductImage({ product }: ProductImageProps) {
           priority
           alt={selectedImage.color}
           src={selectedImage.image}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="w-full h-full object-contain max-h-[500px] min-h-[300px] sm:min-h-[400px]"
         />
       </div>
