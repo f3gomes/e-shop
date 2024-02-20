@@ -20,6 +20,7 @@ export default function OrderItem({ item }: OrderItemProps) {
             alt={item.name}
             className="object-contain"
             src={item.grid.image}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
 

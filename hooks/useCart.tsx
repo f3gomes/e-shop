@@ -127,20 +127,22 @@ export const CartContextProvider = (props: Props) => {
         return toast.error("Quantidade máxima atingida!");
       }
 
-      if (cartProducts) {
-        updatedCart = [...cartProducts];
+      if (product?.quantity < product?.grid?.stock!) {
+        if (cartProducts) {
+          updatedCart = [...cartProducts];
 
-        const existingIndex = cartProducts.findIndex(
-          (item) => item.grid?.image === product.grid?.image
-        );
+          const existingIndex = cartProducts.findIndex(
+            (item) => item.grid?.image === product.grid?.image
+          );
 
-        if (existingIndex > -1) {
-          updatedCart[existingIndex].quantity = ++updatedCart[existingIndex]
-            .quantity;
+          if (existingIndex > -1) {
+            updatedCart[existingIndex].quantity = ++updatedCart[existingIndex]
+              .quantity;
+          }
+
+          setCartProducts(updatedCart);
+          setItem("eShopCartItems", updatedCart);
         }
-
-        setCartProducts(updatedCart);
-        setItem("eShopCartItems", updatedCart);
       }
     },
     [cartProducts]
