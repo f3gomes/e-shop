@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { firebaseApp } from "@/libs/firebase";
 import { Heading } from "@/components/Heading";
 import { ActionBtn } from "@/components/ActionBtn";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { Box, Modal, TextField } from "@mui/material";
@@ -333,15 +333,16 @@ export default function ManageProductsClient({
         <DataGrid
           rows={rows}
           columns={columns}
+          checkboxSelection
+          pageSizeOptions={[5, 10]}
+          disableRowSelectionOnClick
           className="!text-shop-text-default"
+          localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
             },
           }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          disableRowSelectionOnClick
         />
       </div>
     </div>

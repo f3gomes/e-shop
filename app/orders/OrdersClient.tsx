@@ -10,7 +10,7 @@ import { Order, User } from "@prisma/client";
 import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
 import {
   MdAccessTimeFilled,
   MdDeliveryDining,
@@ -165,15 +165,16 @@ export default function OrdersClient({ orders }: OrdersClientProps) {
         <DataGrid
           rows={rows}
           columns={columns}
+          checkboxSelection
+          pageSizeOptions={[5, 10]}
+          disableRowSelectionOnClick
           className="!text-shop-text-default"
+          localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
             },
           }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          disableRowSelectionOnClick
         />
       </div>
     </div>
