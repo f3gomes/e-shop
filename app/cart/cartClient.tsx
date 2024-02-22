@@ -12,6 +12,7 @@ import { CartItem } from "@/components/CartItem";
 import { formatPrice } from "@/utils/formatPrice";
 import { CustomButton } from "@/components/CustomButton";
 import { FormControl, MenuItem, Select } from "@mui/material";
+import ConfirmationModal from "@/components/ConfirmationModal";
 
 interface CartClientProps {
   currentUser: SafeUser | any;
@@ -21,6 +22,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
   const { cartProducts, cartTotalAmout, handleClearCart } = useCart();
   const [selectedOption, setSelectedOption] = useState("checkout");
   const [isLoading, setIsLoading] = useState(false);
+  const [openModalConfirm, setOpenModalConfirm] = useState(false);
 
   const router = useRouter();
 
@@ -29,10 +31,12 @@ export default function CartClient({ currentUser }: CartClientProps) {
     router.push(`/${selectedOption}`);
   };
 
+  const handleClose = () => {
+    setOpenModalConfirm(false);
+  };
+
   const confirmClearCart = () => {
-    if (confirm("Remover todos os produtos do carrinho?")) {
-      handleClearCart();
-    }
+    handleClearCart();
   };
 
   if (!cartProducts || cartProducts.length === 0) {
@@ -55,6 +59,13 @@ export default function CartClient({ currentUser }: CartClientProps) {
 
   return (
     <div>
+      <ConfirmationModal
+        text="Remover todos os produtos do carrinho?"
+        handleClose={handleClose}
+        handleConfirm={confirmClearCart}
+        openModal={openModalConfirm}
+      />
+
       <Heading title="Seu Carrinho" center />
       <div className="grid grid-cols-5 text-xs gap-4 pb-2 items-center mt-8">
         <div className="col-span-2 justify-self-start">PRODUTO</div>
@@ -76,7 +87,7 @@ export default function CartClient({ currentUser }: CartClientProps) {
             small
             outline
             label="Limpar carrinho"
-            onClick={confirmClearCart}
+            onClick={() => setOpenModalConfirm(true)}
           />
         </div>
 
