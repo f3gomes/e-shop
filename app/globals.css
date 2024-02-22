@@ -15,7 +15,7 @@
 }
 
 .css-ptiqhd-MuiSvgIcon-root {
-  @apply !text-shop-text-default;
+  @apply bg-shop-body-bg !text-shop-text-default;
 }
 
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
