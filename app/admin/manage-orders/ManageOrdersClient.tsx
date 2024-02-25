@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import axios from "axios";
 import moment from "moment";
@@ -13,6 +13,7 @@ import { Heading } from "@/components/Heading";
 import { formatPrice } from "@/utils/formatPrice";
 import { ActionBtn } from "@/components/ActionBtn";
 import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
+import ConfirmationModal from "@/components/ConfirmationModal";
 import {
   MdAccessTimeFilled,
   MdDeliveryDining,
@@ -32,6 +33,13 @@ type ExtendedOrder = Order & {
 export default function ManageOrdersClient({
   orders,
 }: ManageOrdersClientProps) {
+  const [openModalConfirm, setOpenModalConfirm] = useState(false);
+  const [dataConfirm, setDataConfirm] = useState({
+    status: "",
+    text: "",
+    id: "",
+  });
+
   const router = useRouter();
 
   let rows: any = [];
@@ -52,8 +60,8 @@ export default function ManageOrdersClient({
   }
 
   const columns: GridColDef[] = [
-    { field: "orderNumber", headerName: "Número do Pedido", width: 160 },
-    { field: "customer", headerName: "Nome do Cliente", width: 130 },
+    { field: "orderNumber", headerName: "Número do Pedido", width: 130 },
+    { field: "customer", headerName: "Nome do Cliente", width: 160 },
     {
       field: "amount",
       headerName: "Valor (R$)",
@@ -152,19 +160,40 @@ export default function ManageOrdersClient({
             <ActionBtn
               tooltip="Confirmar pagamento"
               icon={MdPayments}
-              onClick={() => handlePayment(params.row.id)}
+              onClick={() => {
+                setOpenModalConfirm(true);
+                setDataConfirm({
+                  id: params.row.id,
+                  status: "complete",
+                  text: "Confirmar pagamento desse pedido?",
+                });
+              }}
             />
 
             <ActionBtn
               tooltip="Confirmar envio"
               icon={MdDeliveryDining}
-              onClick={() => handleDispatch(params.row.id)}
+              onClick={() => {
+                setOpenModalConfirm(true);
+                setDataConfirm({
+                  id: params.row.id,
+                  status: "dispatched",
+                  text: "Confirmar envio desse pedido?",
+                });
+              }}
             />
 
             <ActionBtn
-              tooltip="Confirmar recebimento"
+              tooltip="Confirmar entrega"
               icon={MdDone}
-              onClick={() => handleDelivery(params.row.id)}
+              onClick={() => {
+                setOpenModalConfirm(true);
+                setDataConfirm({
+                  id: params.row.id,
+                  status: "delivered",
+                  text: "Confirmar entrega desse pedido?",
+                });
+              }}
             />
 
             <ActionBtn
@@ -179,70 +208,92 @@ export default function ManageOrdersClient({
   ];
 
   const handlePayment = useCallback(
-    (id: string) => {
-      if (confirm("Confirmar pagamento deste pedido?")) {
-        axios
-          .put("/api/order", {
-            id,
-            paymentStatus: "complete",
-          })
-          .then((res) => {
-            toast.success("Pagamento confirmado!");
-            router.refresh();
-          })
-          .catch((err) => {
-            toast.error("Algo deu errado!");
-            console.log(err);
-          });
-      }
+    (id: string, paymentStatus: string) => {
+      axios
+        .put("/api/order", {
+          id,
+          paymentStatus,
+        })
+        .then((res) => {
+          toast.success("Pagamento confirmado!");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Algo deu errado!");
+          console.log(err);
+        });
     },
     [] // eslint-disable-line
   );
 
   const handleDispatch = useCallback(
-    (id: string) => {
-      if (confirm("Confirmar envio do pedido?")) {
-        axios
-          .put("/api/order", {
-            id,
-            deliveryStatus: "dispatched",
-          })
-          .then((res) => {
-            toast.success("Pedido enviado!");
-            router.refresh();
-          })
-          .catch((err) => {
-            toast.error("Algo deu errado!");
-            console.log(err);
-          });
-      }
+    (id: string, deliveryStatus: string) => {
+      axios
+        .put("/api/order", {
+          id,
+          deliveryStatus,
+        })
+        .then((res) => {
+          toast.success("Pedido enviado!");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Algo deu errado!");
+          console.log(err);
+        });
     },
     [] // eslint-disable-line
   );
 
   const handleDelivery = useCallback(
-    (id: string) => {
-      if (confirm("Confirmar recebimento do pedido?")) {
-        axios
-          .put("/api/order", {
-            id,
-            deliveryStatus: "delivered",
-          })
-          .then((res) => {
-            toast.success("Pedido recebido!");
-            router.refresh();
-          })
-          .catch((err) => {
-            toast.error("Algo deu errado!");
-            console.log(err);
-          });
-      }
+    (id: string, deliveryStatus: string) => {
+      axios
+        .put("/api/order", {
+          id,
+          deliveryStatus,
+        })
+        .then((res) => {
+          toast.success("Pedido entregue!");
+          router.refresh();
+        })
+        .catch((err) => {
+          toast.error("Algo deu errado!");
+          console.log(err);
+        });
     },
     [] // eslint-disable-line
   );
 
+  const handleConfirmAction = (id: string, status: string) => {
+    switch (status) {
+      case "complete":
+        handlePayment(id, status);
+        break;
+      case "dispatched":
+        handleDispatch(id, status);
+        break;
+      case "delivered":
+        handleDelivery(id, status);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleConfirm = () => {
+    setOpenModalConfirm(false);
+    handleConfirmAction(dataConfirm.id, dataConfirm.status);
+  };
+
   return (
     <div className="max-w-[1100px] m-auto text-xl">
+      <ConfirmationModal
+        text={dataConfirm.text}
+        openModal={openModalConfirm}
+        handleConfirm={handleConfirm}
+        handleClose={() => setOpenModalConfirm(false)}
+      />
+
       <div className="mb-4 mt-8">
         <Heading title="Editar Pedidos" center />
       </div>
