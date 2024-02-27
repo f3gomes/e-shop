@@ -15,6 +15,7 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 import { MdCached, MdClose, MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { Box, Modal, TextField } from "@mui/material";
 import { CustomButton } from "@/components/CustomButton";
+import ConfirmationModal from "@/components/ConfirmationModal";
 
 interface ManageProductsClientProps {
   products: IProduct[] | any;
@@ -31,6 +32,11 @@ export default function ManageProductsClient({
   const [disabledStockInput, setDisabledStockInput] = useState(true);
   const [productData, setProductData] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
+  const [openModalConfirm, setOpenModalConfirm] = useState(false);
+  const [dataConfirm, setDataConfirm] = useState({
+    id: "",
+    grid: [],
+  });
 
   let rows: any = [];
 
@@ -98,7 +104,13 @@ export default function ManageProductsClient({
             <ActionBtn
               tooltip="Excluir produto"
               icon={MdDelete}
-              onClick={() => handleDelete(params.row.id, params.row.grid)}
+              onClick={() => {
+                setOpenModalConfirm(true);
+                setDataConfirm({
+                  id: params.row.id,
+                  grid: params.row.grid,
+                });
+              }}
             />
           </div>
         );
@@ -107,37 +119,35 @@ export default function ManageProductsClient({
   ];
 
   const handleDelete = useCallback(async (id: string, grid: any[]) => {
-    if (confirm("Excluir produto?")) {
-      toast("Removendo produto...");
+    toast("Removendo produto...");
 
-      const handleImageDelete = async () => {
-        try {
-          for (const item of grid) {
-            if (item.image) {
-              const imageRef = ref(storage, item.image);
-              await deleteObject(imageRef);
-              console.log("Image deleted: ", item.image);
-            }
+    const handleImageDelete = async () => {
+      try {
+        for (const item of grid) {
+          if (item.image) {
+            const imageRef = ref(storage, item.image);
+            await deleteObject(imageRef);
+            console.log("Image deleted: ", item.image);
           }
-        } catch (error) {
-          return console.log("Deleting images error: ", error);
         }
-      };
+      } catch (error) {
+        return console.log("Deleting images error: ", error);
+      }
+    };
 
-      axios
-        .delete(`/api/product/${id}`)
-        .then((res) => {
-          handleImageDelete();
-          toast.success("Produto removido do banco de dados!");
-          router.refresh();
-        })
-        .catch((err) => {
-          toast.error(
-            "Este produto não pode ser excluido pois está em um pedido!"
-          );
-          console.log(err);
-        });
-    }
+    axios
+      .delete(`/api/product/${id}`)
+      .then((res) => {
+        handleImageDelete();
+        toast.success("Produto removido do banco de dados!");
+        router.refresh();
+      })
+      .catch((err) => {
+        toast.error(
+          "Produto com pedido vinculado!"
+        );
+        console.log(err);
+      });
   }, []); // eslint-disable-line
 
   const style = {
@@ -209,8 +219,20 @@ export default function ManageProductsClient({
     setGridData(selectedProduct.grid);
   }, [selectedProduct]);
 
+  const handleConfirm = () => {
+    setOpenModalConfirm(false);
+    handleDelete(dataConfirm.id, dataConfirm.grid);
+  };
+
   return (
     <div className="max-w-[1100px] m-auto text-xl">
+      <ConfirmationModal
+        text={"Excluir esse produto?"}
+        openModal={openModalConfirm}
+        handleConfirm={handleConfirm}
+        handleClose={() => setOpenModalConfirm(false)}
+      />
+
       <Modal
         open={openModalDetails}
         onClose={closeModalEnableInputs}
