@@ -44,9 +44,14 @@ export default function ConfirmationModal({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleConfirm}>Sim</Button>
           <Button onClick={handleClose} autoFocus>
             Não
+          </Button>
+          <Button
+            onClick={handleConfirm}
+            className="bg-shop-btn-bg hover:bg-shop-btn-bg hover:brightness-110 transition duration-300 text-shop-text-default"
+          >
+            Sim
           </Button>
         </DialogActions>
       </Dialog>
