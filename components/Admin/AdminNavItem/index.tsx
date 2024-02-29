@@ -15,14 +15,14 @@ export function AdminNavItem({
   return (
     <div
       className={cn(
-        "flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-shop-text-title transition cursor-pointer",
+        "flex items-center justify-center text-center gap-1 p-2 border-b-2 hover:text-shop-nav-hover transition cursor-pointer",
         selected
           ? "border-b-shop-nav-selected text-shop-nav-selected"
           : "border-transparent text-shop-nav-text"
       )}
     >
       <Icon size={20} />
-      <div className="font-medium text-sm text-center break-normal">
+      <div className="font-semibold text-sm text-center break-normal">
         {label}
       </div>
     </div>

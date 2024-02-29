@@ -28,10 +28,10 @@ export function CustomButton({
     <button
       className={cn(
         className,
-        "disabled:opacity-70 disabled:cursor-not-allowed rounded-md hover:opacity-80 transition duration-300 w-full border-shop-btn-bg flex items-center justify-center gap-2",
+        "disabled:opacity-70 disabled:cursor-not-allowed rounded-md transition duration-300 w-full border-shop-btn-bg flex items-center justify-center gap-2",
         outline
           ? "bg-shop-btn-outline-bg text-shop-btn-outline-text"
-          : "bg-shop-btn-bg text-shop-btn-text",
+          : "bg-shop-btn-bg hover:bg-shop-btn-hover active:bg-shop-btn-active text-shop-btn-text",
         small
           ? "text-sm font-light py-1 px-2 border-[1px]"
           : "text-base font-semibold py-3 px-4 border-2",

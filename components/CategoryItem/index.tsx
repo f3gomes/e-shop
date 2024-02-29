@@ -54,7 +54,7 @@ export function CategoryItem({
         selected
           ? "border-b-shop-nav-border text-shop-nav-selected"
           : "border-transparent text-shop-nav-text",
-        "flex items-center gap-1 p-2 border-b-2 hover:opacity-65 transition duration-200 cursor-pointer"
+        "flex items-center gap-1 p-2 border-b-2 hover:text-shop-nav-hover active:text-shop-nav-active transition duration-200 cursor-pointer"
       )}
     >
       <Icon size={20} />
