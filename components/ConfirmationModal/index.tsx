@@ -49,7 +49,7 @@ export default function ConfirmationModal({
           </Button>
           <Button
             onClick={handleConfirm}
-            className="bg-shop-btn-bg hover:bg-shop-btn-bg hover:brightness-110 transition duration-300 text-shop-text-default"
+            className="!bg-shop-btn-bg !hover:bg-shop-btn-bg !hover:brightness-110 transition duration-300 !text-shop-text-default"
           >
             Sim
           </Button>
