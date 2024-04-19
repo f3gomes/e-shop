@@ -1,23 +1,23 @@
-import { PiDressFill } from "react-icons/pi";
-import { MdStorefront } from "react-icons/md";
-import { GiDress } from "react-icons/gi";
-import { GiLargeDress } from "react-icons/gi";
+import { MdWatchLater } from "react-icons/md";
+import { IoWatch } from "react-icons/io5";
+import { GiPocketWatch } from "react-icons/gi";
+import { GiWatch } from "react-icons/gi";
 
 export const categories = [
   {
     label: "Todas",
-    icon: MdStorefront,
+    icon: MdWatchLater,
   },
   {
-    label: "Vestidos",
-    icon: GiLargeDress,
+    label: "Esportivos",
+    icon: IoWatch,
   },
   {
-    label: "Conjuntos",
-    icon: PiDressFill,
+    label: "Mecânicos",
+    icon: GiWatch,
   },
   {
-    label: "Macaquinhos",
-    icon: GiDress,
+    label: "Bolso",
+    icon: GiPocketWatch,
   },
 ];

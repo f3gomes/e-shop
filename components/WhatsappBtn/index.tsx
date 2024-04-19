@@ -33,7 +33,7 @@ export function WhatsappBtn() {
     <Tooltip title="Fale conosco">
       <Link
         target="_blank"
-        href={"https://wa.me/message/XS6EL27PLG5PK1"}
+        href={"https://wa.me/"}
         className="bg-green-500 hover:scale-110 items-center justify-center transition-all duration-300 fixed w-12 h-12 right-8 bottom-8 text-5xl z-10 cursor-pointer leading-10 rounded-full px-2 shadow-[0_0_0_4px_rgba(0,0,0,0.3)]"
         style={{ display: visible ? "flex" : "none" }}
         onClick={scrollToTop}

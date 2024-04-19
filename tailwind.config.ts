@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { fashionIndiscreta } from "./themes/fashion-indiscreta";
+import { shopBlack } from "./themes/black";
 import { shopDefault } from "./themes/shop-default";
 
 const config: Config = {
@@ -15,7 +15,7 @@ const config: Config = {
         "max-sm": { max: "639px" },
       },
       colors: {
-        shop: fashionIndiscreta,
+        shop: shopBlack,
       },
 
       backgroundImage: {

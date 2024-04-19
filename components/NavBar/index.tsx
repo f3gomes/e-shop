@@ -28,10 +28,10 @@ export async function NavBar() {
               <div className="flex gap-2 items-center max-sm:text-xl">
                 <Image
                   alt="logo"
-                  src={"/assets/logo.jpeg"}
+                  src={"/assets/logo.png"}
                   width={30}
                   height={30}
-                  className="static"
+                  className="static rounded-full"
                 />
                 {shopInfo.name}
               </div>

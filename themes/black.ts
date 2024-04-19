@@ -1,4 +1,4 @@
-export const fashionIndiscreta = {
+export const shopBlack = {
   body: {
     bg: "#222",
     drop: "#e2e8f0",

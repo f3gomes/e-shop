@@ -1,7 +1,7 @@
 import { categories } from "./categories";
 
 export const shopInfo = {
-  name: "Fashion Indiscreta",
+  name: "Watch Shop",
   greeting: "Bem vindos a minha loja!",
 
   promo: {
@@ -20,9 +20,9 @@ export const shopInfo = {
     },
 
     navigation: {
-      category1: "/?category=Vestidos",
-      category2: "/?category=Conjuntos",
-      category3: "/?category=Macaquinhos",
+      category1: "/?category=Esportivos",
+      category2: "/?category=Mecânicos",
+      category3: "/?category=Bolso",
     },
 
     services: {
@@ -38,7 +38,7 @@ export const shopInfo = {
     },
 
     socials: {
-      instagram: "https://www.instagram.com/fashion_indiscreta/",
+      instagram: "https://www.instagram.com/",
       facebook: "https://www.facebook.com/",
       twitter: "https://twitter.com/",
       youtube: "https://www.youtube.com/@",
